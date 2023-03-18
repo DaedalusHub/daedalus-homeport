@@ -22,6 +22,9 @@
             "@/components/*": [
                 "components/*"
             ],
+            "@/core/*": [
+                "core/*"
+            ],
             "@/pages/*": [
                 "pages/*"
             ],

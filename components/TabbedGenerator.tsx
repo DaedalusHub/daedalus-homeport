@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Tab } from '@headlessui/react';
-import { tabs } from '@/constants/generators';
+import { tabs } from '@/core/generators';
 import { Generator } from './Generator';
 
 export function TabList({ tabList, selectedTab, setSelectedTab }) {
@@ -10,7 +10,9 @@ export function TabList({ tabList, selectedTab, setSelectedTab }) {
                 <Tab
                     key={tab.name}
                     className={`tab ${
-                        selectedTab === tab.tab ? 'bg-primary' : 'bg-primary-focus'
+                        selectedTab === tab.tab
+                            ? 'bg-primary'
+                            : 'bg-primary-focus'
                     } hover:bg-primary text-primary-content`}
                     onClick={() => setSelectedTab(tab.tab)}
                 >
@@ -33,7 +35,7 @@ export function TabbedGenerator({ generators }) {
     const setValue = (key, value) => {
         setState((prevState) => ({
             ...prevState,
-            [key]: value,
+            [key]: value
         }));
     };
 
@@ -58,8 +60,12 @@ export function TabbedGenerator({ generators }) {
                                     key={generator.name}
                                     generator={generator}
                                     value={state[generator.name]}
-                                    setValue={(value) => setValue(generator.name, value)}
-                                    getInputValue={(name) => getInputValue(name)}
+                                    setValue={(value) =>
+                                        setValue(generator.name, value)
+                                    }
+                                    getInputValue={(name) =>
+                                        getInputValue(name)
+                                    }
                                 />
                             ))}
                     </Tab.Panel>

@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Chat from '@/components/Chat';
 
 export default function Home() {
     return (
@@ -17,6 +18,7 @@ export default function Home() {
                         className="w-60"
                     />
                 </a>
+                <Chat />
             </main>
         </div>
     );
