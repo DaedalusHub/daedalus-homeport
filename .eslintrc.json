@@ -4,29 +4,46 @@
         "es2021": true
     },
     "extends": [
-        "eslint:recommended",
-        "plugin:@typescript-eslint/recommended"
+        "eslint:recommended"
     ],
-    "overrides": [],
+    "overrides": [
+        {
+            "files": [
+                "*.ts",
+                "*.tsx"
+            ],
+            "extends": [
+                "eslint:recommended",
+                "plugin:@typescript-eslint/recommended"
+            ],
+            "plugins": [
+                "@typescript-eslint"
+            ],
+            "parser": "@typescript-eslint/parser",
+            "parserOptions": {
+                "sourceType": "module",
+                "ecmaVersion": "latest",
+                "project": [
+                    "./tsconfig.json"
+                ],
+                "tsconfigRootDir": "./",
+                "ecmaFeatures": {
+                    "jsx": true,
+                    "modules": true
+                }
+            }
+        },
+        {
+            "files": [
+                "./*.config.js"
+            ],
+            "rules": {
+                "no-undef": "off"
+            }
+        }
+    ],
     "plugins": [
-        "@typescript-eslint",
         "import",
         "regexp"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "sourceType": "module",
-        "ecmaVersion": "latest",
-        "project": [
-            "./tsconfig.json"
-        ],
-        "tsconfigRootDir": "./",
-        "ecmaFeatures": {
-            "jsx": true,
-            "modules": true
-        }
-    },
-    "ignorePatterns": [
-        "tailwind.config.js"
     ]
 }
