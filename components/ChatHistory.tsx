@@ -6,7 +6,7 @@ export interface ChatHistoryProps {
 }
 
 const ChatHistory: React.FC<ChatHistoryProps> = ({ messages }) => (
-    <div>
+    <div className="overflow-y-auto max-h-80">
         {messages.map((message, index) => (
             <Message
                 key={index}

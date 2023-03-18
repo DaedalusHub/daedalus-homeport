@@ -25,10 +25,12 @@ const Chat: React.FC = () => {
     };
 
     return (
-        <div>
-            <h1>Chat with ChatGPT</h1>
-            <ChatHistory messages={messages} />
-            <ChatInput onSubmit={handleUserMessage} />
+        <div className="bg-base-100 p-8 min-h-screen">
+            <h1 className="text-4xl font-bold mb-8">Chat with ChatGPT</h1>
+            <div className="bg-base-200 p-6 rounded-lg shadow-lg">
+                <ChatHistory messages={messages} />
+                <ChatInput onSubmit={handleUserMessage} />
+            </div>
         </div>
     );
 };

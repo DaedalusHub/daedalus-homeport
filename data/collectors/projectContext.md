@@ -16,6 +16,8 @@ References in order of priority:
 3. https://github.com/vercel/next.js/
 4. https://github.com/facebook/react
 5. https://platform.openai.com/docs/api-reference
+6. https://daisyui.com/components/
+7. https://tailwindcss.com/docs/
 
 Feature 1: Write the components for a chat interface that takes user input and displays the chat history.
 
