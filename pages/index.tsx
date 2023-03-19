@@ -10,7 +10,9 @@ export default function Home() {
             </Head>
 
             <main className="flex flex-col items-center space-y-8">
-                <h1 className="text-4xl text-primary">Daedalus Homeport</h1>
+                <h1 className="text-4xl font-bold bg-primary text-primary-content p-2 rounded-lg mt-4">
+                    Daedalus Homeport
+                </h1>
                 <a href="https://en.wikipedia.org/wiki/Daedalus">
                     <img
                         alt="Daedalus Homeport"

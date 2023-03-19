@@ -1,0 +1,78 @@
+import React from 'react';
+
+interface ChatHeaderProps {
+    onSave: () => void;
+    onClear: () => void;
+    onExport: () => void;
+    onImport: (data: unknown[]) => void;
+}
+
+const ChatHeader: React.FC<ChatHeaderProps> = ({
+    onSave,
+    onClear,
+    onExport,
+    onImport
+}) => {
+    const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+
+        const reader = new FileReader();
+        reader.onload = (event) => {
+            try {
+                const data = JSON.parse(event.target?.result as string);
+                if (Array.isArray(data)) {
+                    onImport(data);
+                } else {
+                    new Error('Invalid data format');
+                }
+            } catch (err) {
+                alert('Invalid JSON format');
+            }
+        };
+        reader.readAsText(file);
+    };
+
+    return (
+        <div className="flex justify-between">
+            <h1 className="text-4xl font-bold text-base-100-contents">
+                Chat with ChatGPT
+            </h1>
+            <div className="flex space-x-3 mb-4 h-fit">
+                <button
+                    onClick={onSave}
+                    className="bg-primary text-white px-4 py-2 rounded"
+                >
+                    Save
+                </button>
+                <button
+                    onClick={onExport}
+                    className="bg-primary text-white px-4 py-2 rounded"
+                >
+                    Export
+                </button>
+                <label
+                    htmlFor="import"
+                    className="bg-secondary text-white px-4 py-2 rounded cursor-pointer"
+                >
+                    Import
+                </label>
+                <input
+                    type="file"
+                    id="import"
+                    accept=".json"
+                    onChange={handleFileSelect}
+                    style={{ display: 'none' }}
+                />
+                <button
+                    onClick={onClear}
+                    className="bg-accent text-white px-4 py-2 rounded"
+                >
+                    Clear
+                </button>
+            </div>
+        </div>
+    );
+};
+
+export default ChatHeader;
