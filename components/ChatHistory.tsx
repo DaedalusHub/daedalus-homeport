@@ -1,8 +1,9 @@
 import React from 'react';
-import Message, { MessageProps } from './Message';
+import Message from './Message';
+import { ChatMessage } from '@/core/chatHelpers';
 
 export interface ChatHistoryProps {
-    messages: MessageProps[];
+    messages: ChatMessage[];
 }
 
 const ChatHistory: React.FC<ChatHistoryProps> = ({ messages }) => (
@@ -10,7 +11,7 @@ const ChatHistory: React.FC<ChatHistoryProps> = ({ messages }) => (
         {messages.map((message, index) => (
             <Message
                 key={index}
-                author={message.author}
+                role={message.role}
                 content={message.content}
             />
         ))}

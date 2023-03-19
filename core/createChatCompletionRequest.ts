@@ -1,10 +1,11 @@
 import { CreateChatCompletionRequest } from 'openai';
 
-export function configureChatCompletion(
-    topic: string
+export function createChatCompletionRequest(
+    model: string,
+    prompt: string
 ): CreateChatCompletionRequest {
     return {
-        model: 'gpt-3.5-turbo',
+        model: model || 'gpt-3.5-turbo',
         temperature: 0.6,
         max_tokens: 3000,
         top_p: 1,
@@ -18,7 +19,7 @@ export function configureChatCompletion(
             },
             {
                 role: 'user',
-                content: topic
+                content: prompt
             }
         ]
     };

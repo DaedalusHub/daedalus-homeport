@@ -1,17 +1,6 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { Configuration, OpenAIApi } from 'openai';
-import { configureChatCompletion } from '@/core/configureChatCompletion';
-
-interface OpenAIError extends Error {
-    response?: {
-        status: number;
-        data: unknown;
-    };
-}
-
-interface OpenAIResponseData {
-    json: () => Promise<unknown>;
-}
+import { createChatCompletionRequest } from '@/core/createChatCompletionRequest';
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY
@@ -29,45 +18,38 @@ export default async function (req: VercelRequest, res: VercelResponse) {
         return;
     }
 
-    const config = configureChatCompletion(req.body.topic);
+    const { model, prompt } = req.body;
+
+    const completionRequest = createChatCompletionRequest(model, prompt);
+
     try {
-        const completion = await openai.createChatCompletion(config);
-        let response = completion.data.choices?.[0]?.message?.content;
-        response = response?.trim();
-        console.log(response);
-        res.status(200).json({ result: response });
-    } catch (error: unknown) {
-        if ((error as OpenAIError).response) {
-            const openaiError = error as OpenAIError;
-            if (openaiError.response?.status) {
-                console.error(
-                    openaiError.response.status,
-                    openaiError.response.data
-                );
-                const responseData = openaiError.response
-                    .data as OpenAIResponseData;
-                const data = await responseData.json();
-                res.status(openaiError.response.status).json(data);
-            } else if (error instanceof Error) {
-                console.error(
-                    `Error with OpenAI API request: ${error.message}`
-                );
-                res.status(500).json({
-                    error: {
-                        message: 'An error occurred during your request.'
-                    }
-                });
-            } else {
-                console.error(
-                    `Unexpected error with OpenAI API request: ${error}`
-                );
-                res.status(500).json({
-                    error: {
-                        message:
-                            'An unexpected error occurred during your request.'
-                    }
-                });
-            }
+        console.log(`Generating completion for model ${model}...`);
+        console.log(`Prompt: ${prompt}`);
+        const openaiResponse = await openai.createChatCompletion(
+            completionRequest
+        );
+        console.log(openaiResponse.data.choices[0]);
+        res.status(200).json(openaiResponse.data.choices[0]);
+    } catch (error) {
+        if (error instanceof Error && 'response' in error && error.response) {
+            const openaiError = error;
+            const responseData = openaiError.response.data;
+            res.status(openaiError.response.status).json(responseData);
+        } else if (error instanceof Error) {
+            console.error(`Error generating completion: ${error.message}`);
+            res.status(500).json({
+                error: {
+                    message:
+                        'An error occurred while generating the completion.'
+                }
+            });
+        } else {
+            console.error('Unknown error');
+            res.status(500).json({
+                error: {
+                    message: 'An unknown error occurred.'
+                }
+            });
         }
     }
 }

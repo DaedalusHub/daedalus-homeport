@@ -35,8 +35,8 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
 
     return (
         <div className="flex justify-between">
-            <h1 className="text-4xl font-bold text-base-100-contents">
-                Chat with ChatGPT
+            <h1 className="text-3xl font-bold text-base-100-contents">
+                Daedalus Chat
             </h1>
             <div className="flex space-x-3 mb-4 h-fit">
                 <button

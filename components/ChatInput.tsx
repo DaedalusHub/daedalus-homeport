@@ -16,17 +16,17 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSubmit }) => {
     };
 
     return (
-        <form onSubmit={handleSubmit} className="mt-4 flex">
+        <form onSubmit={handleSubmit} className="ml-4 flex flex-grow">
             <input
                 type="text"
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Type your message..."
-                className="flex-grow border-2 border-primary focus:border-primary focus:ring-0 rounded-l p-2"
+                className="w-full border-2 border-primary focus:border-primary focus:ring-0 rounded-l p-2 bg-base-300 text-base-content"
             />
             <button
                 type="submit"
-                className="bg-primary text-white px-6 py-2 rounded-r"
+                className="bg-primary text-white px-6 py-2.5 rounded-r"
             >
                 Send
             </button>
