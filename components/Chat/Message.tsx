@@ -1,7 +1,7 @@
 import React from 'react';
 import { ChatMessage } from '@/core/chatHelpers';
 
-const Message: React.FC<ChatMessage> = ({ role, content }) => (
+const Message: React.FC<ChatMessage> = ({ role, content, isLoading }) => (
     <div
         className={`rounded-lg p-4 mb-4 ${
             role === 'User' ? 'bg-neutral' : 'bg-neutral-focus'
@@ -17,6 +17,11 @@ const Message: React.FC<ChatMessage> = ({ role, content }) => (
             </div>
             <div className="ml-4 flex-grow">
                 <span>{content}</span>
+                {isLoading && (
+                    <span className="ml-2 animate-spin">
+                        <i className="fas fa-circle-notch"></i>
+                    </span>
+                )}
             </div>
         </div>
     </div>

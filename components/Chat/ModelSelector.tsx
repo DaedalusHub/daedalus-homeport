@@ -25,7 +25,7 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
                 {models.map((model) => (
                     <li key={model}>
                         <a
-                            href="#"
+                            href="components#"
                             className="block px-4 py-2 text-sm min-w-fit uppercase"
                             onClick={(e) => {
                                 e.preventDefault();

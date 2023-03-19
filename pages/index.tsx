@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import React from 'react';
 
-import Chat from '@/components/Chat';
+import ChatUI from '@/components/Chat/ChatUI';
 import NavBar from '@/components/NavBar';
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
 
             <NavBar />
             <main className="flex flex-col items-center space-y-8">
-                <Chat />
+                <ChatUI />
             </main>
         </div>
     );
