@@ -7,18 +7,12 @@ export interface MessageProps {
 
 const Message: React.FC<MessageProps> = ({ author, content }) => (
     <div
-        className={`flex items-center space-x-2 ${
-            author === 'User' ? 'justify-end' : ''
+        className={`rounded-lg p-4 mb-4 ${
+            author === 'User' ? 'bg-neutral' : 'bg-neutral-focus'
         }`}
     >
-        <strong
-            className={`${
-                author === 'User' ? 'text-theme-500' : 'text-theme-400'
-            } font-semibold`}
-        >
-            {author}:
-        </strong>
-        <span className="text-theme-800">{content}</span>
+        <strong className="font-bold">{author}: </strong>
+        <span>{content}</span>
     </div>
 );
 

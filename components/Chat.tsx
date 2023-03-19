@@ -12,7 +12,7 @@ const Chat: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([]);
 
     const addMessage = (author: string, content: string) => {
-        setMessages([...messages, { author, content }]);
+        setMessages((prevMessages) => [...prevMessages, { author, content }]);
     };
 
     const handleUserMessage = async (message: string) => {
@@ -25,9 +25,9 @@ const Chat: React.FC = () => {
     };
 
     return (
-        <div className="bg-base-100 p-8 min-h-screen">
+        <div className="bg-base-100 p-8 min-h-screen flex flex-col w-screen">
             <h1 className="text-4xl font-bold mb-8">Chat with ChatGPT</h1>
-            <div className="bg-base-200 p-6 rounded-lg shadow-lg">
+            <div className="bg-base-200 p-6 rounded-lg shadow-lg flex flex-col flex-grow">
                 <ChatHistory messages={messages} />
                 <ChatInput onSubmit={handleUserMessage} />
             </div>
