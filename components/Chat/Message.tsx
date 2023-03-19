@@ -9,7 +9,7 @@ const Message: React.FC<ChatMessage> = ({ role, content, isLoading }) => (
     >
         <div className="flex items-start">
             <div
-                className={`min-w-fit w-24 rounded px-2 py-1 text-white text-center ${
+                className={`min-w-fit w-32 rounded px-2 py-1 text-white text-center ${
                     role === 'User' ? 'bg-primary' : 'bg-secondary'
                 }`}
             >

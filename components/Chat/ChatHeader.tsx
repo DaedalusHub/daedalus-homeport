@@ -41,19 +41,19 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
             <div className="flex space-x-3 mb-4 h-fit">
                 <button
                     onClick={onSave}
-                    className="bg-primary text-white px-4 py-2 rounded"
+                    className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-focus"
                 >
                     Save
                 </button>
                 <button
                     onClick={onExport}
-                    className="bg-primary text-white px-4 py-2 rounded"
+                    className="bg-primary text-white px-4 py-2 rounded hover:bg-primary-focus"
                 >
                     Export
                 </button>
                 <label
                     htmlFor="import"
-                    className="bg-secondary text-white px-4 py-2 rounded cursor-pointer"
+                    className="bg-secondary text-white px-4 py-2 rounded cursor-pointer hover:bg-secondary-focus"
                 >
                     Import
                 </label>
@@ -66,7 +66,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
                 />
                 <button
                     onClick={onClear}
-                    className="bg-accent text-white px-4 py-2 rounded"
+                    className="bg-accent text-white px-4 py-2 rounded hover:bg-accent-focus"
                 >
                     Clear
                 </button>
