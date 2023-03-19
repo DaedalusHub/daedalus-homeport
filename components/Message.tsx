@@ -11,8 +11,18 @@ const Message: React.FC<MessageProps> = ({ author, content }) => (
             author === 'User' ? 'bg-neutral' : 'bg-neutral-focus'
         }`}
     >
-        <strong className="font-bold">{author}: </strong>
-        <span>{content}</span>
+        <div className="flex items-start">
+            <div
+                className={`w-24 rounded px-2 py-1 text-white text-center ${
+                    author === 'User' ? 'bg-primary' : 'bg-secondary'
+                }`}
+            >
+                <strong className="font-bold">{author}</strong>
+            </div>
+            <div className="ml-4 flex-grow">
+                <span>{content}</span>
+            </div>
+        </div>
     </div>
 );
 
