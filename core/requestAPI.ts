@@ -2,14 +2,15 @@ import { ChatMessage } from '@/components/Chat/chatHelpers';
 
 export async function requestAPI(
     model: string,
-    prompt: string
+    prompt: string,
+    messageHistory: ChatMessage[]
 ): Promise<ChatMessage> {
     const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ model, prompt })
+        body: JSON.stringify({ model, prompt, messageHistory })
     });
 
     const data = await response.json();

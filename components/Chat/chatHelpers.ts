@@ -2,7 +2,6 @@
 export interface ChatMessage {
     role: string;
     content: string;
-    isLoading?: boolean;
 }
 
 export function importFromJson(

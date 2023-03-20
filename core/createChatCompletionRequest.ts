@@ -1,26 +1,26 @@
-import { CreateChatCompletionRequest } from 'openai';
+import { ChatCompletionRequest } from 'openai';
+import { ChatMessage } from '@/components/Chat/chatHelpers';
 
 export function createChatCompletionRequest(
     model: string,
-    prompt: string
-): CreateChatCompletionRequest {
+    userMessage: string,
+    messageHistory: ChatMessage[]
+): ChatCompletionRequest {
     return {
-        model: model || 'gpt-3.5-turbo',
-        temperature: 0.6,
-        max_tokens: 3000,
-        top_p: 1,
-        frequency_penalty: 1.5,
-        presence_penalty: 1,
-        stop: ['\nUser:', '\nAssistant:'],
+        model: model,
         messages: [
-            {
-                role: 'system',
-                content: 'You are a helpful code writer assisting the user.'
-            },
+            ...messageHistory,
             {
                 role: 'user',
-                content: prompt
+                content: userMessage
             }
-        ]
+        ],
+        max_tokens: 150,
+        n: 1,
+        stop: null,
+        temperature: 0.7,
+        top_p: 1,
+        frequency_penalty: 0,
+        presence_penalty: 0
     };
 }

@@ -1,4 +1,4 @@
-## 0.2.3 (2023-03-20)
+## 0.2.4 (2023-03-20)
 
 
 ### Features
@@ -12,6 +12,7 @@
 * **chat:** chat history and additional chat style ([3c9459e](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/3c9459efebebb57919cab437ae2f74c04508997d))
 * **chat:** move author name to down div, add style ([d1521d0](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/d1521d056465fe37401bc61e34f980cbc50cfb36))
 * **chat:** refactor chat.tsx to multiple files, add loading animation ([2856884](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/2856884d6c9c3b7f50a737b059ed0de13c91d317))
+* **message:** add syntax highlighting ([6d52fb4](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/6d52fb4f407b8e12e8ef333376dd2e1c0ba15e56))
 
 
 

@@ -9,14 +9,15 @@ export const handleUserMessage = async (
     selectedModel: string,
     message: string,
     addMessage: (author: string, content: string) => void,
-    setLoading: (loading: boolean) => void
+    setLoading: (loading: boolean) => void,
+    messageHistory: ChatMessage[]
 ) => {
-    addMessage('User', message);
+    addMessage('user', message);
     setLoading(true);
 
-    const response = await requestAPI(selectedModel, message);
+    const response = await requestAPI(selectedModel, message, messageHistory);
     setLoading(false);
-    addMessage(selectedModel, response.content);
+    addMessage('assistant', response.content);
 };
 
 export const handleSave = (messages: ChatMessage[]) => {
