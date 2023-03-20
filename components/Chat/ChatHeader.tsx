@@ -1,10 +1,10 @@
-import React from 'react';
+import { ChatMessage, importJSON } from '@/components/Chat/chatHelpers';
 
 interface ChatHeaderProps {
     onSave: () => void;
     onClear: () => void;
     onExport: () => void;
-    onImport: (data: unknown[]) => void;
+    onImport: (data: ChatMessage[]) => void;
 }
 
 const ChatHeader: React.FC<ChatHeaderProps> = ({
@@ -20,7 +20,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
         const reader = new FileReader();
         reader.onload = (event) => {
             try {
-                const data = JSON.parse(event.target?.result as string);
+                const data = importJSON(event.target?.result as string);
                 if (Array.isArray(data)) {
                     onImport(data);
                 } else {

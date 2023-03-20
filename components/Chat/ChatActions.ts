@@ -2,7 +2,7 @@ import {
     ChatMessage,
     exportToJson,
     saveMessagesToFile
-} from '@/core/chatHelpers';
+} from '@/components/Chat/chatHelpers';
 import { requestAPI } from '@/core/requestAPI';
 
 export const handleUserMessage = async (
@@ -33,7 +33,11 @@ export const handleExport = (messages: ChatMessage[]) => {
 
 export const handleImport = (
     importedMessages: ChatMessage[],
+    addMessage: (message: ChatMessage) => void,
     setMessages: (messages: ChatMessage[]) => void
 ) => {
-    setMessages(importedMessages);
+    setMessages([]);
+    importedMessages.forEach((message) => {
+        addMessage(message);
+    });
 };

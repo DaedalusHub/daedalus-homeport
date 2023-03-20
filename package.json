@@ -1,6 +1,6 @@
 {
     "name": "daedalus-homeport",
-    "version": "0.2.2",
+    "version": "0.2.3",
     "private": true,
     "scripts": {
         "dev": "next dev -p 3000",
@@ -18,10 +18,18 @@
         "commitlog": "conventional-changelog -p angular -i COMMITLOG.md -s -r 0\n"
     },
     "dependencies": {
+        "@codemirror/basic-setup": "^0.20.0",
+        "@codemirror/lang-css": "^6.1.1",
+        "@codemirror/lang-html": "^6.4.2",
+        "@codemirror/lang-javascript": "^6.1.4",
+        "@codemirror/lang-json": "^6.0.1",
+        "@codemirror/lang-python": "^6.1.2",
         "@codemirror/language": "^6.6.0",
         "@codemirror/legacy-modes": "^6.3.1",
+        "@codemirror/stream-parser": "^0.19.9",
         "@codemirror/theme-one-dark": "^6.1.1",
         "@headlessui/react": "^1.7.13",
+        "@lezer/javascript": "^1.4.1",
         "@tailwindcss/typography": "^0.5.9",
         "codemirror": "^6.0.1",
         "daisyui": "^2.51.3",
@@ -30,6 +38,7 @@
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-markdown": "^8.0.5",
+        "react-syntax-highlighter": "^15.5.0",
         "react-textarea-autosize": "^8.4.0"
     },
     "engines": {
@@ -42,6 +51,7 @@
         "@cucumber/cucumber": "^9.0.1",
         "@types/node": "18.14.4",
         "@types/react": "18.0.28",
+        "@types/react-syntax-highlighter": "^15.5.6",
         "@types/webpack": "^5.28.0",
         "@typescript-eslint/eslint-plugin": "^5.54.1",
         "@typescript-eslint/parser": "^5.54.1",

@@ -1,4 +1,4 @@
-import { ChatMessage } from '@/core/chatHelpers';
+import { ChatMessage } from '@/components/Chat/chatHelpers';
 
 export async function requestAPI(
     model: string,

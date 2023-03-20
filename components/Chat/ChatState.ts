@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ChatMessage } from '@/core/chatHelpers';
+import { ChatMessage } from '@/components/Chat/chatHelpers';
 
 export const useChatState = () => {
     const [messages, setMessages] = useState<ChatMessage[]>([]);
