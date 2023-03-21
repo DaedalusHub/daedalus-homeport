@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 import FileTree from './FileTree';
 
 const FileTreeDisplay: React.FC = () => {
-    const [projectFiles, setProjectFiles] = useState([]);
+    const [projectFiles, setProjectFiles] = useState([
+        { name: 'Please load a directory.', isDirectory: false }
+    ]);
 
     const loadProject = async () => {
         const directoryHandle = await window.showDirectoryPicker();
@@ -37,7 +39,7 @@ const FileTreeDisplay: React.FC = () => {
                     Load project
                 </button>
             </div>
-            <div className="border rounded-lg border-2 border-primary bg-base-300 m-4">
+            <div className="border rounded-lg border-2 border-primary bg-base-300 m-4 p-4">
                 <FileTree files={projectFiles} />
             </div>
         </div>
