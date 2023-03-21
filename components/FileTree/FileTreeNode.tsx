@@ -5,18 +5,25 @@ export interface FileTreeNodeProps {
     name: string;
     isDirectory: boolean;
     children?: FileTreeNodeProps[];
+    showChildren?: boolean;
+    onToggleVisibility?: (path: string[], showChildren: boolean) => void;
+    path?: string[];
 }
 
 const FileTreeNode: React.FC<FileTreeNodeProps> = ({
     name,
     isDirectory,
-    children
+    children,
+    showChildren,
+    onToggleVisibility,
+    path = []
 }) => {
-    const [showChildren, setShowChildren] = useState(false);
+    const [visible, setVisible] = useState(showChildren);
 
     const toggleVisibility = () => {
         if (isDirectory) {
-            setShowChildren(!showChildren);
+            setVisible(!visible);
+            onToggleVisibility && onToggleVisibility([...path, name], !visible);
         }
     };
 
@@ -31,10 +38,15 @@ const FileTreeNode: React.FC<FileTreeNodeProps> = ({
                     <code className="text-primary-content/80">{name}</code>
                 )}
             </span>
-            {isDirectory && showChildren && children && (
+            {isDirectory && visible && children && (
                 <ul>
                     {children.map((child, index) => (
-                        <FileTreeNode key={index} {...child} />
+                        <FileTreeNode
+                            key={index}
+                            {...child}
+                            onToggleVisibility={onToggleVisibility}
+                            path={[...path, name]}
+                        />
                     ))}
                 </ul>
             )}

@@ -4,9 +4,10 @@ import FileTreeNode, { FileTreeNodeProps } from './FileTreeNode';
 
 export interface FileTreeProps {
     files: FileTreeNodeProps[];
+    onToggleVisibility?: (path: string[], showChildren: boolean) => void;
 }
 
-const FileTree: React.FC<FileTreeProps> = ({ files }) => {
+const FileTree: React.FC<FileTreeProps> = ({ files, onToggleVisibility }) => {
     const sortedFiles = files.sort((a, b) => {
         if (a.isDirectory === b.isDirectory) {
             return a.name.localeCompare(b.name);
@@ -17,7 +18,11 @@ const FileTree: React.FC<FileTreeProps> = ({ files }) => {
     return (
         <ul>
             {sortedFiles.map((file, index) => (
-                <FileTreeNode key={index} {...file} />
+                <FileTreeNode
+                    key={index}
+                    {...file}
+                    onToggleVisibility={onToggleVisibility}
+                />
             ))}
         </ul>
     );
