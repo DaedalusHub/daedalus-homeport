@@ -14,7 +14,7 @@ const projectFiles = [
     { name: 'README.md', isDirectory: false }
 ];
 
-const App: React.FC = () => {
+const FileTreeDisplay: React.FC = () => {
     return (
         <div>
             <h1>Project Directory</h1>
@@ -23,4 +23,4 @@ const App: React.FC = () => {
     );
 };
 
-export default App;
+export default FileTreeDisplay;

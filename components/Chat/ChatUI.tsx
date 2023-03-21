@@ -32,7 +32,7 @@ const ChatUI: React.FC = () => {
     }, [setSelectedModel]);
 
     return (
-        <div className="bg-base-100 p-8 min-h-screen flex flex-col w-screen">
+        <div className="bg-base-100 p-8 min-h-fit h-1/2 flex flex-col w-screen">
             <ChatHeader
                 onSave={() => handleSave(messages)}
                 onClear={() => handleClear(setMessages)}
