@@ -1,5 +1,6 @@
 // chatHelpers.ts
 export interface ChatMessage {
+    key: string;
     role: string;
     content: string;
 }

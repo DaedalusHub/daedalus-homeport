@@ -1,8 +1,9 @@
-## 0.2.8 (2023-03-21)
+## 0.2.9 (2023-03-21)
 
 
 ### Bug Fixes
 
+* **chat:** fix chat import ([dc175c1](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/dc175c12b0ffe5d4399ae8b266d51eb17d0d700a))
 * **message:** fix styling ([2c266af](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/2c266af25a48c9040b063ce106f256c99d6ca318))
 
 

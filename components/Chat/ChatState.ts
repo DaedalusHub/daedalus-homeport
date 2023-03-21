@@ -5,10 +5,8 @@ export const useChatState = () => {
     const [messages, setMessages] = useState<ChatMessage[]>([]);
 
     const addMessage = (author: string, content: string) => {
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            { role: author, content }
-        ]);
+        const newMessage = { id: Date.now().toString(), role: author, content };
+        setMessages((prevMessages) => [...prevMessages, newMessage]);
     };
 
     return { messages, addMessage, setMessages };
