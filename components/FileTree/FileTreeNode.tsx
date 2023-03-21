@@ -29,15 +29,17 @@ const FileTreeNode: React.FC<FileTreeNodeProps> = ({
 
     return (
         <li className="ml-4 cursor-pointer select-none">
-            <span onClick={toggleVisibility}>
+            <code className="text-primary-content/80">
                 {isDirectory ? (
-                    <strong className="text-primary-content text-lg">
-                        {name}/
-                    </strong>
+                    <span onClick={toggleVisibility}>
+                        <strong className="text-primary-content">
+                            {name}/
+                        </strong>
+                    </span>
                 ) : (
-                    <code className="text-primary-content/80">{name}</code>
+                    name
                 )}
-            </span>
+            </code>
             {isDirectory && visible && children && (
                 <ul>
                     {children.map((child, index) => (

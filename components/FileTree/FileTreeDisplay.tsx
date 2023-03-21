@@ -56,9 +56,13 @@ const FileTreeDisplay: React.FC = () => {
 
     const createFileStructureString = (files, level = 0) => {
         let result = '';
-        files.forEach((file) => {
+        files.forEach((file, index) => {
+            const isLastItem = index === files.length - 1;
+            const linePrefix = isLastItem ? '└── ' : '├── ';
+            const indent = '│  '.repeat(level);
+
             if (file.isDirectory) {
-                result += `${'  '.repeat(level)}  ${file.name}/\n`;
+                result += `${indent}${linePrefix}${file.name}/\n`;
                 if (file.showChildren) {
                     result += createFileStructureString(
                         file.children,
@@ -66,7 +70,7 @@ const FileTreeDisplay: React.FC = () => {
                     );
                 }
             } else {
-                result += `${'  '.repeat(level)}  ${file.name}\n`;
+                result += `${indent}${linePrefix}${file.name}\n`;
             }
         });
         return result;

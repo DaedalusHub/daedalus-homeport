@@ -1,4 +1,4 @@
-## 0.2.14 (2023-03-21)
+## 0.2.15 (2023-03-21)
 
 
 ### Bug Fixes
@@ -18,6 +18,7 @@
 * **chat:** chat history and additional chat style ([3c9459e](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/3c9459efebebb57919cab437ae2f74c04508997d))
 * **chat:** move author name to down div, add style ([d1521d0](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/d1521d056465fe37401bc61e34f980cbc50cfb36))
 * **chat:** refactor chat.tsx to multiple files, add loading animation ([2856884](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/2856884d6c9c3b7f50a737b059ed0de13c91d317))
+* **FileTree:** add copy to clipboard ([219ebf4](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/219ebf48368ae6304906f01f5548b0fa055be837))
 * **FileTree:** add directory display, folder toggling ([780348f](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/780348fc30899b3fbb21adf995f24ee49ca9364c))
 * **FileTree:** add placeholder file ([a30d44a](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/a30d44a701513c10d70b4410fff63b77cc7da95b))
 * **FileTree:** add styling ([6826034](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/68260343195f3e32f427421514f051bf68d5f21a))
