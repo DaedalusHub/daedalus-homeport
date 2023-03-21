@@ -39,7 +39,7 @@ const ChatUI: React.FC = () => {
                 onExport={() => handleExport(messages)}
                 onImport={
                     (importedMessages) =>
-                        handleImport(importedMessages, addMessage, setMessages) // Change this line
+                        handleImport(importedMessages, setMessages) // Change this line
                 }
             />
             <div className="bg-base-200 p-6 rounded-lg shadow-lg flex flex-col flex-grow">

@@ -34,11 +34,7 @@ export const handleExport = (messages: ChatMessage[]) => {
 
 export const handleImport = (
     importedMessages: ChatMessage[],
-    addMessage: (message: ChatMessage) => void,
     setMessages: (messages: ChatMessage[]) => void
 ) => {
-    setMessages([]);
-    importedMessages.forEach((message) => {
-        addMessage(message);
-    });
+    setMessages(importedMessages);
 };
