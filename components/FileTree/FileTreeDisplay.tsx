@@ -1,10 +1,10 @@
-// FileTreeDisplay.tsx
 import React, { useState } from 'react';
 import FileTree from './FileTree';
+import { createFileStructureString, readDirectory } from './fileTreeUtils';
 
 const FileTreeDisplay: React.FC = () => {
     const [projectFiles, setProjectFiles] = useState([
-        { name: 'Please load a directory.', isDirectory: false }
+        { id: 'initial', name: 'Please load a directory.', isDirectory: false }
     ]);
     const [rootDirectory, setRootDirectory] = useState(null);
 
@@ -13,19 +13,6 @@ const FileTreeDisplay: React.FC = () => {
         setRootDirectory(directoryHandle);
         const children = await readDirectory(directoryHandle);
         setProjectFiles(children);
-    };
-
-    const readDirectory = async (dirHandle) => {
-        const entries = [];
-        for await (const entry of dirHandle.values()) {
-            if (entry.kind === 'directory') {
-                const children = await readDirectory(entry);
-                entries.push({ name: entry.name, isDirectory: true, children });
-            } else {
-                entries.push({ name: entry.name, isDirectory: false });
-            }
-        }
-        return entries;
     };
 
     const updateShowChildren = (path, showChildren) => {
@@ -54,55 +41,50 @@ const FileTreeDisplay: React.FC = () => {
         await navigator.clipboard.writeText(fileStructureString);
     };
 
-    const createFileStructureString = (files, level = 0) => {
-        let result = '';
-        files.forEach((file, index) => {
-            const isLastItem = index === files.length - 1;
-            const linePrefix = isLastItem ? '└── ' : '├── ';
-            const indent = '│  '.repeat(level);
-
-            if (file.isDirectory) {
-                result += `${indent}${linePrefix}${file.name}/\n`;
-                if (file.showChildren) {
-                    result += createFileStructureString(
-                        file.children,
-                        level + 1
-                    );
-                }
-            } else {
-                result += `${indent}${linePrefix}${file.name}\n`;
-            }
-        });
-        return result;
-    };
-
     return (
         <div className="flex flex-col m-4 space-y-4">
-            <div className="flex flex-row items-center m-4">
-                <h1 className="text-2xl text-primary-content flex-none">
-                    Project Directory
-                </h1>
-                <div className="flex-1 flex flex-row justify-end items-center">
-                    <button
-                        className="btn btn-secondary p-2 min-w-fit w-24 min-h-fit h-8 mr-2"
-                        onClick={loadProject}
-                    >
-                        Load project
-                    </button>
-                    <button
-                        className="btn btn-accent p-2 min-w-fit w-24 min-h-fit h-8"
-                        onClick={copyToClipboard}
-                    >
-                        Copy to clipboard
-                    </button>
-                </div>
-            </div>
-            <div className="border rounded-lg border-2 border-primary bg-base-300 m-4 p-4">
+            <Header
+                loadProject={loadProject}
+                copyToClipboard={copyToClipboard}
+            />
+            <FileTreeContainer>
                 <FileTree
                     files={projectFiles}
                     onToggleVisibility={updateShowChildren}
                 />
+            </FileTreeContainer>
+        </div>
+    );
+};
+
+const Header = ({ loadProject, copyToClipboard }) => {
+    return (
+        <div className="flex flex-row items-center m-4">
+            <h1 className="text-2xl text-primary-content flex-none">
+                Project Directory
+            </h1>
+            <div className="flex-1 flex flex-row justify-end items-center">
+                <button
+                    className="btn btn-secondary p-2 min-w-fit w-24 min-h-fit h-8 mr-2"
+                    onClick={loadProject}
+                >
+                    Load project
+                </button>
+                <button
+                    className="btn btn-accent p-2 min-w-fit w-24 min-h-fit h-8"
+                    onClick={copyToClipboard}
+                >
+                    Copy to clipboard
+                </button>
             </div>
+        </div>
+    );
+};
+
+const FileTreeContainer = ({ children }) => {
+    return (
+        <div className="border rounded-lg border-2 border-primary bg-base-300 m-4 p-4">
+            {children}
         </div>
     );
 };

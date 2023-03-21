@@ -1,4 +1,3 @@
-// FileTree.tsx
 import React from 'react';
 import FileTreeNode, { FileTreeNodeProps } from './FileTreeNode';
 
@@ -17,9 +16,9 @@ const FileTree: React.FC<FileTreeProps> = ({ files, onToggleVisibility }) => {
 
     return (
         <ul>
-            {sortedFiles.map((file, index) => (
+            {sortedFiles.map((file) => (
                 <FileTreeNode
-                    key={index}
+                    key={file.id}
                     {...file}
                     onToggleVisibility={onToggleVisibility}
                 />

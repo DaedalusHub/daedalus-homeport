@@ -1,7 +1,7 @@
-// FileTreeNode.tsx
 import React, { useState } from 'react';
 
 export interface FileTreeNodeProps {
+    id: string;
     name: string;
     isDirectory: boolean;
     children?: FileTreeNodeProps[];
@@ -11,6 +11,7 @@ export interface FileTreeNodeProps {
 }
 
 const FileTreeNode: React.FC<FileTreeNodeProps> = ({
+    id,
     name,
     isDirectory,
     children,
@@ -28,7 +29,7 @@ const FileTreeNode: React.FC<FileTreeNodeProps> = ({
     };
 
     return (
-        <li className="ml-4 cursor-pointer select-none">
+        <li className="ml-4 cursor-pointer select-none" key={id}>
             <code className="text-primary-content/80">
                 {isDirectory ? (
                     <span onClick={toggleVisibility}>
@@ -42,9 +43,9 @@ const FileTreeNode: React.FC<FileTreeNodeProps> = ({
             </code>
             {isDirectory && visible && children && (
                 <ul>
-                    {children.map((child, index) => (
+                    {children.map((child) => (
                         <FileTreeNode
-                            key={index}
+                            key={child.id}
                             {...child}
                             onToggleVisibility={onToggleVisibility}
                             path={[...path, name]}

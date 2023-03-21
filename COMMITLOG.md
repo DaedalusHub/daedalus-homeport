@@ -1,4 +1,4 @@
-## 0.2.15 (2023-03-21)
+## 0.2.16 (2023-03-21)
 
 
 ### Bug Fixes
@@ -22,6 +22,7 @@
 * **FileTree:** add directory display, folder toggling ([780348f](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/780348fc30899b3fbb21adf995f24ee49ca9364c))
 * **FileTree:** add placeholder file ([a30d44a](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/a30d44a701513c10d70b4410fff63b77cc7da95b))
 * **FileTree:** add styling ([6826034](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/68260343195f3e32f427421514f051bf68d5f21a))
+* **FileTree:** improve clipboard format ([29a6e11](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/29a6e11946a1e2d6b2c263ef6aaeac7a1b168935))
 * **FileTree:** initial component creation ([07420fa](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/07420fa69d1967b2fee91199ec484542d734bf53))
 * **message:** add syntax highlighting ([6d52fb4](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/6d52fb4f407b8e12e8ef333376dd2e1c0ba15e56))
 * **message:** include history in messages ([0023059](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/002305980fce3f7468840a69fec72067de381762))
