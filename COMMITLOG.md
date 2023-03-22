@@ -1,4 +1,4 @@
-## 0.2.20 (2023-03-22)
+## 0.2.21 (2023-03-22)
 
 
 ### Bug Fixes
@@ -10,6 +10,7 @@
 ### Features
 
 * **chat:** add import & export ([12129f6](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/12129f609f001ac0a521fb5f306f0b2599d2140e))
+* **Chat:** add max tokens and prompt token awareness ([71a2144](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/71a21442980e0d6a9b4ef783ca00125581879647))
 * **chat:** add model selection ([bf4af77](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/bf4af77675fd8612267a72b57d4b7290ee51c50d))
 * **Chat:** add multiline input ([d33cd8f](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/d33cd8f347d3fec7b23ea226e38ad2d2a87e2660))
 * **chat:** add reactivity to history related buttons ([b0efd9d](https://github.com/Unnamed-GameDev-Studio/daedalus-homeport/commit/b0efd9d2c7c5c88b83a240ce6495f1deec147ea0))
