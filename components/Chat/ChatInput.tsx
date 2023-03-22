@@ -20,8 +20,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSubmit, isLoading }) => {
 
     return (
         <form onSubmit={handleSubmit} className="ml-4 flex flex-grow">
-            <input
-                type="text"
+            <textarea
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Type your message..."
