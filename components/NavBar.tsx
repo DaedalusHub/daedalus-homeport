@@ -9,8 +9,8 @@ interface NavBarProps {
 const NavBar: React.FC<NavBarProps> = ({ selectedTab, setSelectedTab }) => {
     const renderTabs = () => {
         const tabs = [
-            { id: 'chat', label: 'ChatUI' },
-            { id: 'directory', label: 'DirectoryTreeDisplay' }
+            { id: 'chat', label: 'Chat' },
+            { id: 'directory', label: 'Project Files' }
         ];
 
         return tabs.map((tab) => (
