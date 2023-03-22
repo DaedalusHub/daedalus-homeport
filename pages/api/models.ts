@@ -1,5 +1,5 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
-import { Configuration, OpenAIApi } from 'openai';
+import {VercelRequest, VercelResponse} from '@vercel/node';
+import {Configuration, OpenAIApi} from 'openai';
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY
@@ -8,6 +8,9 @@ const openai = new OpenAIApi(configuration);
 
 async function fetchModels(type: string) {
     const response = await openai.listModels();
+    if (type === 'any') {
+        return response.data.data.map((model) => model.id);
+    }
     return response.data.data
         .filter((model) => model.id.startsWith(type))
         .map((model) => model.id);

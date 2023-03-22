@@ -1,6 +1,6 @@
-import { VercelRequest, VercelResponse } from '@vercel/node';
-import { Configuration, OpenAIApi } from 'openai';
-import { createChatCompletionRequest } from '@/core/createChatCompletionRequest';
+import {VercelRequest, VercelResponse} from '@vercel/node';
+import {Configuration, OpenAIApi} from 'openai';
+import {createChatCompletionRequest} from '@/core/createChatCompletionRequest';
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY
@@ -34,6 +34,9 @@ export default async function (req: VercelRequest, res: VercelResponse) {
             completionRequest
         );
         console.log(openaiResponse.data.choices[0]);
+        console.log(`Completion generated for model ${openaiResponse.data.model}`)
+        console.log(`Prompt tokens used: ${openaiResponse.data.usage?.prompt_tokens}`)
+        console.log(`Completion tokens used: ${openaiResponse.data.usage?.completion_tokens}`);
         res.status(200).json(openaiResponse.data.choices[0]);
     } catch (error) {
         if (error instanceof Error && 'response' in error && error.response) {
