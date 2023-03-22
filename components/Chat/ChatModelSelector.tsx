@@ -6,11 +6,11 @@ interface ModelSelectorProps {
     onModelSelect: (model: string) => void;
 }
 
-const ModelSelector: React.FC<ModelSelectorProps> = ({
-    models,
-    selectedModel,
-    onModelSelect
-}) => {
+const ChatModelSelector: React.FC<ModelSelectorProps> = ({
+                                                             models,
+                                                             selectedModel,
+                                                             onModelSelect
+                                                         }) => {
     const handleModelSelect = (model: string) => {
         onModelSelect(model);
     };
@@ -41,4 +41,4 @@ const ModelSelector: React.FC<ModelSelectorProps> = ({
     );
 };
 
-export default ModelSelector;
+export default ChatModelSelector;
