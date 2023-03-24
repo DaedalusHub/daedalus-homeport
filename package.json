@@ -1,9 +1,9 @@
 {
     "name": "daedalus-homeport",
-    "version": "0.2.22",
+    "version": "0.2.23",
     "private": true,
     "scripts": {
-        "dev": "next dev -p 6000",
+        "dev": "next dev -p 4000",
         "build": "next build",
         "start": "next start",
         "type-check": "tsc --noEmit",
