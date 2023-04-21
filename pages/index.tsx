@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import ChatUI from '@/components/Chat/ChatUI';
 import NavBar from '@/components/NavBar';
 import FileTreeDisplay from '@/components/FileTree/FileTreeDisplay';
-import Onboarding from '@/components/Onboarding';
+import Onboarding from '@/components/Onboarding/Onboarding';
 import { getLogger } from '@/lib/logger';
 
 const log = getLogger('Home');

@@ -4,6 +4,7 @@
 ### Bug Fixes
 
 * **message:** fix styling ([2c266af](https://github.com/DaedalusHub/daedalus-homeport/commit/2c266af25a48c9040b063ce106f256c99d6ca318))
+* **onboarding:** fix redis set function ([f3c5d48](https://github.com/DaedalusHub/daedalus-homeport/commit/f3c5d48c20371b82f70ab175dd3faaa0811e2b38))
 
 
 ### Features
