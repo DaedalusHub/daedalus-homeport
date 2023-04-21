@@ -1,4 +1,9 @@
 // tailwind.config.js
+// https://tailwindcss.com/
+// https://github.com/tailwindlabs/tailwindcss
+// https://daisyui.com/
+// https://github.com/saadeghi/daisyui
+
 module.exports = {
     content: ['{pages,src,components}/**/*.{js,ts,jsx,tsx}'],
     darkMode: 'class',

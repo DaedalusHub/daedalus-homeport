@@ -10,6 +10,7 @@ const NavBar: React.FC<NavBarProps> = ({ selectedTab, setSelectedTab }) => {
     const renderTabs = () => {
         const tabs = [
             { id: 'chat', label: 'Chat' },
+            { id: 'project', label: 'Project' },
             { id: 'directory', label: 'Project Files' }
         ];
 
