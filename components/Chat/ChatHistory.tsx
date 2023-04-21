@@ -1,5 +1,5 @@
 import React from 'react';
-import Message from '../Message/Message';
+import Message from '@/components/Message/Message';
 import { ChatMessage } from '@/components/Chat/chatHelpers';
 
 export interface ChatHistoryProps {
@@ -9,9 +9,9 @@ export interface ChatHistoryProps {
 const ChatHistory: React.FC<ChatHistoryProps> = ({ messages }) => (
     <div className="overflow-y-auto max-h-screen-50 md:max-h-screen-75 flex-grow mb-6">
         {Array.isArray(messages) &&
-            messages.map((message, index) => (
+            messages.map((message) => (
                 <Message
-                    key={index}
+                    key={message.key}
                     role={message.role}
                     content={message.content}
                 />

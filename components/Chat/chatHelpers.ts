@@ -1,34 +1,17 @@
 // chatHelpers.ts
 export interface ChatMessage {
+    key: string;
     role: string;
     content: string;
 }
 
-export function importFromJson(
-    file: File,
-    onSuccess: (messages: ChatMessage[]) => void
-) {
-    const reader = new FileReader();
-    reader.onload = (event) => {
-        const fileContent = event.target?.result;
-        if (typeof fileContent === 'string') {
-            const importedMessages = JSON.parse(fileContent) as ChatMessage[];
-
-            // Process imported messages
-            const processedMessages = importedMessages.map((message) => ({
-                ...message,
-                content: message.originalContent
-            }));
-
-            onSuccess(processedMessages);
-        } else {
-            console.error('Unable to read file content');
-        }
-    };
-    reader.onerror = () => {
-        console.error('Error occurred while reading the file');
-    };
-    reader.readAsText(file);
+export function importFromJson(fileContent: string): ChatMessage[] | undefined {
+    try {
+        return JSON.parse(fileContent) as ChatMessage[];
+    } catch (err) {
+        console.error('Invalid JSON format');
+        return undefined;
+    }
 }
 
 export function saveMessagesToFile(messages: ChatMessage[]) {
