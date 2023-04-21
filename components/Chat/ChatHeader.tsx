@@ -1,4 +1,4 @@
-import { ChatMessage, importJSON } from '@/components/Chat/chatHelpers';
+import { ChatMessage, importFromJson } from '@/components/Chat/chatHelpers';
 
 interface ChatHeaderProps {
     onSave: () => void;
@@ -19,15 +19,16 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
 
         const reader = new FileReader();
         reader.onload = (event) => {
-            try {
-                const data = importJSON(event.target?.result as string);
+            const fileContent = event.target?.result;
+            if (typeof fileContent === 'string') {
+                const data = importFromJson(fileContent);
                 if (Array.isArray(data)) {
                     onImport(data);
                 } else {
-                    new Error('Invalid data format');
+                    alert('Invalid JSON format');
                 }
-            } catch (err) {
-                alert('Invalid JSON format');
+            } else {
+                console.error('Unable to read file content');
             }
         };
         reader.readAsText(file);

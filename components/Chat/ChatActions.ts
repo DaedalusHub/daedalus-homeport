@@ -1,23 +1,20 @@
-import {
-    ChatMessage,
-    exportToJson,
-    saveMessagesToFile
-} from '@/components/Chat/chatHelpers';
-import { requestAPI } from '@/core/requestAPI';
+import {ChatMessage, exportToJson, saveMessagesToFile} from '@/components/Chat/chatHelpers';
+import {requestAPI} from '@/core/requestAPI';
 
 export const handleUserMessage = async (
     selectedModel: string,
     message: string,
-    addMessage: (author: string, content: string) => void,
+    addMessage: (author: string, content: string, key: string) => void,
     setLoading: (loading: boolean) => void,
     messageHistory: ChatMessage[]
 ) => {
-    addMessage('user', message);
+    const key = `${Date.now()}-${Math.random().toString(36).substring(2)}`;
+    addMessage('user', message, key);
     setLoading(true);
 
     const response = await requestAPI(selectedModel, message, messageHistory);
     setLoading(false);
-    addMessage('assistant', response.content);
+    addMessage('assistant', response.content, key);
 };
 
 export const handleSave = (messages: ChatMessage[]) => {
@@ -34,11 +31,12 @@ export const handleExport = (messages: ChatMessage[]) => {
 
 export const handleImport = (
     importedMessages: ChatMessage[],
-    addMessage: (message: ChatMessage) => void,
     setMessages: (messages: ChatMessage[]) => void
 ) => {
-    setMessages([]);
-    importedMessages.forEach((message) => {
-        addMessage(message);
-    });
+    // Add unique key to each imported message
+    const messagesWithKey = importedMessages.map((message) => ({
+        ...message,
+        key: `${Date.now()}-${Math.random().toString(36).substring(2)}`
+    }));
+    setMessages(messagesWithKey);
 };

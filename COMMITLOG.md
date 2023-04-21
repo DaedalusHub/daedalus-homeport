@@ -1,4 +1,4 @@
-## 0.2.7 (2023-04-21)
+## 0.2.24 (2023-04-21)
 
 
 ### Bug Fixes
@@ -8,6 +8,7 @@
 
 ### Features
 
+* add project onboarding ([c168c08](https://github.com/DaedalusHub/daedalus-homeport/commit/c168c0872115e38a2b9b4e670d5fb3588b3e8c41))
 * **chat:** add import & export ([12129f6](https://github.com/DaedalusHub/daedalus-homeport/commit/12129f609f001ac0a521fb5f306f0b2599d2140e))
 * **chat:** add model selection ([bf4af77](https://github.com/DaedalusHub/daedalus-homeport/commit/bf4af77675fd8612267a72b57d4b7290ee51c50d))
 * **chat:** add reactivity to history related buttons ([b0efd9d](https://github.com/DaedalusHub/daedalus-homeport/commit/b0efd9d2c7c5c88b83a240ce6495f1deec147ea0))
