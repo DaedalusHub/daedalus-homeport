@@ -1,4 +1,4 @@
-# 0.4.0 (2023-04-21)
+# [0.3.0](https://github.com/DaedalusHub/daedalus-homeport/compare/4cd8f73cc6e0efa047c591f462f145d91a66143f...v0.3.0) (2023-04-21)
 
 
 ### Bug Fixes
