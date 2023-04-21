@@ -1,8 +1,8 @@
 // lib/project.ts
-import { getAsync, setAsync } from "./redisClient";
+import { getAsync, setAsync } from './redisClient';
 import { getLogger } from './logger';
 
-const logger = getLogger('Project');
+const log = getLogger('Project');
 
 export const saveProjectDetails = async (
     projectId: string,
@@ -12,9 +12,14 @@ export const saveProjectDetails = async (
 ) => {
     const projectKey = `project:${projectId}`;
     const projectDetails = JSON.stringify({ name, intent, goals });
-    await setAsync(projectKey, projectDetails);
 
-    logger.info(`Project details saved for projectId ${projectId}`);
+    try {
+        await setAsync(projectKey, projectDetails);
+        log.info(`Project details saved for projectId ${projectId}`);
+    } catch (error) {
+        log.error(`Error saving project details: ${error}`);
+        throw error;
+    }
 };
 
 export const getProjectDetails = async (projectId: string) => {
@@ -25,6 +30,6 @@ export const getProjectDetails = async (projectId: string) => {
         return JSON.parse(projectDetails);
     }
 
-    logger.warn(`Project details not found for projectId ${projectId}`);
+    log.warn(`Project details not found for projectId ${projectId}`);
     return null;
 };
