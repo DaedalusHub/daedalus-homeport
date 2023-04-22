@@ -1,5 +1,3 @@
-// src/components/Onboarding/Onboarding.tsx
-
 import React, { useEffect, useState } from 'react';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import { toast, Toaster } from 'react-hot-toast';
@@ -20,7 +18,6 @@ interface OnboardingProps {
 }
 
 const Onboarding: React.FC<OnboardingProps> = ({ onCompleted }) => {
-    const [step, setStep] = useState<number>(1);
     const { goals, addGoal, removeGoal, handleGoalChange, setGoals } =
         useGoals();
 
@@ -116,15 +113,15 @@ const Onboarding: React.FC<OnboardingProps> = ({ onCompleted }) => {
                 onSubmit={handleSubmit}
             >
                 {({ isValid, setFieldValue }) => (
-                    <Form className="bg-base-200 p-6 rounded-lg shadow-lg">
-                        {step === 1 && (
-                            <>
-                                <h2 className="text-2xl text-primary-content mb-4">
-                                    Welcome! Let's get started.
-                                </h2>
+                    <Form>
+                        <div className="flex flex-row justify-between items-center">
+                            <h2 className="text-2xl text-primary-content mb-4">
+                                Project Driven AI Generation
+                            </h2>
+                            <div className="flex flex-row items-center">
                                 <label
                                     htmlFor="projects"
-                                    className="block mb-1"
+                                    className="block mb-1 mr-2 min-w-fit text-primary-content"
                                 >
                                     Select a Project:
                                 </label>
@@ -145,7 +142,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onCompleted }) => {
                                         setFieldValue('intent', project.intent);
                                         setFieldValue('goals', project.goals);
                                     }}
-                                    className="input input-bordered w-full mb-2"
+                                    className="input input-bordered w-full mb-2 min-w-fit text-primary-content bg-base-200"
                                 >
                                     {projects.map((project) => (
                                         <option
@@ -156,65 +153,49 @@ const Onboarding: React.FC<OnboardingProps> = ({ onCompleted }) => {
                                         </option>
                                     ))}
                                 </Field>
-                                <label htmlFor="name" className="block mb-1">
-                                    Project Name:
-                                </label>
-                                <Field
-                                    name="name"
-                                    placeholder="Enter your project name"
-                                    className="input input-bordered w-full mb-2"
-                                />
-                                <ErrorMessage
-                                    name="name"
-                                    component="p"
-                                    className="text-error text-sm mb-2"
-                                />
-                                <label htmlFor="intent" className="block mb-1">
-                                    Project Intent:
-                                </label>
-                                <Field
-                                    name="intent"
-                                    placeholder="What's the intent of your project?"
-                                    className="input input-bordered w-full mb-2"
-                                />
-                                <ErrorMessage
-                                    name="intent"
-                                    component="p"
-                                    className="text-error text-sm mb-2"
-                                />
-                                <button
-                                    type="button"
-                                    onClick={() => setStep(2)}
-                                    className="btn btn-accent mt-4"
-                                >
-                                    Next
-                                </button>
-                            </>
-                        )}
-                        {step === 2 && (
-                            <>
-                                <GoalsInput
-                                    goals={goals}
-                                    addGoal={addGoal}
-                                    removeGoal={removeGoal}
-                                    handleGoalChange={handleGoalChange}
-                                />
-                                <button
-                                    type="button"
-                                    onClick={() => setStep(1)}
-                                    className="btn btn-secondary mt-4 mr-2"
-                                >
-                                    Previous
-                                </button>
-                                <button
-                                    type="submit"
-                                    disabled={!isValid}
-                                    className="btn btn-accent mt-4"
-                                >
-                                    Submit
-                                </button>
-                            </>
-                        )}
+                            </div>
+                        </div>
+                        <div className="bg-base-200 p-6 rounded-lg shadow-lg">
+                            <label htmlFor="name" className="block mb-1">
+                                Project Name:
+                            </label>
+                            <Field
+                                name="name"
+                                placeholder="Enter your project name"
+                                className="input input-bordered w-full mb-2"
+                            />
+                            <ErrorMessage
+                                name="name"
+                                component="p"
+                                className="text-error text-sm mb-2"
+                            />
+                            <label htmlFor="intent" className="block mb-1">
+                                Project Intent:
+                            </label>
+                            <Field
+                                name="intent"
+                                placeholder="What's the intent of your project?"
+                                className="input input-bordered w-full mb-2"
+                            />
+                            <ErrorMessage
+                                name="intent"
+                                component="p"
+                                className="text-error text-sm mb-2"
+                            />
+                            <GoalsInput
+                                goals={goals}
+                                addGoal={addGoal}
+                                removeGoal={removeGoal}
+                                handleGoalChange={handleGoalChange}
+                            />
+                            <button
+                                type="submit"
+                                disabled={!isValid}
+                                className="btn btn-accent mt-4"
+                            >
+                                Submit
+                            </button>
+                        </div>
                     </Form>
                 )}
             </Formik>

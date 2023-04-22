@@ -22,6 +22,7 @@
 * **message:** add syntax highlighting ([6d52fb4](https://github.com/DaedalusHub/daedalus-homeport/commit/6d52fb4f407b8e12e8ef333376dd2e1c0ba15e56))
 * **message:** include history in messages ([0023059](https://github.com/DaedalusHub/daedalus-homeport/commit/002305980fce3f7468840a69fec72067de381762))
 * **onboarding:** add theming, redis backend ([7f212bd](https://github.com/DaedalusHub/daedalus-homeport/commit/7f212bd4a1531091fcd8f0b941d429290b324a32))
+* **onboarding:** fetch existing projects, populate data from selected project ([3be8566](https://github.com/DaedalusHub/daedalus-homeport/commit/3be8566097a76354a14f872ca187f19c60d22fce))
 
 
 
