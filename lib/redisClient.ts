@@ -8,7 +8,7 @@ import { getLogger } from './logger';
 const log = getLogger('Redis');
 
 //const redisUrl = process.env.REDIS_URL;
-const redisUrl = process.env.REDIS_URL
+const redisUrl = process.env.REDIS_URL;
 
 if (!redisUrl) {
     throw new Error('REDIS_URL is not defined in environment variables');
@@ -16,7 +16,7 @@ if (!redisUrl) {
 
 const createRedisClient = () => {
     const client = createClient({
-        url: redisUrl,
+        url: redisUrl
     });
 
     client.on('error', (error) => {
@@ -26,17 +26,23 @@ const createRedisClient = () => {
     return client;
 };
 
-export const getAsync = async (key: string): Promise<string | null> => {
+export const hsetAsync = async (
+    key: string,
+    field: string,
+    value: string
+): Promise<void> => {
     const client = createRedisClient();
     await client.connect();
-    const result = await client.get(key);
+    await client.hSet(key, field, value);
     await client.disconnect();
-    return result;
 };
 
-export const setAsync = async (key: string, value: string): Promise<void> => {
+export const hgetallAsync = async (
+    key: string
+): Promise<Record<string, string> | null> => {
     const client = createRedisClient();
     await client.connect();
-    await client.set(key, value);
+    const result = await client.hGetAll(key);
     await client.disconnect();
+    return result;
 };

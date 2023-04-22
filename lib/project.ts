@@ -1,5 +1,5 @@
 // lib/project.ts
-import { getAsync, setAsync } from './redisClient';
+import { hgetallAsync, hsetAsync } from './redisClient';
 import { getLogger } from './logger';
 
 const log = getLogger('Project');
@@ -10,11 +10,12 @@ export const saveProjectDetails = async (
     intent: string,
     goals: string[]
 ) => {
-    const projectKey = `project:${projectId}`;
+    const projectKey = `projects`;
+    const projectField = `project:${projectId}`;
     const projectDetails = JSON.stringify({ name, intent, goals });
 
     try {
-        await setAsync(projectKey, projectDetails);
+        await hsetAsync(projectKey, projectField, projectDetails);
         log.info(`Project details saved for projectId ${projectId}`);
     } catch (error) {
         log.error(`Error saving project details: ${error}`);
@@ -22,14 +23,20 @@ export const saveProjectDetails = async (
     }
 };
 
-export const getProjectDetails = async (projectId: string) => {
-    const projectKey = `project:${projectId}`;
-    const projectDetails = await getAsync(projectKey);
+export const getAllProjects = async () => {
+    const projectKey = `projects`;
+    const projectDetailsList = await hgetallAsync(projectKey);
 
-    if (projectDetails) {
-        return JSON.parse(projectDetails);
+    if (!projectDetailsList) {
+        log.warn(`No projects found`);
+        return [];
     }
 
-    log.warn(`Project details not found for projectId ${projectId}`);
-    return null;
+    const projects = Object.values(projectDetailsList)
+        .map((projectDetails) => JSON.parse(projectDetails))
+        .filter((project) => project !== null);
+
+    log.info(`Fetched all projects: ${JSON.stringify(projects)}`);
+
+    return projects;
 };

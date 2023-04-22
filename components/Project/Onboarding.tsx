@@ -1,6 +1,6 @@
 // src/components/Onboarding/Onboarding.tsx
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import { toast, Toaster } from 'react-hot-toast';
 import * as Yup from 'yup';
@@ -21,13 +21,39 @@ interface OnboardingProps {
 
 const Onboarding: React.FC<OnboardingProps> = ({ onCompleted }) => {
     const [step, setStep] = useState<number>(1);
-    const { goals, addGoal, removeGoal, handleGoalChange } = useGoals();
+    const { goals, addGoal, removeGoal, handleGoalChange, setGoals } =
+        useGoals();
+
+    const [projects, setProjects] = useState<any[]>([]);
+    const [selectedProject, setSelectedProject] = useState<any>(null);
 
     const initialValues = {
-        name: '',
-        intent: '',
-        goals
+        name: selectedProject?.name || '',
+        intent: selectedProject?.intent || '',
+        goals: selectedProject?.goals || goals
     };
+
+    useEffect(() => {
+        const fetchProjects = async () => {
+            try {
+                const response = await fetch('/api/get-projects');
+                const data = await response.json();
+                setProjects(data);
+                setSelectedProject(data[0]);
+            } catch (error) {
+                log.error(`Error fetching projects: ${error}`);
+            }
+        };
+
+        fetchProjects();
+    }, []);
+
+    useEffect(() => {
+        if (selectedProject) {
+            const updatedGoals = selectedProject.goals;
+            setGoals(updatedGoals);
+        }
+    }, [selectedProject]);
 
     const validationSchema = Yup.object({
         name: Yup.string().required('Please enter a name for your project.'),
@@ -84,17 +110,52 @@ const Onboarding: React.FC<OnboardingProps> = ({ onCompleted }) => {
     return (
         <div className="bg-base-100 p-8 min-h-fit h-1/2 flex flex-col w-screen">
             <Formik
+                enableReinitialize
                 initialValues={initialValues}
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                {({ isValid }) => (
+                {({ isValid, setFieldValue }) => (
                     <Form className="bg-base-200 p-6 rounded-lg shadow-lg">
                         {step === 1 && (
                             <>
                                 <h2 className="text-2xl text-primary-content mb-4">
                                     Welcome! Let's get started.
                                 </h2>
+                                <label
+                                    htmlFor="projects"
+                                    className="block mb-1"
+                                >
+                                    Select a Project:
+                                </label>
+                                <Field
+                                    as="select"
+                                    name="projects"
+                                    value={selectedProject?.id}
+                                    onChange={async (
+                                        e: React.ChangeEvent<HTMLSelectElement>
+                                    ) => {
+                                        const projectId = e.target.value;
+                                        const project = projects.find(
+                                            (p) => p.id === projectId
+                                        );
+                                        setSelectedProject(project);
+
+                                        setFieldValue('name', project.name);
+                                        setFieldValue('intent', project.intent);
+                                        setFieldValue('goals', project.goals);
+                                    }}
+                                    className="input input-bordered w-full mb-2"
+                                >
+                                    {projects.map((project) => (
+                                        <option
+                                            key={project.id}
+                                            value={project.id}
+                                        >
+                                            {project.name}
+                                        </option>
+                                    ))}
+                                </Field>
                                 <label htmlFor="name" className="block mb-1">
                                     Project Name:
                                 </label>
@@ -130,7 +191,6 @@ const Onboarding: React.FC<OnboardingProps> = ({ onCompleted }) => {
                                 </button>
                             </>
                         )}
-
                         {step === 2 && (
                             <>
                                 <GoalsInput
@@ -142,7 +202,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onCompleted }) => {
                                 <button
                                     type="button"
                                     onClick={() => setStep(1)}
-                                    className="btn btn-secondary mt4 mr-2"
+                                    className="btn btn-secondary mt-4 mr-2"
                                 >
                                     Previous
                                 </button>
