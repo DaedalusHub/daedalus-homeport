@@ -1,5 +1,3 @@
-// src/components/Onboarding/GoalsInput.tsx
-
 import React from 'react';
 import { ErrorMessage, Field } from 'formik';
 
@@ -11,11 +9,11 @@ interface GoalsInputProps {
 }
 
 const GoalsInput: React.FC<GoalsInputProps> = ({
-    goals,
-    addGoal,
-    removeGoal,
-    handleGoalChange
-}) => {
+                                                   goals,
+                                                   addGoal,
+                                                   removeGoal,
+                                                   handleGoalChange,
+                                               }) => {
     return (
         <>
             <div className="flex flex-col items-start">
@@ -24,7 +22,7 @@ const GoalsInput: React.FC<GoalsInputProps> = ({
                 </label>
                 {goals.map((goal, index) => (
                     <div
-                        key={`goal-${index}`}
+                        key={index}
                         className="mb-2 flex items-center space-x-2 w-4/5"
                     >
                         <span className="font-semibold">{index + 1}.</span>
@@ -45,7 +43,6 @@ const GoalsInput: React.FC<GoalsInputProps> = ({
                             Remove
                         </button>
                         <ErrorMessage
-                            key={`error-goal-${index}`}
                             name={`goals[${index}]`}
                             render={(msg) => (
                                 <p className="text-error text-sm mb-2">{msg}</p>

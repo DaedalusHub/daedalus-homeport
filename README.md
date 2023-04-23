@@ -24,13 +24,17 @@
 5. Make a copy of the example environment variables file
 
    On Linux systems:
+
    ```bash
    $ cp .env.example .env
    ```
+
    On Windows:
+
    ```powershell
    $ copy .env.example .env
    ```
+
 6. Add your [API key](https://beta.openai.com/account/api-keys) to the newly created `.env` file
 
 7. Run the app
@@ -39,5 +43,5 @@
    $ npm run dev
    ```
 
-You should now be able to access the app at [http://localhost:3000](http://localhost:3000)! For the full context behind
+You should now be able to access the app at <http://localhost:3000>! For the full context behind
 this example app, check out the [tutorial](https://beta.openai.com/docs/quickstart).

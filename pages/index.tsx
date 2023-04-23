@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 import ChatUI from '@/components/Chat/ChatUI';
 import NavBar from '@/components/NavBar';
 import FileTreeDisplay from '@/components/FileTree/FileTreeDisplay';
-import Onboarding from '@/components/Project/Onboarding';
+import Project from '@/components/Project/Project';
 import { getLogger } from '@/lib/logger';
 
 const log = getLogger('Home');
@@ -21,7 +21,7 @@ export default function Home() {
         goals: string[];
     } | null>(null);
 
-    const handleOnboardingCompleted = (values: {
+    const handleProjectCompleted = (values: {
         name: string;
         intent: string;
         goals: string[];
@@ -34,7 +34,7 @@ export default function Home() {
         if (selectedTab === 'chat') {
             return <ChatUI />;
         } else if (selectedTab === 'project') {
-            return <Onboarding onCompleted={handleOnboardingCompleted} />;
+            return <Project onCompleted={handleProjectCompleted} />;
         } else if (selectedTab === 'directory') {
             return <FileTreeDisplay />;
         }
