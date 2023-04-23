@@ -1,10 +1,9 @@
-# 0.3.0 (2023-04-22)
+# [0.3.0](https://github.com/DaedalusHub/daedalus-homeport/compare/4cd8f73cc6e0efa047c591f462f145d91a66143f...v0.3.0) (2023-04-21)
 
 
 ### Bug Fixes
 
 * **message:** fix styling ([2c266af](https://github.com/DaedalusHub/daedalus-homeport/commit/2c266af25a48c9040b063ce106f256c99d6ca318))
-* **onboarding:** fix redis set function ([f3c5d48](https://github.com/DaedalusHub/daedalus-homeport/commit/f3c5d48c20371b82f70ab175dd3faaa0811e2b38))
 
 
 ### Features
@@ -21,8 +20,6 @@
 * **chat:** refactor chat.tsx to multiple files, add loading animation ([2856884](https://github.com/DaedalusHub/daedalus-homeport/commit/2856884d6c9c3b7f50a737b059ed0de13c91d317))
 * **message:** add syntax highlighting ([6d52fb4](https://github.com/DaedalusHub/daedalus-homeport/commit/6d52fb4f407b8e12e8ef333376dd2e1c0ba15e56))
 * **message:** include history in messages ([0023059](https://github.com/DaedalusHub/daedalus-homeport/commit/002305980fce3f7468840a69fec72067de381762))
-* **onboarding:** add theming, redis backend ([7f212bd](https://github.com/DaedalusHub/daedalus-homeport/commit/7f212bd4a1531091fcd8f0b941d429290b324a32))
-* **onboarding:** fetch existing projects, populate data from selected project ([3be8566](https://github.com/DaedalusHub/daedalus-homeport/commit/3be8566097a76354a14f872ca187f19c60d22fce))
 
 
 
