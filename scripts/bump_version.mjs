@@ -46,18 +46,47 @@ const bump = async () => {
 
     console.log('New version:', newVersion);
 
+    const { changeType } = await inquirer.prompt([
+        {
+            type: 'list',
+            name: 'changeType',
+            message: 'Choose change type:',
+            choices: [
+                'Added',
+                'Changed',
+                'Deprecated',
+                'Removed',
+                'Fixed',
+                'Security',
+            ],
+        },
+    ]);
+
+    const { changeInformation } = await inquirer.prompt([
+        {
+            type: 'input',
+            name: 'changeInformation',
+            message: `Enter additional information for the "${changeType}" change:`,
+        },
+    ]);
+
     const packageJson = JSON.parse(fs.readFileSync('package.json', 'utf8'));
     packageJson.version = newVersion;
     fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2) + '\n');
 
-    //execSync(`git commit -am "chore: bump version to ${newVersion}"`);
-    execSync(`git tag v${newVersion}`);
+    const changelogFilename = 'CHANGELOG.md';
+    const changelog = fs.readFileSync(changelogFilename, 'utf8');
+    const unreleasedSection = '## [Unreleased]';
+    const newChangelogEntry = `## [${newVersion}](https://github.com/DaedalusHub/daedalus-homeport/compare/v${currentVersion}...v${newVersion}) (${new Date().toISOString().split('T')[0]})\n\n### ${changeType}\n\n- ${changeInformation}\n\n`;
 
-    execSync(`hallmark cc add ${newVersion}`);
+    const updatedChangelog = changelog.replace(unreleasedSection, `${unreleasedSection}\n\n${newChangelogEntry}`);
+    fs.writeFileSync(changelogFilename, updatedChangelog);
+
+    execSync(`git add CHANGELOG.md package.json`);
+    execSync(`git commit -m "chore: bump version to ${newVersion}"`);
+    execSync(`git tag -a v${newVersion} -m "Release ${newVersion}"`);
 
     console.log(`Changelog updated. Edit CHANGELOG.md to include relevant changes.`);
 };
 
 bump();
-
-// End of file: scripts/bump_version.mjs
