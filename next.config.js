@@ -9,7 +9,7 @@ const nextConfig = {
         config.resolve.alias['@/styles'] = './styles';
         config.resolve.alias['@/constants'] = './constants';
         return config;
-    },
+    }
 };
 
 module.exports = nextConfig;
