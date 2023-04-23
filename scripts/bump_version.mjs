@@ -50,26 +50,12 @@ const bump = async () => {
     packageJson.version = newVersion;
     fs.writeFileSync('package.json', JSON.stringify(packageJson, null, 2) + '\n');
 
-    execSync(`git commit -am "chore: bump version to ${newVersion}"`);
+    //execSync(`git commit -am "chore: bump version to ${newVersion}"`);
     execSync(`git tag v${newVersion}`);
 
-    const changelogFilename = 'CHANGELOG.md';
+    execSync(`hallmark cc add ${newVersion}`);
 
-    let changelog;
-
-    if (fs.existsSync(changelogFilename)) {
-        changelog = fs.readFileSync(changelogFilename, 'utf8');
-    } else {
-        changelog = '# Changelog\n\nAll notable changes to this project will be documented in this file. For a more granular list of changes see [COMMITLOG.md](COMMITLOG.md)\n\nThe format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),\nand this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).\n\n## [Unreleased]\n\n';
-    }
-
-    const newChangelogEntry = `## [${newVersion}](https://github.com/DaedalusHub/daedalus-homeport/compare/v${currentVersion}...v${newVersion}) (${new Date().toISOString().split('T')[0]})\n\n### Added\n\n`;
-
-    const updatedChangelog = changelog.replace('## [Unreleased]', `## [Unreleased]\n\n${newChangelogEntry}`);
-
-    fs.writeFileSync(changelogFilename, updatedChangelog);
-
-    console.log(`Changelog updated. Edit ${changelogFilename} to include relevant changes.`);
+    console.log(`Changelog updated. Edit CHANGELOG.md to include relevant changes.`);
 };
 
 bump();

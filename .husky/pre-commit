@@ -7,5 +7,8 @@ yarn test && yarn lint-staged
 # Update COMMITLOG
 yarn commitlog
 
+# Fix markdown
+yarn hallmark
+
 # Commit COMMITLOG
 git add COMMITLOG.md
