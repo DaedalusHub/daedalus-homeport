@@ -1,33 +1,24 @@
-import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { Dispatch, SetStateAction } from 'react';
 
-interface Goal {
-    id: string;
-    text: string;
-}
-
-const useGoals = (initialGoals?: string[]) => {
-    const [goals, setGoals] = useState<Goal[]>(
-        initialGoals?.map((goal) => ({ id: uuidv4(), text: goal })) || []
-    );
-
+const useGoals = (
+    goals: string[],
+    setGoals: Dispatch<SetStateAction<string[]>>
+) => {
     const addGoal = () => {
-        setGoals((goals) => [...goals, { id: uuidv4(), text: '' }]);
+        setGoals((goals) => [...goals, '']);
     };
 
-    const removeGoal = (goalId: string) => {
-        setGoals((goals) => goals.filter((goal) => goal.id !== goalId));
+    const removeGoal = (index: number) => {
+        setGoals((goals) => goals.filter((_, i) => i !== index));
     };
 
-    const handleGoalChange = (goalId: string, newGoalText: string) => {
+    const handleGoalChange = (index: number, newGoalText: string) => {
         setGoals((goals) =>
-            goals.map((goal) =>
-                goal.id === goalId ? { ...goal, text: newGoalText } : goal
-            )
+            goals.map((goal, i) => (i === index ? newGoalText : goal))
         );
     };
 
-    return { goals, addGoal, removeGoal, handleGoalChange, setGoals };
+    return { addGoal, removeGoal, handleGoalChange };
 };
 
 export default useGoals;

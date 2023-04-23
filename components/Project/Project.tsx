@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ErrorMessage, Field, Form, Formik, FormikHelpers } from 'formik';
 import { toast, Toaster } from 'react-hot-toast';
 import * as Yup from 'yup';
@@ -7,9 +7,9 @@ import { v4 as uuidv4 } from 'uuid';
 import GoalsInput from './GoalsInput';
 import useGoals from './useGoals';
 
-const log = getLogger('Onboarding');
+const log = getLogger('Project');
 
-interface OnboardingProps {
+interface ProjectProps {
     onCompleted: (values: {
         name: string;
         intent: string;
@@ -17,39 +17,59 @@ interface OnboardingProps {
     }) => void;
 }
 
-const Onboarding: React.FC<OnboardingProps> = ({ onCompleted }) => {
-    const { goals, addGoal, removeGoal, handleGoalChange, setGoals } =
-        useGoals();
-
+const Project: React.FC<ProjectProps> = ({ onCompleted }) => {
     const [projects, setProjects] = useState<any[]>([]);
     const [selectedProject, setSelectedProject] = useState<any>(null);
+    const [goals, setGoals] = useState<string[]>([]);
+    const [projectName, setProjectName] = useState('');
+    const [projectIntent, setProjectIntent] = useState('');
+    const [generatedPrompt, setGeneratedPrompt] = useState('');
+
+    const generatePrompt = (values: {
+        name: string;
+        intent: string;
+        goals: string[];
+    }) => {
+        const prompt = `You are assisting me on a project with the following details:
+- Title: ${values.name}
+- Intent: ${values.intent}
+- Goals:
+${values.goals.map((goal, index) => `  ${index + 1}. ${goal}`).join('\n')}`;
+
+        setGeneratedPrompt(prompt);
+    };
+    const { addGoal, removeGoal, handleGoalChange } = useGoals(goals, setGoals);
 
     const initialValues = {
-        name: selectedProject?.name || '',
-        intent: selectedProject?.intent || '',
-        goals: selectedProject?.goals || goals
+        name: projectName,
+        intent: projectIntent,
+        goals: selectedProject?.goals || goals,
+    };
+
+    const updateProjectDetails = (project) => {
+        setProjectName(project?.name || '');
+        setProjectIntent(project?.intent || '');
+        setGoals(project?.goals || []);
+    };
+
+    const fetchProjects = async () => {
+        try {
+            const response = await fetch('/api/get-projects');
+            const data = await response.json();
+            setProjects(data);
+            setSelectedProject(data[0]);
+            updateProjectDetails(data[0]);
+        } catch (error) {
+            log.error(`Error fetching projects: ${error}`);
+        }
     };
 
     useEffect(() => {
-        const fetchProjects = async () => {
-            try {
-                const response = await fetch('/api/get-projects');
-                const data = await response.json();
-                setProjects(data);
-                setSelectedProject(data[0]);
-            } catch (error) {
-                log.error(`Error fetching projects: ${error}`);
-            }
-        };
-
         fetchProjects();
     }, []);
 
     useEffect(() => {
-        if (selectedProject) {
-            const updatedGoals = selectedProject.goals;
-            setGoals(updatedGoals);
-        }
+        updateProjectDetails(selectedProject);
     }, [selectedProject]);
 
     const validationSchema = Yup.object({
@@ -96,6 +116,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onCompleted }) => {
             });
             toast.dismiss();
             toast.success('Submitted');
+            await fetchProjects();
         } catch (error) {
             log.error(`Error submitting project details: ${error}`);
             toast.dismiss();
@@ -112,7 +133,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onCompleted }) => {
                 validationSchema={validationSchema}
                 onSubmit={handleSubmit}
             >
-                {({ isValid, setFieldValue }) => (
+                {({ isValid, setFieldValue, values }) => (
                     <Form>
                         <div className="flex flex-row justify-between items-center">
                             <h2 className="text-2xl text-primary-content mb-4">
@@ -139,7 +160,9 @@ const Onboarding: React.FC<OnboardingProps> = ({ onCompleted }) => {
                                         setSelectedProject(project);
 
                                         setFieldValue('name', project.name);
+                                        setProjectName(project.name);
                                         setFieldValue('intent', project.intent);
+                                        setProjectIntent(project.intent);
                                         setFieldValue('goals', project.goals);
                                     }}
                                     className="input input-bordered w-full mb-2 min-w-fit text-primary-content bg-base-200"
@@ -163,7 +186,9 @@ const Onboarding: React.FC<OnboardingProps> = ({ onCompleted }) => {
                                 name="name"
                                 placeholder="Enter your project name"
                                 className="input input-bordered w-full mb-2"
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProjectName(e.target.value)}
                             />
+
                             <ErrorMessage
                                 name="name"
                                 component="p"
@@ -176,6 +201,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ onCompleted }) => {
                                 name="intent"
                                 placeholder="What's the intent of your project?"
                                 className="input input-bordered w-full mb-2"
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setProjectIntent(e.target.value)}
                             />
                             <ErrorMessage
                                 name="intent"
@@ -187,21 +213,36 @@ const Onboarding: React.FC<OnboardingProps> = ({ onCompleted }) => {
                                 addGoal={addGoal}
                                 removeGoal={removeGoal}
                                 handleGoalChange={handleGoalChange}
+                                setProjectName={setProjectName}
+                                setProjectIntent={setProjectIntent}
                             />
                             <button
                                 type="submit"
                                 disabled={!isValid}
-                                className="btn btn-accent mt-4"
+                                className="btn btn-accent mt-4 mr-2"
                             >
-                                Submit
+                                Save
+                            </button>
+                            <button
+                                type="button"
+                                disabled={!isValid}
+                                onClick={() => generatePrompt(values)}
+                                className="btn btn-secondary mt-4"
+                            >
+                                Generate Prompt
                             </button>
                         </div>
                     </Form>
                 )}
             </Formik>
+            <textarea
+                readOnly
+                value={generatedPrompt}
+                className="mt-4 p-2 w-full h-32 border-2 border-base-300"
+            />
             <Toaster />
         </div>
     );
 };
 
-export default Onboarding;
+export default Project;
