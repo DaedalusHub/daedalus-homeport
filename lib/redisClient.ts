@@ -1,13 +1,8 @@
-// Part: lib/redisClient.ts
-// Code Reference: https://github.com/redis/node-redis
-// Documentation: https://redis.io/docs/clients/nodejs/
-
 import { createClient } from 'redis';
 import { getLogger } from './logger';
 
 const log = getLogger('Redis');
 
-//const redisUrl = process.env.REDIS_URL;
 const redisUrl = process.env.REDIS_URL;
 
 if (!redisUrl) {

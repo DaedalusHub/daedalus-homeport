@@ -1,4 +1,3 @@
-// lib/project.ts
 import { hgetallAsync, hsetAsync } from './redisClient';
 import { getLogger } from './logger';
 

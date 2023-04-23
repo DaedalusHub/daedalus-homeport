@@ -1,8 +1,3 @@
-// Part: lib/logger.ts
-// Code Reference: https://github.com/winstonjs/winston
-// Documentation:
-// Code Reference: https://github.com/pimterry/loglevel
-
 import log, { setLevel } from "loglevel";
 import * as process from "process";
 let winston;
