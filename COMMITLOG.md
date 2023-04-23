@@ -1,3 +1,19 @@
+# [0.4.0](https://github.com/DaedalusHub/daedalus-homeport/compare/v0.3.0...v0.4.0) (2023-04-23)
+
+
+### Bug Fixes
+
+* **onboarding:** fix redis set function ([f3c5d48](https://github.com/DaedalusHub/daedalus-homeport/commit/f3c5d48c20371b82f70ab175dd3faaa0811e2b38))
+
+
+### Features
+
+* **onboarding:** add theming, redis backend ([7f212bd](https://github.com/DaedalusHub/daedalus-homeport/commit/7f212bd4a1531091fcd8f0b941d429290b324a32))
+* **onboarding:** fetch existing projects, populate data from selected project ([3be8566](https://github.com/DaedalusHub/daedalus-homeport/commit/3be8566097a76354a14f872ca187f19c60d22fce))
+* **project:** project prompt generation ([0dcb397](https://github.com/DaedalusHub/daedalus-homeport/commit/0dcb39702e46c38d5a320e5f639ecd0e22e6f8d5))
+
+
+
 # [0.3.0](https://github.com/DaedalusHub/daedalus-homeport/compare/4cd8f73cc6e0efa047c591f462f145d91a66143f...v0.3.0) (2023-04-21)
 
 
