@@ -1,9 +1,9 @@
-import {ChatMessage} from '@/components/Chat/chatHelpers';
+import {ChatMessageType} from '@/components/Chat/utils/chatHelpers';
 import {encode} from "gpt-3-encoder";
-import {CreateChatCompletionRequest} from "openai";
+import { ChatCompletionRequestMessage, CreateChatCompletionRequest } from "openai";
 
 
-function getPromptTokens(model: string, messageHistory: ChatMessage[], userMessage: string) {
+function getPromptTokens(model: string, messageHistory: ChatMessageType[], userMessage: string) {
     const prompt = [...messageHistory, {
         role: 'user',
         content: userMessage
@@ -16,7 +16,7 @@ function getPromptTokens(model: string, messageHistory: ChatMessage[], userMessa
 export function createChatCompletionRequest(
     model: string,
     userMessage: string,
-    messageHistory: ChatMessage[]
+    messageHistory: ChatMessageType[]
 ): CreateChatCompletionRequest {
     console.log('model', model);
     const maxTokens = model.startsWith('gpt-4') ? 8000 : 4000;
@@ -25,14 +25,22 @@ export function createChatCompletionRequest(
     console.log('promptTokens', promptTokens);
     const availableTokens = maxTokens - promptTokens;
     console.log('availableTokens', availableTokens);
-    const reducedTokens = Math.max(0, availableTokens);
+    const minimumTokens = parseInt(process.env.MINIMUM_RESPONSE_TOKENS || '50');
+    const reducedTokens = Math.max(minimumTokens, availableTokens);
     console.log('reducedTokens', reducedTokens);
 
+
+    const formattedMessages: ChatCompletionRequestMessage[] = messageHistory.map((message) => {
+        return {
+            role: message.role as 'user' | 'assistant',
+            content: message.content,
+        };
+    });
 
     return {
         model: model,
         messages: [
-            ...messageHistory,
+            ...formattedMessages,
             {
                 role: 'user',
                 content: userMessage,

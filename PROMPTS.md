@@ -20,6 +20,8 @@ As a TypeScript coding function, your goals are to ensure quality, maintainabili
 - [Loglevel (client-side logging)](https://github.com/pimterry/loglevel)
 - [Redis NodeJS Repo](https://github.com/redis/node-redis)
 - [Redis NodeJS Documentation](https://redis.io/docs/clients/nodejs/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Daisy UI](https://daisyui.com/)
 
 ## Code Style Guidelines
 

@@ -1,37 +1,22 @@
-import { ChatMessage, importFromJson } from '@/components/Chat/chatHelpers';
+import React from "react";
+import { ChatMessageType, importMessages } from "@/components/Chat/utils/chatHelpers";
 
 interface ChatHeaderProps {
     onSave: () => void;
     onClear: () => void;
     onExport: () => void;
-    onImport: (data: ChatMessage[]) => void;
+    onImport: (data: ChatMessageType[]) => void;
 }
 
 const ChatHeader: React.FC<ChatHeaderProps> = ({
-    onSave,
-    onClear,
-    onExport,
-    onImport
-}) => {
+                                                   onSave,
+                                                   onClear,
+                                                   onExport,
+                                                   onImport
+                                               }) => {
     const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files && e.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            const fileContent = event.target?.result;
-            if (typeof fileContent === 'string') {
-                const data = importFromJson(fileContent);
-                if (Array.isArray(data)) {
-                    onImport(data);
-                } else {
-                    alert('Invalid JSON format');
-                }
-            } else {
-                console.error('Unable to read file content');
-            }
-        };
-        reader.readAsText(file);
+        if (file) importMessages(file, onImport);
     };
 
     return (
@@ -63,7 +48,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
                     id="import"
                     accept=".json"
                     onChange={handleFileSelect}
-                    style={{ display: 'none' }}
+                    style={{ display: "none" }}
                 />
                 <button
                     onClick={onClear}

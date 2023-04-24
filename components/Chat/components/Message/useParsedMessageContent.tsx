@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import CodeBlock from './CodeBlock';
 
-const useMessageContent = (content: string | JSX.Element) => {
+const useParsedMessageContent = (content: string | JSX.Element) => {
     return useMemo(() => {
         if (typeof content === 'string') {
             const lines = content.split(/\r\n|\r|\n/);
@@ -47,4 +47,4 @@ const useMessageContent = (content: string | JSX.Element) => {
     }, [content]);
 };
 
-export default useMessageContent;
+export default useParsedMessageContent;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface ModelSelectorProps {
     models: string[];
@@ -17,7 +17,7 @@ const ChatModelSelector: React.FC<ModelSelectorProps> = ({
 
     return (
         <div className="dropdown dropdown-hover dropdown-top flex-none">
-            <button className="btn">{selectedModel}</button>
+            <button className="btn" aria-label="Model selector">{selectedModel}</button>
             <ul
                 tabIndex={0}
                 className="pr-2 shadow menu dropdown-content bg-base-300 w-auto"
@@ -25,7 +25,8 @@ const ChatModelSelector: React.FC<ModelSelectorProps> = ({
                 {models.map((model) => (
                     <li key={model}>
                         <a
-                            href="components#"
+                            aria-label={`Select ${model} model`}
+                            href="../..#"
                             className="block px-4 py-2 text-sm min-w-fit uppercase"
                             onClick={(e) => {
                                 e.preventDefault();

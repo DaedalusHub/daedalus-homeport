@@ -1,29 +1,23 @@
-import React, {useEffect, useState} from 'react';
-import ChatInput from './ChatInput';
-import ChatHistory from './ChatHistory';
-import ChatHeader from './ChatHeader';
-import ChatModelSelector from './ChatModelSelector';
-import {useChatState} from './ChatState';
-import {handleClear, handleExport, handleImport, handleSave, handleUserMessage} from './ChatActions';
+import React, { useState } from "react";
+import ChatInput from "./components/ChatInput";
+import ChatHistory from "./components/ChatHistory";
+import ChatHeader from "./components/ChatHeader";
+import ChatModelSelector from "./components/ChatModelSelector";
+import {
+    handleClear,
+    handleExport,
+    handleImport,
+    handleSave,
+    handleUserMessage
+} from "@/components/Chat/hooks/useChatActions";
+import { useModels } from "@/components/Chat/hooks/useModels";
+import { useChatState } from "@/components/Chat/hooks/useChatState";
 
 const ChatUI: React.FC = () => {
-    const {messages, addMessage, setMessages} = useChatState();
+    const { messages, addMessage, setMessages, pendingResponse, setPendingResponse } = useChatState();
+    const models = useModels();
 
-    const [models, setModels] = useState<string[]>([]);
-    const [loading, setLoading] = useState<boolean>(false);
-
-    const [selectedModel, setSelectedModel] = useState<string>('gpt-3.5-turbo');
-
-    useEffect(() => {
-        async function fetchModels() {
-            const response = await fetch('/api/models?type=gpt');
-            const data = await response.json();
-            setModels(data.models.sort() || []);
-        }
-
-        fetchModels();
-        setSelectedModel('gpt-3.5-turbo');
-    }, [setSelectedModel]);
+    const [selectedModel, setSelectedModel] = useState<string>("gpt-3.5-turbo");
 
     return (
         <div className="bg-base-100 p-8 min-h-fit h-1/2 flex flex-col w-screen">
@@ -31,32 +25,31 @@ const ChatUI: React.FC = () => {
                 onSave={() => handleSave(messages)}
                 onClear={() => handleClear(setMessages)}
                 onExport={() => handleExport(messages)}
-                onImport={
-                    (importedMessages) =>
-                        handleImport(importedMessages, setMessages) // Change this line
+                onImport={(importedMessages) =>
+                    handleImport(importedMessages, setMessages)
                 }
             />
+            <div className="flex items-center justify-between mb-4">
+                <ChatModelSelector
+                    models={models}
+                    selectedModel={selectedModel}
+                    onModelSelect={setSelectedModel}
+                />
+            </div>
             <div className="bg-base-200 p-6 rounded-lg shadow-lg flex flex-col flex-grow">
-                <ChatHistory messages={messages} />
-                <div className="flex align-center mt-4 w-full">
-                    <ChatModelSelector
-                        models={models}
-                        selectedModel={selectedModel}
-                        onModelSelect={setSelectedModel}
-                    />
-                    <ChatInput
-                        onSubmit={(message) =>
-                            handleUserMessage(
-                                selectedModel,
-                                message,
-                                addMessage,
-                                setLoading,
-                                messages
-                            )
-                        }
-                        isLoading={loading}
-                    />
-                </div>
+                <ChatHistory messages={messages} pendingResponse={pendingResponse} />
+
+                <ChatInput
+                    onSubmit={(message) =>
+                        handleUserMessage(
+                            selectedModel,
+                            message,
+                            addMessage,
+                            setPendingResponse,
+                            messages
+                        )
+                    }
+                />
             </div>
         </div>
     );
