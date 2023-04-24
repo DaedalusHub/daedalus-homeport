@@ -1,6 +1,11 @@
 import React from "react";
+<<<<<<<< HEAD:components/Chat/components/Message/Message.tsx
 import RoleLabel from "./RoleLabel";
 import useParsedMessageContent from "./useParsedMessageContent";
+========
+import RoleLabel from "../../Message/RoleLabel";
+import useMessageContent from "../../Message/useMessageContent";
+>>>>>>>> 26d149a (feat(chat): change pending response action to spinner in chat history):components/Chat/components/Message.tsx
 
 interface MessageProps {
     role: string;
