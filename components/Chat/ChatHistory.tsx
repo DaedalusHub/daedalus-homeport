@@ -9,9 +9,9 @@ export interface ChatHistoryProps {
 const ChatHistory: React.FC<ChatHistoryProps> = ({ messages }) => (
     <div className="overflow-y-auto max-h-screen-50 md:max-h-screen-75 flex-grow mb-6">
         {Array.isArray(messages) &&
-            messages.map((message) => (
+            messages.map((message, index) => (
                 <Message
-                    key={message.key}
+                    key={index}
                     role={message.role}
                     content={message.content}
                 />

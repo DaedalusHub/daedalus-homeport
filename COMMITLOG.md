@@ -3,6 +3,7 @@
 
 ### Bug Fixes
 
+* **chat:** fixes [#9](https://github.com/DaedalusHub/daedalus-homeport/issues/9), additional refactoring performed based on GPT suggestions ([52b37a5](https://github.com/DaedalusHub/daedalus-homeport/commit/52b37a5f7614317aeed97f635bc075167586d2e2))
 * **message:** fix styling ([2c266af](https://github.com/DaedalusHub/daedalus-homeport/commit/2c266af25a48c9040b063ce106f256c99d6ca318))
 
 
