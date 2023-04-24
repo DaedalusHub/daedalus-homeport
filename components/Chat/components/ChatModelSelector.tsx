@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface ModelSelectorProps {
     models: string[];
@@ -26,7 +26,7 @@ const ChatModelSelector: React.FC<ModelSelectorProps> = ({
                     <li key={model}>
                         <a
                             aria-label={`Select ${model} model`}
-                            href="components#"
+                            href="../..#"
                             className="block px-4 py-2 text-sm min-w-fit uppercase"
                             onClick={(e) => {
                                 e.preventDefault();

@@ -1,4 +1,4 @@
-import {ChatMessage} from '@/components/Chat/chatHelpers';
+import {ChatMessage} from '@/components/Chat/utils/chatHelpers';
 import {encode} from "gpt-3-encoder";
 import {CreateChatCompletionRequest} from "openai";
 

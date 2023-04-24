@@ -1,6 +1,6 @@
-import React from 'react';
-import RoleLabel from './RoleLabel';
-import useMessageContent from './useMessageContent';
+import React from "react";
+import RoleLabel from "../../Message/RoleLabel";
+import useMessageContent from "../../Message/useMessageContent";
 
 interface MessageProps {
     role: string;
@@ -13,7 +13,7 @@ const Message: React.FC<MessageProps> = ({ role, content }) => {
     return (
         <div
             className={`rounded-lg p-4 mb-4 ${
-                role === 'user' ? 'bg-neutral' : 'bg-neutral-focus'
+                role === "user" ? "bg-neutral" : "bg-neutral-focus"
             }`}
         >
             <div className="flex items-start">

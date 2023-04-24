@@ -1,25 +1,20 @@
-// Start of file: ChatActions.ts
-import {
-    ChatMessage,
-    exportToJson,
-    saveMessagesToFile
-} from '@/components/Chat/chatHelpers';
-import { requestAPI } from '@/core/requestAPI';
+import { ChatMessage, exportToJson, saveMessagesToFile } from "@/components/Chat/utils/chatHelpers";
+import { requestAPI } from "@/components/Chat/utils/requestAPI";
 
 export const handleUserMessage = async (
     selectedModel: string,
     message: string,
     addMessage: (author: string, content: string, key: string) => void,
-    setLoading: (loading: boolean) => void,
+    setPendingResponse: (pending: boolean) => void,
     messageHistory: ChatMessage[]
 ) => {
     const key = `${Date.now()}-${Math.random().toString(36).substring(2)}`;
-    addMessage('user', message, key);
-    setLoading(true);
+    addMessage("user", message, key);
+    setPendingResponse(true);
 
     const response = await requestAPI(selectedModel, message, messageHistory);
-    setLoading(false);
-    addMessage('assistant', response.content, key);
+    setPendingResponse(false);
+    addMessage("assistant", response.content, key);
 };
 
 export const handleSave = (messages: ChatMessage[]) => {
@@ -38,7 +33,6 @@ export const handleImport = (
     importedMessages: ChatMessage[],
     setMessages: (messages: ChatMessage[]) => void
 ) => {
-    // Add unique key to each imported message
     const messagesWithKey = importedMessages.map((message) => ({
         ...message,
         key: `${Date.now()}-${Math.random().toString(36).substring(2)}`
@@ -46,4 +40,3 @@ export const handleImport = (
     setMessages(messagesWithKey);
 };
 
-// End of file: ChatActions.ts
