@@ -7,4 +7,4 @@ const buildEslintCommand = (filenames) =>
 
 {
     '*.{js,jsx,ts,tsx}': [buildEslintCommand, "prettier --write --ignore-unknown"]
- }
+}
