@@ -1,5 +1,5 @@
 import React from "react";
-import Message from "@/components/Message/Message";
+import Message from "@/components/Chat/components/Message/Message";
 import { ChatMessageType } from "@/components/Chat/utils/chatHelpers";
 
 export interface ChatHistoryProps {
@@ -14,7 +14,7 @@ const ChatHistory: React.FC<ChatHistoryProps> = ({ messages, pendingResponse }) 
                 <Message
                     key={index}
                     role={message.role}
-                    content={message.content}
+                    rawContent={message.content}
                 />
             ))}
         {pendingResponse && (

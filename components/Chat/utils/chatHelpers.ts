@@ -3,6 +3,7 @@ export interface ChatMessageType {
     role: string;
     content: string;
 }
+
 export function importFromJson(fileContent: string): ChatMessageType[] | undefined {
     try {
         return JSON.parse(fileContent) as ChatMessageType[];
@@ -11,6 +12,22 @@ export function importFromJson(fileContent: string): ChatMessageType[] | undefin
         return undefined;
     }
 }
+
+export const importMessages = (file: File, onImport: (data: ChatMessageType[]) => void) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+        const result = reader.result;
+        if (typeof result === "string") {
+            const messages = importFromJson(result);
+            if (messages) {
+                onImport(messages);
+            } else {
+                console.error("Failed to import messages. Invalid data format.");
+            }
+        }
+    };
+    reader.readAsText(file);
+};
 
 export function saveMessagesToFile(messages: ChatMessageType[]) {
     const chatText = messages

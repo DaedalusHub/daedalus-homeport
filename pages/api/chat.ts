@@ -1,6 +1,6 @@
 import {VercelRequest, VercelResponse} from '@vercel/node';
 import {Configuration, OpenAIApi} from 'openai';
-import {createChatCompletionRequest} from '@/core/createChatCompletionRequest';
+import {createChatCompletionRequest} from '@/components/Chat/utils/createChatCompletionRequest';
 import { getLogger } from '@/lib/logger';
 
 const log = getLogger('Chat');

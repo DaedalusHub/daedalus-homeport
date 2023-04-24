@@ -1,14 +1,14 @@
 import React from "react";
 import RoleLabel from "./RoleLabel";
-import useMessageContent from "./useMessageContent";
+import useParsedMessageContent from "./useParsedMessageContent";
 
 interface MessageProps {
     role: string;
-    content: string;
+    rawContent: string;
 }
 
-const Message: React.FC<MessageProps> = ({ role, content }) => {
-    const messageContent = useMessageContent(content);
+const Message: React.FC<MessageProps> = ({ role, rawContent }) => {
+    const messageContent = useParsedMessageContent(rawContent);
 
     return (
         <div
