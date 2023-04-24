@@ -13,6 +13,7 @@
 * **chat:** add reactivity to history related buttons ([b0efd9d](https://github.com/DaedalusHub/daedalus-homeport/commit/b0efd9d2c7c5c88b83a240ce6495f1deec147ea0))
 * **chat:** change pending response action to spinner in chat history ([26d149a](https://github.com/DaedalusHub/daedalus-homeport/commit/26d149a370362f35ab7e3d055a17cad1ac00ab09))
 * **chat:** refactor chat.tsx to multiple files, add loading animation ([2856884](https://github.com/DaedalusHub/daedalus-homeport/commit/2856884d6c9c3b7f50a737b059ed0de13c91d317))
+* **chat:** set minimum tokens for prompt ([50a55a9](https://github.com/DaedalusHub/daedalus-homeport/commit/50a55a92da1f4f89c08cbf204bdbeb4fbb3da3f9))
 * **message:** add syntax highlighting ([6d52fb4](https://github.com/DaedalusHub/daedalus-homeport/commit/6d52fb4f407b8e12e8ef333376dd2e1c0ba15e56))
 * **message:** include history in messages ([0023059](https://github.com/DaedalusHub/daedalus-homeport/commit/002305980fce3f7468840a69fec72067de381762))
 

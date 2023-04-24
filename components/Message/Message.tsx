@@ -1,6 +1,6 @@
 import React from "react";
-import RoleLabel from "../../Message/RoleLabel";
-import useMessageContent from "../../Message/useMessageContent";
+import RoleLabel from "./RoleLabel";
+import useMessageContent from "./useMessageContent";
 
 interface MessageProps {
     role: string;

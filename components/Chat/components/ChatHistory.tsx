@@ -1,9 +1,9 @@
 import React from "react";
-import Message from "@/components/Chat/components/Message";
-import { ChatMessage } from "@/components/Chat/utils/chatHelpers";
+import Message from "@/components/Message/Message";
+import { ChatMessageType } from "@/components/Chat/utils/chatHelpers";
 
 export interface ChatHistoryProps {
-    messages: ChatMessage[];
+    messages: ChatMessageType[];
     pendingResponse: boolean;
 }
 

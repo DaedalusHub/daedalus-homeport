@@ -1,6 +1,9 @@
 import {VercelRequest, VercelResponse} from '@vercel/node';
 import {Configuration, OpenAIApi} from 'openai';
 import {createChatCompletionRequest} from '@/core/createChatCompletionRequest';
+import { getLogger } from '@/lib/logger';
+
+const log = getLogger('Chat');
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY
@@ -30,9 +33,12 @@ export default async function (req: VercelRequest, res: VercelResponse) {
         console.log(`Generating completion for model ${model}`);
         console.log(`Messages in history: ${messageHistory.length}`);
         console.log(`Prompt: ${prompt}`);
-        const openaiResponse = await openai.createChatCompletion(
-            completionRequest
-        );
+        const openaiResponse = await openai.createChatCompletion(completionRequest);
+
+        if (!openaiResponse.data.model.startsWith(model)) {
+            log.error(`Model mismatch: requested ${model}, received ${openaiResponse.data.model}`);
+        }
+
         console.log(openaiResponse.data.choices[0]);
         console.log(`Completion generated for model ${openaiResponse.data.model}`)
         console.log(`Prompt tokens used: ${openaiResponse.data.usage?.prompt_tokens}`)

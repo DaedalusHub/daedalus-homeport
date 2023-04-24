@@ -1,11 +1,10 @@
-// Start of file: requestAPI.ts
-import { ChatMessage } from "@/components/Chat/utils/chatHelpers";
+import { ChatMessageType } from "@/components/Chat/utils/chatHelpers";
 
 export async function requestAPI(
     model: string,
     prompt: string,
-    messageHistory: ChatMessage[]
-): Promise<ChatMessage> {
+    messageHistory: ChatMessageType[]
+): Promise<ChatMessageType> {
     const sanitizedMessageHistory = messageHistory.map(
         ({ role, content, key }) => ({
             role,
@@ -31,7 +30,5 @@ export async function requestAPI(
         throw new Error(data.error?.message || "Unknown error occurred");
     }
 
-    return data.message as ChatMessage;
+    return data.message as ChatMessageType;
 }
-
-// End of file: requestAPI.ts

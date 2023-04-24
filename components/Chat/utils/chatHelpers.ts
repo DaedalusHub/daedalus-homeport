@@ -1,19 +1,18 @@
-export interface ChatMessage {
-    key: string;
+export interface ChatMessageType {
+    id: string;
     role: string;
     content: string;
 }
-
-export function importFromJson(fileContent: string): ChatMessage[] | undefined {
+export function importFromJson(fileContent: string): ChatMessageType[] | undefined {
     try {
-        return JSON.parse(fileContent) as ChatMessage[];
+        return JSON.parse(fileContent) as ChatMessageType[];
     } catch (err) {
         console.error("Invalid JSON format");
         return undefined;
     }
 }
 
-export function saveMessagesToFile(messages: ChatMessage[]) {
+export function saveMessagesToFile(messages: ChatMessageType[]) {
     const chatText = messages
         .map((message) => `--${message.role}--\n\n${message.content}`)
         .join("\n\n\n");
@@ -27,7 +26,7 @@ export function saveMessagesToFile(messages: ChatMessage[]) {
     URL.revokeObjectURL(href);
 }
 
-export function exportToJson(messages: ChatMessage[]) {
+export function exportToJson(messages: ChatMessageType[]) {
     const data = JSON.stringify(
         messages.map((message) => ({
             ...message

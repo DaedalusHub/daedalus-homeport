@@ -1,12 +1,16 @@
-import { ChatMessage, importFromJson } from "@/components/Chat/utils/chatHelpers";
+import { ChatMessageType, importFromJson } from "@/components/Chat/utils/chatHelpers";
 
-const importMessages = (file: File, onImport: (data: ChatMessage[]) => void) => {
+const importMessages = (file: File, onImport: (data: ChatMessageType[]) => void) => {
     const reader = new FileReader();
     reader.onload = () => {
         const result = reader.result;
         if (typeof result === "string") {
             const messages = importFromJson(result);
-            onImport(messages);
+            if (messages) {
+                onImport(messages);
+            } else {
+                console.error("Failed to import messages. Invalid data format.");
+            }
         }
     };
     reader.readAsText(file);
@@ -16,7 +20,7 @@ interface ChatHeaderProps {
     onSave: () => void;
     onClear: () => void;
     onExport: () => void;
-    onImport: (data: ChatMessage[]) => void;
+    onImport: (data: ChatMessageType[]) => void;
 }
 
 const ChatHeader: React.FC<ChatHeaderProps> = ({

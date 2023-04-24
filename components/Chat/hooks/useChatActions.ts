@@ -1,4 +1,4 @@
-import { ChatMessage, exportToJson, saveMessagesToFile } from "@/components/Chat/utils/chatHelpers";
+import { ChatMessageType, exportToJson, saveMessagesToFile } from "@/components/Chat/utils/chatHelpers";
 import { requestAPI } from "@/components/Chat/utils/requestAPI";
 
 export const handleUserMessage = async (
@@ -6,7 +6,7 @@ export const handleUserMessage = async (
     message: string,
     addMessage: (author: string, content: string, key: string) => void,
     setPendingResponse: (pending: boolean) => void,
-    messageHistory: ChatMessage[]
+    messageHistory: ChatMessageType[]
 ) => {
     const key = `${Date.now()}-${Math.random().toString(36).substring(2)}`;
     addMessage("user", message, key);
@@ -17,21 +17,21 @@ export const handleUserMessage = async (
     addMessage("assistant", response.content, key);
 };
 
-export const handleSave = (messages: ChatMessage[]) => {
+export const handleSave = (messages: ChatMessageType[]) => {
     saveMessagesToFile(messages);
 };
 
-export const handleClear = (setMessages: (messages: ChatMessage[]) => void) => {
+export const handleClear = (setMessages: (messages: ChatMessageType[]) => void) => {
     setMessages([]);
 };
 
-export const handleExport = (messages: ChatMessage[]) => {
+export const handleExport = (messages: ChatMessageType[]) => {
     exportToJson(messages);
 };
 
 export const handleImport = (
-    importedMessages: ChatMessage[],
-    setMessages: (messages: ChatMessage[]) => void
+    importedMessages: ChatMessageType[],
+    setMessages: (messages: ChatMessageType[]) => void
 ) => {
     const messagesWithKey = importedMessages.map((message) => ({
         ...message,
