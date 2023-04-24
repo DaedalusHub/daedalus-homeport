@@ -1,6 +1,6 @@
 import {ChatMessageType} from '@/components/Chat/utils/chatHelpers';
 import {encode} from "gpt-3-encoder";
-import {CreateChatCompletionRequest} from "openai";
+import { ChatCompletionRequestMessage, CreateChatCompletionRequest } from "openai";
 
 
 function getPromptTokens(model: string, messageHistory: ChatMessageType[], userMessage: string) {
@@ -30,10 +30,17 @@ export function createChatCompletionRequest(
     console.log('reducedTokens', reducedTokens);
 
 
+    const formattedMessages: ChatCompletionRequestMessage[] = messageHistory.map((message) => {
+        return {
+            role: message.role as 'user' | 'assistant',
+            content: message.content,
+        };
+    });
+
     return {
         model: model,
         messages: [
-            ...messageHistory,
+            ...formattedMessages,
             {
                 role: 'user',
                 content: userMessage,
