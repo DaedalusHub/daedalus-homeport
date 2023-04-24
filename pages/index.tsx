@@ -43,7 +43,7 @@ export default function Home() {
     return (
         <div>
             <Head>
-                <title>Daedalus Homeport</title>
+                <title>Daedalus HomePort</title>
                 <link rel="icon" href="/daedalus.ico" />
             </Head>
             <main>
