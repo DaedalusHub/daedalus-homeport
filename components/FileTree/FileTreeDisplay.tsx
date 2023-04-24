@@ -1,21 +1,39 @@
-import React, { useState } from 'react';
-import FileTree from './FileTree';
-import { createFileStructureString, readDirectory } from './fileTreeUtils';
+import React, { ReactNode, useState } from "react";
+import FileTree from "./FileTree";
+import { createFileStructureString, readDirectory, loadDirectory } from "./fileTreeUtils";
+
+interface FileObject {
+    id: string;
+    name: string;
+    isDirectory: boolean;
+    children?: FileObject[];
+    showChildren?: boolean;
+}
+
+interface HeaderProps {
+    loadProject: () => void;
+    copyToClipboard: () => void;
+}
+
+interface FileTreeContainerProps {
+    children: ReactNode;
+}
 
 const FileTreeDisplay: React.FC = () => {
-    const [projectFiles, setProjectFiles] = useState([
-        { id: 'initial', name: 'Please load a directory.', isDirectory: false }
+    const [projectFiles, setProjectFiles] = useState<FileObject[]>([
+        { id: 'initial', name: 'Please load a directory.', isDirectory: false },
     ]);
-    const [rootDirectory, setRootDirectory] = useState(null);
 
     const loadProject = async () => {
-        const directoryHandle = await window.showDirectoryPicker();
-        setRootDirectory(directoryHandle);
+        const directoryHandle = await loadDirectory();
+        if (!directoryHandle) {
+            return;
+        }
         const children = await readDirectory(directoryHandle);
         setProjectFiles(children);
     };
 
-    const updateShowChildren = (path, showChildren) => {
+    const updateShowChildren = (path: string[], showChildren: boolean) => {
         const updatedFiles = [...projectFiles];
         let currentLevel = updatedFiles;
         for (const part of path) {
@@ -26,7 +44,7 @@ const FileTreeDisplay: React.FC = () => {
                 if (part === path[path.length - 1]) {
                     currentLevel[index].showChildren = showChildren;
                 } else {
-                    currentLevel = currentLevel[index].children;
+                    currentLevel = currentLevel[index].children ?? [];
                 }
             } else {
                 break;
@@ -36,8 +54,7 @@ const FileTreeDisplay: React.FC = () => {
     };
 
     const copyToClipboard = async () => {
-        let fileStructureString = rootDirectory.name + '/\n';
-        fileStructureString += createFileStructureString(projectFiles);
+        const fileStructureString = createFileStructureString(projectFiles);
         await navigator.clipboard.writeText(fileStructureString);
     };
 
@@ -57,7 +74,7 @@ const FileTreeDisplay: React.FC = () => {
     );
 };
 
-const Header = ({ loadProject, copyToClipboard }) => {
+const Header: React.FC<HeaderProps> = ({ loadProject, copyToClipboard }) => {
     return (
         <div className="flex flex-row items-center m-4">
             <h1 className="text-2xl text-primary-content flex-none">
@@ -81,12 +98,13 @@ const Header = ({ loadProject, copyToClipboard }) => {
     );
 };
 
-const FileTreeContainer = ({ children }) => {
+const FileTreeContainer: React.FC<FileTreeContainerProps> = ({ children }) => {
     return (
-        <div className="border rounded-lg border-2 border-primary bg-base-300 m-4 p-4">
+        <div className="border-2 rounded-lg border-primary bg-base-300 m-4 p-4">
             {children}
         </div>
     );
+
 };
 
 export default FileTreeDisplay;

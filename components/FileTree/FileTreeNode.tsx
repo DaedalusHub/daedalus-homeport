@@ -11,14 +11,14 @@ export interface FileTreeNodeProps {
 }
 
 const FileTreeNode: React.FC<FileTreeNodeProps> = ({
-    id,
-    name,
-    isDirectory,
-    children,
-    showChildren,
-    onToggleVisibility,
-    path = []
-}) => {
+                                                       id,
+                                                       name,
+                                                       isDirectory,
+                                                       children,
+                                                       showChildren,
+                                                       onToggleVisibility,
+                                                       path = []
+                                                   }) => {
     const [visible, setVisible] = useState(showChildren);
 
     const toggleVisibility = () => {
@@ -33,10 +33,10 @@ const FileTreeNode: React.FC<FileTreeNodeProps> = ({
             <code className="text-primary-content/80">
                 {isDirectory ? (
                     <span onClick={toggleVisibility}>
-                        <strong className="text-primary-content">
-                            {name}/
-                        </strong>
-                    </span>
+        <strong className="text-primary-content">
+          {name}/
+          </strong>
+          </span>
                 ) : (
                     name
                 )}

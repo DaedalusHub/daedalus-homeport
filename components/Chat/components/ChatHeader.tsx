@@ -1,17 +1,5 @@
 import React from "react";
-import { ChatMessageType, importMessages } from "@/components/Chat/utils/chatHelpers";
-
-const importMessages = (file: File, onImport: (data: ChatMessage[]) => void) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-        const result = reader.result;
-        if (typeof result === 'string') {
-            const messages = importFromJson(result);
-            onImport(messages);
-        }
-    };
-    reader.readAsText(file);
-};
+import { ChatMessageType, importMessages} from "@/components/Chat/utils/chatHelpers";
 
 interface ChatHeaderProps {
     onSave: () => void;
