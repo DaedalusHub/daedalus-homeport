@@ -1,5 +1,17 @@
 import { ChatMessage, importFromJson } from '@/components/Chat/chatHelpers';
 
+const importMessages = (file: File, onImport: (data: ChatMessage[]) => void) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+        const result = reader.result;
+        if (typeof result === 'string') {
+            const messages = importFromJson(result);
+            onImport(messages);
+        }
+    };
+    reader.readAsText(file);
+};
+
 interface ChatHeaderProps {
     onSave: () => void;
     onClear: () => void;
@@ -15,23 +27,7 @@ const ChatHeader: React.FC<ChatHeaderProps> = ({
 }) => {
     const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files && e.target.files[0];
-        if (!file) return;
-
-        const reader = new FileReader();
-        reader.onload = (event) => {
-            const fileContent = event.target?.result;
-            if (typeof fileContent === 'string') {
-                const data = importFromJson(fileContent);
-                if (Array.isArray(data)) {
-                    onImport(data);
-                } else {
-                    alert('Invalid JSON format');
-                }
-            } else {
-                console.error('Unable to read file content');
-            }
-        };
-        reader.readAsText(file);
+        if (file) importMessages(file, onImport);
     };
 
     return (

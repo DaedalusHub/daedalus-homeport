@@ -1,13 +1,19 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import ChatInput from './ChatInput';
 import ChatHistory from './ChatHistory';
 import ChatHeader from './ChatHeader';
 import ChatModelSelector from './ChatModelSelector';
-import {useChatState} from './ChatState';
-import {handleClear, handleExport, handleImport, handleSave, handleUserMessage} from './ChatActions';
+import { useChatState } from './ChatState';
+import {
+    handleClear,
+    handleExport,
+    handleImport,
+    handleSave,
+    handleUserMessage
+} from './ChatActions';
 
 const ChatUI: React.FC = () => {
-    const {messages, addMessage, setMessages} = useChatState();
+    const { messages, addMessage, setMessages } = useChatState();
 
     const [models, setModels] = useState<string[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
@@ -31,9 +37,8 @@ const ChatUI: React.FC = () => {
                 onSave={() => handleSave(messages)}
                 onClear={() => handleClear(setMessages)}
                 onExport={() => handleExport(messages)}
-                onImport={
-                    (importedMessages) =>
-                        handleImport(importedMessages, setMessages) // Change this line
+                onImport={(importedMessages) =>
+                    handleImport(importedMessages, setMessages)
                 }
             />
             <div className="bg-base-200 p-6 rounded-lg shadow-lg flex flex-col flex-grow">

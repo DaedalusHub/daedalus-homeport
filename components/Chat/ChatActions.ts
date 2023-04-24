@@ -1,5 +1,10 @@
-import {ChatMessage, exportToJson, saveMessagesToFile} from '@/components/Chat/chatHelpers';
-import {requestAPI} from '@/core/requestAPI';
+// Start of file: ChatActions.ts
+import {
+    ChatMessage,
+    exportToJson,
+    saveMessagesToFile
+} from '@/components/Chat/chatHelpers';
+import { requestAPI } from '@/core/requestAPI';
 
 export const handleUserMessage = async (
     selectedModel: string,
@@ -40,3 +45,5 @@ export const handleImport = (
     }));
     setMessages(messagesWithKey);
 };
+
+// End of file: ChatActions.ts

@@ -1,3 +1,4 @@
+// Start of file: requestAPI.ts
 import { ChatMessage } from '@/components/Chat/chatHelpers';
 
 export async function requestAPI(
@@ -5,12 +6,24 @@ export async function requestAPI(
     prompt: string,
     messageHistory: ChatMessage[]
 ): Promise<ChatMessage> {
+    const sanitizedMessageHistory = messageHistory.map(
+        ({ role, content, key }) => ({
+            role,
+            content,
+            key
+        })
+    );
+
     const response = await fetch('/api/chat', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ model, prompt, messageHistory })
+        body: JSON.stringify({
+            model,
+            prompt,
+            messageHistory: sanitizedMessageHistory
+        })
     });
 
     const data = await response.json();
@@ -20,3 +33,5 @@ export async function requestAPI(
 
     return data.message as ChatMessage;
 }
+
+// End of file: requestAPI.ts
