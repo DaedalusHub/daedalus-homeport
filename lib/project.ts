@@ -9,7 +9,7 @@ export const saveProjectDetails = async (
     intent: string,
     goals: string[]
 ) => {
-    const projectKey = `projects`;
+    const projectKey = "projects";
     const projectField = `project:${projectId}`;
     const projectDetails = JSON.stringify({ name, intent, goals });
 
@@ -23,11 +23,11 @@ export const saveProjectDetails = async (
 };
 
 export const getAllProjects = async () => {
-    const projectKey = `projects`;
+    const projectKey = "projects";
     const projectDetailsList = await hgetallAsync(projectKey);
 
     if (!projectDetailsList) {
-        log.warn(`No projects found`);
+        log.warn("No projects found");
         return [];
     }
 
