@@ -1,72 +1,29 @@
-import { FileSystemDirectoryHandle } from "native-file-system-adapter";
-
-interface FileObject {
-    id: string;
+export type FileOrDirectory = {
     name: string;
     isDirectory: boolean;
-    children?: FileObject[];
-    showChildren?: boolean;
-}
+    children: FileOrDirectory[];
+};
 
 export const readDirectory = async (
-    dirHandle: FileSystemDirectoryHandle,
-    parentPath = ''
-): Promise<FileObject[]> => {
-    const fileObjects: FileObject[] = [];
-
-    for await
-        (const entry of dirHandle.values()) {
-        if (entry.kind === "directory") {
-            const children = await readDirectory(entry as FileSystemDirectoryHandle, `${parentPath}/${entry.name}`);
-            fileObjects.push({
-                id: `${parentPath}/${entry.name}`,
+    dirHandle: FileSystemDirectoryHandle
+): Promise<FileOrDirectory[]> => {
+    const children: FileOrDirectory[] = [];
+    for await (const entry of dirHandle.values()) {
+        if (entry.kind === 'directory') {
+            const childDirHandle = entry;
+            const childEntries = await readDirectory(childDirHandle);
+            children.push({
                 name: entry.name,
                 isDirectory: true,
-                children,
+                children: childEntries
             });
         } else {
-            fileObjects.push({
-                id: `${parentPath}/${entry.name}`,
+            children.push({
                 name: entry.name,
                 isDirectory: false,
+                children: []
             });
         }
     }
-    return fileObjects;
-
-};
-
-export const createFileStructureString = (files: FileObject[], level = 0): string => {
-    let result = '';
-    files.forEach((file, index) => {
-        const isLastItem = index === files.length - 1;
-        const linePrefix = isLastItem ? '└── ' : '├── ';
-        const indent = '│ '.repeat(level);
-        if (file.isDirectory) {
-            result += `${indent}${linePrefix}${file.name}/\n`;
-            if (file.showChildren) {
-                result += createFileStructureString(file.children ?? [], level + 1);
-            }
-        } else {
-            result += `${indent}${linePrefix}${file.name}\n`;
-        }
-    });
-    return result;
-};
-
-export const getAllEntries = async (handle) => {
-    const entries = [];
-    for await (const entry of handle.values()) {
-        entries.push(entry);
-    }
-    return entries;
-};
-
-export const loadDirectory = async () => {
-    const handle = await window.showDirectoryPicker();
-    if (!handle) {
-        return;
-    }
-
-    return handle;
+    return children;
 };
