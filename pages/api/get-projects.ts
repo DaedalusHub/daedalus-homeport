@@ -1,5 +1,3 @@
-// pages/api/get-projects.ts
-
 import { NextApiRequest, NextApiResponse } from 'next';
 import { getAllProjects } from '@/lib/project';
 import { getLogger } from '@/lib/logger';
@@ -15,7 +13,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             res.status(200).json(projects);
         } catch (error) {
             log.error(`Error fetching projects: ${error}`);
-            res.status(500).json({ message: error.message });
+            res.status(500).json({ message: (error as Error).message });
         }
     } else {
         res.status(405).json({ message: 'Method not allowed' });
