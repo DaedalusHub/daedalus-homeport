@@ -24,4 +24,16 @@ jobs:
         cache: 'yarn'
     - run: yarn install --frozen-lockfile
     - run: yarn build
-    - run: yarn test
+
+    - name: Install Playwright dependencies
+      run: npx playwright install-deps
+
+    - name: Run Playwright tests
+      run: yarn test
+
+    - name: Upload test artifacts
+      if: failure()
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-artifacts
+        path: tests/**/*.png
