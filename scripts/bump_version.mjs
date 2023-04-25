@@ -82,11 +82,11 @@ const bump = async () => {
     const updatedChangelog = changelog.replace(unreleasedSection, `${unreleasedSection}\n\n${newChangelogEntry}`);
     fs.writeFileSync(changelogFilename, updatedChangelog);
 
-    execSync(`git add CHANGELOG.md package.json`);
+    execSync("git add CHANGELOG.md package.json");
     execSync(`git commit -m "chore: bump version to ${newVersion}"`);
     execSync(`git tag -a v${newVersion} -m "Release ${newVersion}"`);
 
-    console.log(`Changelog updated. Edit CHANGELOG.md to include relevant changes.`);
+    console.log("Changelog updated. Edit CHANGELOG.md to include relevant changes.");
 };
 
 bump();

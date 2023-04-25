@@ -24,7 +24,7 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSubmit }) => {
             />
             <button
                 type="submit"
-                className={`bg-primary text-white px-6 py-2.5 rounded-r max-h-12`}
+                className={"bg-primary text-white px-6 py-2.5 rounded-r max-h-12"}
             >
                 Send
             </button>
