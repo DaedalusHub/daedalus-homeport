@@ -8,7 +8,7 @@ export const readDirectory = async (
     dirHandle: FileSystemDirectoryHandle
 ): Promise<FileOrDirectory[]> => {
     const children: FileOrDirectory[] = [];
-    for await (const entry of dirHandle.values()) {
+    for await (const entry of (dirHandle as any).values()) {
         if (entry.kind === 'directory') {
             const childDirHandle = entry;
             const childEntries = await readDirectory(childDirHandle);

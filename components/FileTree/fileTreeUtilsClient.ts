@@ -1,5 +1,3 @@
-import { FileSystemDirectoryHandle } from './fileTreeUtils';
-
 export const getClientSideLoadDirectory =
     async (): Promise<FileSystemDirectoryHandle | null> => {
         const opts = {

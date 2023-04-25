@@ -2,6 +2,7 @@ import React, { ReactNode, useState } from 'react';
 import FileTree from './FileTree';
 import { FileOrDirectory, readDirectory } from './fileTreeUtils';
 import FileTreeHeader from '@/components/FileTree/FileTreeHeader';
+import { FileTreeNodeProps } from '@/components/FileTree/FileTreeNode';
 
 export interface FileTreeContainerProps {
     children: ReactNode;
@@ -22,8 +23,31 @@ const FileTreeDisplay: React.FC = () => {
         setProjectFiles(children);
     };
 
-    const createFileStructureString = (
+    const convertToTreeNodeProps = (
         items: FileOrDirectory[],
+        parentId: string
+    ): FileTreeNodeProps[] => {
+        return items.map((item, index) => {
+            const id = `${parentId}-${index}`;
+            if (item.isDirectory) {
+                return {
+                    id,
+                    name: item.name,
+                    isDirectory: item.isDirectory,
+                    children: convertToTreeNodeProps(item.children, id)
+                };
+            } else {
+                return {
+                    id,
+                    name: item.name,
+                    isDirectory: item.isDirectory
+                };
+            }
+        });
+    };
+
+    const createFileStructureString = (
+        items: FileTreeNodeProps[],
         depth = 0
     ): string => {
         let output = '';
@@ -32,7 +56,10 @@ const FileTreeDisplay: React.FC = () => {
         for (const item of items) {
             if (item.isDirectory) {
                 output += `${indent}${item.name}/\n`;
-                output += createFileStructureString(item.children, depth + 1);
+                output += createFileStructureString(
+                    item.children || [],
+                    depth + 1
+                );
             } else {
                 output += `${indent}${item.name}\n`;
             }
@@ -83,7 +110,9 @@ const FileTreeDisplay: React.FC = () => {
     };
 
     const copyToClipboard = async () => {
-        const fileStructureString = createFileStructureString(projectFiles);
+        const fileStructureString = createFileStructureString(
+            convertToTreeNodeProps(projectFiles, 'root')
+        );
         await navigator.clipboard.writeText(fileStructureString);
     };
 
@@ -95,7 +124,7 @@ const FileTreeDisplay: React.FC = () => {
             />
             <FileTreeContainer>
                 <FileTree
-                    files={projectFiles}
+                    files={convertToTreeNodeProps(projectFiles, 'root')}
                     onToggleVisibility={updateShowChildren}
                 />
             </FileTreeContainer>
