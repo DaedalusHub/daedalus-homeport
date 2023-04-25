@@ -1,7 +1,11 @@
+import { FileTreeNodeProps } from '@/components/FileTree/FileTreeNode';
+
 export type FileOrDirectory = {
     name: string;
     isDirectory: boolean;
     children: FileOrDirectory[];
+    path?: string[];
+    showChildren?: boolean;
 };
 
 export const readDirectory = async (
@@ -26,4 +30,29 @@ export const readDirectory = async (
         }
     }
     return children;
+};
+
+export const createFileStructureString = (
+    files: FileTreeNodeProps[],
+    level = 0
+): string => {
+    let result = '';
+    files.forEach((file, index) => {
+        const isLastItem = index === files.length - 1;
+        const linePrefix = isLastItem ? '└── ' : '├── ';
+        const indent = '│  '.repeat(level);
+
+        if (file.isDirectory) {
+            result += `${indent}${linePrefix}${file.name}/\n`;
+            if (file.showChildren) {
+                result += createFileStructureString(
+                    file.children || [],
+                    level + 1
+                );
+            }
+        } else {
+            result += `${indent}${linePrefix}${file.name}\n`;
+        }
+    });
+    return result;
 };

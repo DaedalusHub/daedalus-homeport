@@ -46,28 +46,6 @@ const FileTreeDisplay: React.FC = () => {
         });
     };
 
-    const createFileStructureString = (
-        items: FileTreeNodeProps[],
-        depth = 0
-    ): string => {
-        let output = '';
-        const indent = ' '.repeat(depth * 2);
-
-        for (const item of items) {
-            if (item.isDirectory) {
-                output += `${indent}${item.name}/\n`;
-                output += createFileStructureString(
-                    item.children || [],
-                    depth + 1
-                );
-            } else {
-                output += `${indent}${item.name}\n`;
-            }
-        }
-
-        return output;
-    };
-
     const updateShowChildren = (
         path: string[],
         showChildren: boolean
@@ -109,10 +87,45 @@ const FileTreeDisplay: React.FC = () => {
         setProjectFiles(updatedProjectFiles);
     };
 
+    const createFileStructureString = (
+        items: FileOrDirectory[],
+        depth = 0
+    ): string => {
+        let output = '';
+        const indent = '│  '.repeat(depth);
+
+        for (const item of items) {
+            const isLastItem = items.indexOf(item) === items.length - 1;
+            const linePrefix = isLastItem ? '└── ' : '├── ';
+
+            if (item.isDirectory) {
+                output += `${indent}${linePrefix}${item.name}/\n`;
+                if (item.showChildren && item.children) {
+                    const fileStructureString = createFileStructureString(
+                        item.children,
+                        depth + 1
+                    );
+                    if (fileStructureString) {
+                        output += fileStructureString;
+                    }
+                }
+            } else {
+                output += `${indent}${linePrefix}${item.name}\n`;
+            }
+        }
+
+        return output;
+    };
+
     const copyToClipboard = async () => {
-        const fileStructureString = createFileStructureString(
-            convertToTreeNodeProps(projectFiles, 'root')
-        );
+        const rootDirectory = {
+            name: 'root',
+            isDirectory: true,
+            children: projectFiles,
+            showChildren: true
+        };
+        let fileStructureString = rootDirectory.name + '/\n';
+        fileStructureString += createFileStructureString(projectFiles, 1);
         await navigator.clipboard.writeText(fileStructureString);
     };
 
