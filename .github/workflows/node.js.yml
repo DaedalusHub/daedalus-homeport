@@ -24,10 +24,13 @@ jobs:
         cache: 'yarn'
     - run: yarn install --frozen-lockfile
     - run: yarn build
-
     - name: Install Playwright dependencies
       run: npx playwright install-deps
-
+    - name: Start application
+      run: yarn start &
+    - name: Wait for application to start
+      run: |
+        timeout 300 wget --waitretry=5 --retry-connrefused --quiet --tries=60 --spider http://localhost:3000 || exit 1
     - name: Run Playwright tests
       run: yarn test
 
