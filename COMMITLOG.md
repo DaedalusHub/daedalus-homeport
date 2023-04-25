@@ -4,6 +4,7 @@
 ### Bug Fixes
 
 * **chat:** fixes [#9](https://github.com/DaedalusHub/daedalus-homeport/issues/9), additional refactoring performed based on GPT suggestions ([2890d94](https://github.com/DaedalusHub/daedalus-homeport/commit/2890d94731216f441801148fe5b8e30aa542c97f))
+* **filetree:** fix copy to clipboard functionality ([1944e6c](https://github.com/DaedalusHub/daedalus-homeport/commit/1944e6cde92e50dfebaee15646d36ef8d522485f))
 * **message:** fix styling ([2c266af](https://github.com/DaedalusHub/daedalus-homeport/commit/2c266af25a48c9040b063ce106f256c99d6ca318))
 
 
