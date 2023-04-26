@@ -11,7 +11,7 @@ const NavBar: React.FC<NavBarProps> = ({ selectedTab, setSelectedTab }) => {
         const tabs = [
             { id: 'chat', label: 'Chat' },
             { id: 'project', label: 'Project' },
-            { id: 'directory', label: 'Project Files' }
+            { id: 'directory', label: 'Files' }
         ];
 
         return tabs.map((tab) => (
@@ -31,7 +31,7 @@ const NavBar: React.FC<NavBarProps> = ({ selectedTab, setSelectedTab }) => {
         <nav className="navbar mb-4 bg-primary-focus/50 justify-between">
             <div className="px-2 mx-2">
                 <h1 className="font-bold text-4xl text-primary-content p-2 rounded-lg">
-                    Daedalus Homeport
+                    Daedalus HomePort
                 </h1>
             </div>
             <div className="flex items-center space-x-4">{renderTabs()}</div>

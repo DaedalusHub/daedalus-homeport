@@ -1,6 +1,6 @@
-# Daedalus Homeport
+# Daedalus HomePort
 
-![Daedalus Homeport](public/daedalus.png)
+![Daedalus HomePort](public/daedalus.png)
 
 ## Setup
 

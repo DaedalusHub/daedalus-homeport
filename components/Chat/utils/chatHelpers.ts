@@ -1,7 +1,7 @@
 export interface ChatMessageType {
-    id: string;
     role: string;
     content: string;
+    key: string;
 }
 
 export function importFromJson(fileContent: string): ChatMessageType[] | undefined {

@@ -4,7 +4,9 @@
         "es2021": true
     },
     "extends": [
-        "eslint:recommended"
+        "eslint:recommended",
+        "next",
+        "prettier"
     ],
     "overrides": [
         {
@@ -14,7 +16,8 @@
             ],
             "extends": [
                 "eslint:recommended",
-                "plugin:@typescript-eslint/recommended"
+                "plugin:@typescript-eslint/recommended",
+                "next"
             ],
             "plugins": [
                 "@typescript-eslint"
@@ -31,6 +34,9 @@
                     "jsx": true,
                     "modules": true
                 }
+            },
+            "rules": {
+                "@typescript-eslint/no-var-requires": "off"
             }
         },
         {
@@ -43,7 +49,6 @@
         }
     ],
     "plugins": [
-        "import",
         "regexp"
     ]
 }

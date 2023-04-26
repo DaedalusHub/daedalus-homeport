@@ -1,55 +1,143 @@
-import React, { useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 import FileTree from './FileTree';
-import { createFileStructureString, readDirectory } from './fileTreeUtils';
+import { FileOrDirectory, readDirectory } from './fileTreeUtils';
+import FileTreeHeader from '@/components/FileTree/FileTreeHeader';
+import { FileTreeNodeProps } from '@/components/FileTree/FileTreeNode';
+
+export interface FileTreeContainerProps {
+    children: ReactNode;
+}
 
 const FileTreeDisplay: React.FC = () => {
-    const [projectFiles, setProjectFiles] = useState([
-        { id: 'initial', name: 'Please load a directory.', isDirectory: false }
-    ]);
-    const [rootDirectory, setRootDirectory] = useState(null);
+    const [projectFiles, setProjectFiles] = useState<FileOrDirectory[]>([]);
 
     const loadProject = async () => {
-        const directoryHandle = await window.showDirectoryPicker();
-        setRootDirectory(directoryHandle);
+        const { getClientSideLoadDirectory } = await import(
+            './fileTreeUtilsClient'
+        );
+        const directoryHandle = await getClientSideLoadDirectory();
+        if (!directoryHandle) {
+            return;
+        }
         const children = await readDirectory(directoryHandle);
         setProjectFiles(children);
     };
 
-    const updateShowChildren = (path, showChildren) => {
-        const updatedFiles = [...projectFiles];
-        let currentLevel = updatedFiles;
-        for (const part of path) {
-            const index = currentLevel.findIndex(
-                (entry) => entry.name === part
-            );
-            if (index !== -1) {
-                if (part === path[path.length - 1]) {
-                    currentLevel[index].showChildren = showChildren;
+    const convertToTreeNodeProps = (
+        items: FileOrDirectory[],
+        parentId: string
+    ): FileTreeNodeProps[] => {
+        return items.map((item, index) => {
+            const id = `${parentId}-${index}`;
+            if (item.isDirectory) {
+                return {
+                    id,
+                    name: item.name,
+                    isDirectory: item.isDirectory,
+                    children: convertToTreeNodeProps(item.children, id)
+                };
+            } else {
+                return {
+                    id,
+                    name: item.name,
+                    isDirectory: item.isDirectory
+                };
+            }
+        });
+    };
+
+    const updateShowChildren = (
+        path: string[],
+        showChildren: boolean
+    ): void => {
+        const updateVisibility = (
+            items: FileOrDirectory[],
+            currentPath: string[] = []
+        ): FileOrDirectory[] => {
+            return items.map((item) => {
+                if (item.isDirectory) {
+                    if (
+                        JSON.stringify([...currentPath, item.name]) ===
+                        JSON.stringify(path)
+                    ) {
+                        return {
+                            ...item,
+                            children: updateVisibility(item.children, [
+                                ...currentPath,
+                                item.name
+                            ]),
+                            showChildren
+                        };
+                    } else {
+                        return {
+                            ...item,
+                            children: updateVisibility(item.children, [
+                                ...currentPath,
+                                item.name
+                            ])
+                        };
+                    }
                 } else {
-                    currentLevel = currentLevel[index].children;
+                    return item;
+                }
+            });
+        };
+
+        const updatedProjectFiles = updateVisibility(projectFiles);
+        setProjectFiles(updatedProjectFiles);
+    };
+
+    const createFileStructureString = (
+        items: FileOrDirectory[],
+        depth = 0
+    ): string => {
+        let output = '';
+        const indent = '│  '.repeat(depth);
+
+        for (const item of items) {
+            const isLastItem = items.indexOf(item) === items.length - 1;
+            const linePrefix = isLastItem ? '└── ' : '├── ';
+
+            if (item.isDirectory) {
+                output += `${indent}${linePrefix}${item.name}/\n`;
+                if (item.showChildren && item.children) {
+                    const fileStructureString = createFileStructureString(
+                        item.children,
+                        depth + 1
+                    );
+                    if (fileStructureString) {
+                        output += fileStructureString;
+                    }
                 }
             } else {
-                break;
+                output += `${indent}${linePrefix}${item.name}\n`;
             }
         }
-        setProjectFiles(updatedFiles);
+
+        return output;
     };
 
     const copyToClipboard = async () => {
+        const rootDirectory = {
+            name: 'root',
+            isDirectory: true,
+            children: projectFiles,
+            showChildren: true
+        };
         let fileStructureString = rootDirectory.name + '/\n';
-        fileStructureString += createFileStructureString(projectFiles);
+        fileStructureString += createFileStructureString(projectFiles, 1);
         await navigator.clipboard.writeText(fileStructureString);
     };
 
     return (
         <div className="flex flex-col m-4 space-y-4">
-            <Header
+            <FileTreeHeader
                 loadProject={loadProject}
                 copyToClipboard={copyToClipboard}
             />
             <FileTreeContainer>
                 <FileTree
-                    files={projectFiles}
+                    files={convertToTreeNodeProps(projectFiles, 'root')}
                     onToggleVisibility={updateShowChildren}
                 />
             </FileTreeContainer>
@@ -57,33 +145,9 @@ const FileTreeDisplay: React.FC = () => {
     );
 };
 
-const Header = ({ loadProject, copyToClipboard }) => {
+const FileTreeContainer: React.FC<FileTreeContainerProps> = ({ children }) => {
     return (
-        <div className="flex flex-row items-center m-4">
-            <h1 className="text-2xl text-primary-content flex-none">
-                Project Directory
-            </h1>
-            <div className="flex-1 flex flex-row justify-end items-center">
-                <button
-                    className="btn btn-secondary p-2 min-w-fit w-24 min-h-fit h-8 mr-2"
-                    onClick={loadProject}
-                >
-                    Load project
-                </button>
-                <button
-                    className="btn btn-accent p-2 min-w-fit w-24 min-h-fit h-8"
-                    onClick={copyToClipboard}
-                >
-                    Copy to clipboard
-                </button>
-            </div>
-        </div>
-    );
-};
-
-const FileTreeContainer = ({ children }) => {
-    return (
-        <div className="border rounded-lg border-2 border-primary bg-base-300 m-4 p-4">
+        <div className="border-2 rounded-lg border-primary bg-base-300 m-4 p-4">
             {children}
         </div>
     );

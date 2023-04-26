@@ -1,9 +1,8 @@
-import { Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 
-const useGoals = (
-    goals: string[],
-    setGoals: Dispatch<SetStateAction<string[]>>
-) => {
+const useGoals = () => {
+    const [goals, setGoals] = useState<string[]>(['']);
+
     const addGoal = () => {
         setGoals((goals) => [...goals, '']);
     };
@@ -18,7 +17,13 @@ const useGoals = (
         );
     };
 
-    return { addGoal, removeGoal, handleGoalChange };
+    return {
+        goals,
+        addGoal,
+        removeGoal,
+        handleGoalChange,
+        setGoals
+    };
 };
 
 export default useGoals;
