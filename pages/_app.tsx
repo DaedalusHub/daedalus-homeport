@@ -1,14 +1,27 @@
-// Part: /pages/_app.tsx
-// Code Reference: https://github.com/vercel/next.js/
-// Documentation: https://nextjs.org/docs/
-
+// pages/_app.tsx
 import '../styles/global.css';
-import { AppProps } from 'next/app';
-import log from 'loglevel';
-import { useEffect } from "react";
+import { useEffect } from 'react';
+import { AppProps } from "next/app";
+import log from "loglevel";
+import process from "process";
 
 const logLevel = process.env.LOG_LEVEL || 'warn';
 log.setLevel(logLevel as log.LogLevelDesc);
+
+const startWorker = async () => {
+    if ((global as any).__WORKER_STARTED__) {
+        return;
+    }
+
+    log.info('Starting mock service worker');
+    const { worker } = require('../tests/mocks/browser');
+    await worker.start();
+    (global as any).__WORKER_STARTED__ = true;
+};
+
+if (process.env.USE_MOCKS === 'true') {
+    startWorker();
+}
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
     useEffect(() => {

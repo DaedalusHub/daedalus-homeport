@@ -9,12 +9,13 @@ interface MessageProps {
 
 const Message: React.FC<MessageProps> = ({ role, rawContent }) => {
     const messageContent = useParsedMessageContent(rawContent);
+    const messageClass = `message message-${role}`;
 
     return (
         <div
             className={`rounded-lg p-4 mb-4 ${
                 role === "user" ? "bg-neutral" : "bg-neutral-focus"
-            }`}
+            } ${messageClass}`}
         >
             <div className="flex items-start">
                 <RoleLabel role={role} />

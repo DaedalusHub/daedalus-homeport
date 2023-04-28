@@ -30,9 +30,9 @@ export default async function (req: VercelRequest, res: VercelResponse) {
     );
 
     try {
-        console.log(`Generating completion for model ${model}`);
-        console.log(`Messages in history: ${messageHistory.length}`);
-        console.log(`Prompt: ${prompt}`);
+        log.info(`Generating completion for model ${model}`);
+        log.info(`Messages in history: ${messageHistory.length}`);
+        log.info(`Prompt: ${prompt}`);
         const openaiResponse = await openai.createChatCompletion(
             completionRequest
         );

@@ -22,6 +22,7 @@ As a TypeScript coding function, your goals are to ensure quality, maintainabili
 - [Redis NodeJS Documentation](https://redis.io/docs/clients/nodejs/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Daisy UI](https://daisyui.com/)
+- [Mock Service Worker](https://mswjs.io/docs/)
 
 ## Code Style Guidelines
 

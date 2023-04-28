@@ -1,5 +1,8 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { Configuration, OpenAIApi } from 'openai';
+import { getLogger } from "@/lib/logger";
+
+const log = getLogger('Chat');
 
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY
@@ -13,6 +16,10 @@ async function fetchModels(type: string) {
     }
 
     const uniqueModels = new Set<string>();
+
+    log.info(`Found ${response.data.data.length} models`)
+    log.info(`Filtering models by type ${type}`)
+    log.info(`Models: ${response.data.data.map((model) => model.id).join(', ')}`)
 
     response.data.data.forEach((model) => {
         if (model.id.startsWith(type)) {
@@ -44,7 +51,7 @@ export default async function (req: VercelRequest, res: VercelResponse) {
         const models = await fetchModels(req.query.type as string);
         res.status(200).json({ models });
     } catch (error) {
-        console.error(`Error fetching models: ${(error as Error).message}`);
+        log.error(`Error fetching models: ${(error as Error).message}`);
         res.status(500).json({
             error: {
                 message: 'An error occurred while fetching the models.'
