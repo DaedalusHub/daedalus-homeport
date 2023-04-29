@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+// Project.tsx
+import React from 'react';
 import { Toaster } from 'react-hot-toast';
-import { getLogger } from '@/lib/logger';
 import ProjectDetails from './ProjectDetails';
-
-const log = getLogger('Project');
+import useProjects from './useProjects';
 
 interface ProjectProps {
     onCompleted: (values: {
@@ -14,22 +13,7 @@ interface ProjectProps {
 }
 
 const Project: React.FC<ProjectProps> = ({ onCompleted }) => {
-    const [projects, setProjects] = useState<any[]>([]);
-    const [selectedProject, setSelectedProject] = useState<any>(null);
-    const fetchProjects = async () => {
-        try {
-            const response = await fetch('/api/get-projects');
-            const data = await response.json();
-            setProjects(data);
-            setSelectedProject(data[0]);
-        } catch (error) {
-            log.error(`Error fetching projects: ${error}`);
-        }
-    };
-
-    useEffect(() => {
-        fetchProjects();
-    }, []);
+    const { projects, selectedProject, setSelectedProject } = useProjects();
 
     return (
         <div className="bg-base-100 p-8 min-h-fit h-1/2 flex flex-col w-screen">
@@ -38,6 +22,9 @@ const Project: React.FC<ProjectProps> = ({ onCompleted }) => {
                 selectedProject={selectedProject}
                 setSelectedProject={setSelectedProject}
                 onCompleted={onCompleted}
+                onSelectedProjectChange={(selectedProject) => {
+                    setSelectedProject(selectedProject);
+                }}
             />
             <Toaster />
         </div>

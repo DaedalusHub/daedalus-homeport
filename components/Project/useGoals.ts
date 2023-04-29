@@ -1,7 +1,20 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { getLogger } from '@/lib/logger';
 
-const useGoals = () => {
-    const [goals, setGoals] = useState<string[]>(['']);
+const log = getLogger('useGoals');
+
+const useGoals = (selectedProject) => {
+    const [goals, setGoals] = useState<string[]>(
+        selectedProject?.goals || ['']
+    );
+
+    useEffect(() => {
+        log.debug(`Selected project: ${JSON.stringify(selectedProject)}`);
+        setGoals((prevGoals) => {
+            log.debug(`Updated goals: ${JSON.stringify(prevGoals)}`);
+            return selectedProject?.goals || [''];
+        });
+    }, [selectedProject]);
 
     const addGoal = () => {
         setGoals((goals) => [...goals, '']);
@@ -16,6 +29,8 @@ const useGoals = () => {
             goals.map((goal, i) => (i === index ? newGoalText : goal))
         );
     };
+
+    log.debug(`Current goals: ${JSON.stringify(goals)}`);
 
     return {
         goals,
