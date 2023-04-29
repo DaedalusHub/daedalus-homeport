@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test';
+import { test, expect } from 'playwright-test-coverage';
 import { getLogger } from "@/lib/logger";
 
 
@@ -12,7 +12,7 @@ test.describe('Chat UI', () => {
                 message: {
                     role: 'assistant',
                     content:
-                        "Mocked message reply.",
+                        "Mocked message reply 123.",
                 },
                 finish_reason: 'stop',
                 index: 0,
@@ -24,6 +24,7 @@ test.describe('Chat UI', () => {
             });
         });
 
+            await page.coverage.startJSCoverage();
         await page.goto('/');
     });
 

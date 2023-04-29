@@ -1,8 +1,8 @@
-import { expect, test } from '@playwright/test';
+import { expect, test } from 'playwright-test-coverage';
 
 test('has title', async ({ page }) => {
+    await page.coverage.startJSCoverage();
     await page.goto('/');
-
     await expect(page).toHaveTitle(/Daedalus HomePort/);
 });
 

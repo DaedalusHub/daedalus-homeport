@@ -1,4 +1,4 @@
-## [0.4.2](https://github.com/DaedalusHub/daedalus-homeport/compare/v0.2.0...v0.4.2) (2023-04-28)
+## [0.4.2](https://github.com/DaedalusHub/daedalus-homeport/compare/v0.2.0...v0.4.2) (2023-04-29)
 
 
 ### Bug Fixes

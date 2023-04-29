@@ -52,6 +52,8 @@ export default async (config: FullConfig): Promise<void> => {
             if (data.includes('compiled')) {
                 log.debug('Server is ready');
                 resolve();
+            } else {
+                log.debug(data);
             }
         });
     });
