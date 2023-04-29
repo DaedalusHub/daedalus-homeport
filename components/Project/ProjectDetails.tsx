@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import GoalsInput from './GoalsInput';
@@ -55,6 +55,14 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
         validationSchema,
         onSubmit: handleSubmit
     };
+
+    useEffect(() => {
+        generatePrompt({
+            name: selectedProject?.name || '',
+            intent: selectedProject?.intent || '',
+            goals: selectedProject?.goals || []
+        });
+    }, [selectedProject, generatePrompt]);
 
     return (
         <Formik {...formikProps}>
@@ -115,14 +123,18 @@ const ProjectDetails: React.FC<ProjectDetailsProps> = ({
                             type="button"
                             disabled={!formik.isValid}
                             onClick={() => generatePrompt(formik.values)}
-                            className="btn                             btn-primary mt-4"
+                            className="btn btn-secondary mt-4"
                         >
                             Generate Prompt
                         </button>
                         {generatedPrompt && (
                             <div className="mt-4">
                                 <p className="text-xl">Generated Prompt:</p>
-                                <p className="text-lg">{generatedPrompt}</p>
+                                <pre className="bg-base-100 p-4 rounded-lg overflow-x-auto">
+                                    <code className="text-sm text-accent-content">
+                                        {generatedPrompt}
+                                    </code>
+                                </pre>
                             </div>
                         )}
                     </div>

@@ -9,12 +9,19 @@ const log = getLogger('useFormLogic');
 const useFormLogic = (onCompleted) => {
     const [generatedPrompt, setGeneratedPrompt] = useState('');
 
-    const generatePrompt = (values) => {
-        const prompt = `You are assisting me on a project with the following details:
-- Title: ${values.name}
-- Intent: ${values.intent}
-- Goals:
-${values.goals.map((goal, index) => `  ${index + 1}. ${goal}`).join('\n')}`;
+    const generatePrompt = (values?: {
+        name: string;
+        intent: string;
+        goals: string[];
+    }) => {
+        const promptValues = values || formik.values;
+        const prompt = `You are assisting me on a project with the following details:\n
+- Title: ${promptValues.name}\n
+- Intent: ${promptValues.intent}\n
+- Goals:\n
+${promptValues.goals
+    .map((goal, index) => `  ${index + 1}. ${goal}`)
+    .join('\n')}`;
 
         setGeneratedPrompt(prompt);
     };
