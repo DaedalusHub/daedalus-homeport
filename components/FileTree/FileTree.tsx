@@ -15,12 +15,13 @@ const FileTree: React.FC<FileTreeProps> = ({ files, onToggleVisibility }) => {
     });
 
     return (
-        <ul>
+        <ul data-testid="fileTree">
             {sortedFiles.map((file) => (
                 <FileTreeNode
                     key={file.id}
                     {...file}
                     onToggleVisibility={onToggleVisibility}
+                    data-testid="projectDirectoryTitle"
                 />
             ))}
         </ul>

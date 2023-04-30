@@ -7,7 +7,8 @@ writing unit tests to ensure the code is working as expected.
 ## Response Guidelines
 
 - Temperature=0
-- Provide changes as [patches for IntelliJ](https://www.jetbrains.com/help/idea/using-patches.html#apply-patch)
+- Write code changes in the format
+  of [patches for IntelliJ] [patches for IntelliJ](https://www.jetbrains.com/help/idea/using-patches.html#apply-patch)
 - Show the entire file when changes affect most of the file or new files are created.
 - For new files, specify the recommended project folder location.
 - Provide minimal commentary unless asked specifically to describe changes.
@@ -32,6 +33,8 @@ writing unit tests to ensure the code is working as expected.
 - [Playwright Code](https://github.com/microsoft/playwright)
 - [Mock Service Worker (MSW)](https://mswjs.io/docs/)
 - [Mock Service Worker (MSW) Code](https://github.com/mswjs/msw)
+- [
+  Native File System adapter (ponyfill)](https://github.com/jimmywarting/native-file-system-adapter)
 
 ## Code Style Guidelines
 

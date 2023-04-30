@@ -12,9 +12,7 @@ const FileTreeDisplay: React.FC = () => {
     const [projectFiles, setProjectFiles] = useState<FileOrDirectory[]>([]);
 
     const loadProject = async () => {
-        const { getClientSideLoadDirectory } = await import(
-            './fileTreeUtilsClient'
-        );
+        const { getClientSideLoadDirectory } = await import('./fileUtils');
         const directoryHandle = await getClientSideLoadDirectory();
         if (!directoryHandle) {
             return;
@@ -134,6 +132,7 @@ const FileTreeDisplay: React.FC = () => {
             <FileTreeHeader
                 loadProject={loadProject}
                 copyToClipboard={copyToClipboard}
+                data-testid="fileTreeHeader"
             />
             <FileTreeContainer>
                 <FileTree

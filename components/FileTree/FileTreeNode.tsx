@@ -32,13 +32,16 @@ const FileTreeNode: React.FC<FileTreeNodeProps> = ({
         <li className="ml-4 cursor-pointer select-none" key={id}>
             <code className="text-primary-content/80">
                 {isDirectory ? (
-                    <span onClick={toggleVisibility}>
+                    <span
+                        onClick={toggleVisibility}
+                        data-testid="directoryElement"
+                    >
                         <strong className="text-primary-content">
                             {name}/
                         </strong>
                     </span>
                 ) : (
-                    name
+                    <span data-testid="fileElement">{name}</span>
                 )}
             </code>
             {isDirectory && visible && children && (

@@ -18,12 +18,14 @@ const FileTreeHeader: React.FC<HeaderProps> = ({
                 <button
                     className="btn btn-secondary p-2 min-w-fit w-24 min-h-fit h-8 mr-2"
                     onClick={loadProject}
+                    data-testid="loadProjectButton"
                 >
                     Load project
                 </button>
                 <button
                     className="btn btn-accent p-2 min-w-fit w-24 min-h-fit h-8"
                     onClick={copyToClipboard}
+                    data-testid="copyToClipboardButton"
                 >
                     Copy to clipboard
                 </button>

@@ -1,3 +1,7 @@
+export const showDirectoryPicker = async (opts) => {
+    return await (window as any).showDirectoryPicker(opts);
+};
+
 export const getClientSideLoadDirectory =
     async (): Promise<FileSystemDirectoryHandle | null> => {
         const opts = {
@@ -13,7 +17,7 @@ export const getClientSideLoadDirectory =
             multiple: false
         };
 
-        const handle = await (window as any).showDirectoryPicker(opts);
+        const handle = await showDirectoryPicker(opts);
 
         if (handle) {
             return handle;
