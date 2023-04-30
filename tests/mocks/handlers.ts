@@ -44,4 +44,33 @@ export const handlers = [
             ])
         );
     }),
+
+    rest.post('/api/saveProject', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json({
+                message: 'Project details saved successfully',
+            })
+        );
+    }),
+
+    rest.get('/api/getProjects', (req, res, ctx) => {
+        return res(
+            ctx.status(200),
+            ctx.json([
+                {
+                    id: '1',
+                    name: 'Project 1',
+                    intent: 'Intent 1',
+                    goals: ['Goal 1', 'Goal 2'],
+                },
+                {
+                    id: '2',
+                    name: 'Project 2',
+                    intent: 'Intent 2',
+                    goals: ['Goal 3', 'Goal 4'],
+                },
+            ])
+        );
+    }),
 ];

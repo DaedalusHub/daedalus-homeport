@@ -16,7 +16,7 @@
         "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
         "putout": "putout .",
         "test": "playwright test",
-        "dev:test": "TEST=1 next dev",
+        "dev:test": "TEST=true next dev",
         "coverage": "nyc report --reporter=html && open coverage/index.html",
         "codecov": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
         "commitlog": "conventional-changelog -p angular -i COMMITLOG.md -s -r 0",

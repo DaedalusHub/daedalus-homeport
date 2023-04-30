@@ -1,6 +1,6 @@
 import { VercelRequest, VercelResponse } from '@vercel/node';
 import { Configuration, OpenAIApi } from 'openai';
-import { getLogger } from "@/lib/logger";
+import { getLogger } from '@/lib/logger';
 
 const log = getLogger('Chat');
 
@@ -17,9 +17,8 @@ async function fetchModels(type: string) {
 
     const uniqueModels = new Set<string>();
 
-    log.info(`Found ${response.data.data.length} models`)
-    log.info(`Filtering models by type ${type}`)
-    log.info(`Models: ${response.data.data.map((model) => model.id).join(', ')}`)
+    log.info(`Found ${response.data.data.length} models`);
+    log.info(`Filtering models by type ${type}`);
 
     response.data.data.forEach((model) => {
         if (model.id.startsWith(type)) {
@@ -32,6 +31,7 @@ async function fetchModels(type: string) {
             }
         }
     });
+    log.info(`Models: ${Array.from(uniqueModels).join(', ')}`);
 
     return Array.from(uniqueModels);
 }

@@ -1,14 +1,14 @@
 // babel.config.js
 const plugins = [];
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.TEST === 'true') {
     console.log(
-        "Detected development environment. Instrumenting code for coverage."
+        'Detected development environment. Instrumenting code for coverage.'
     );
-    plugins.push("istanbul");
+    plugins.push('istanbul');
 }
 
 module.exports = {
-    presets: ["next/babel"],
-    plugins,
+    presets: ['next/babel'],
+    plugins
 };
