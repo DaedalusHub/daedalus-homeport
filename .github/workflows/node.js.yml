@@ -45,10 +45,17 @@ jobs:
             -   run: yarn install --frozen-lockfile
             -   name: Install Playwright dependencies
                 run: yarn playwright install --with-deps
+            -   name: Start development server
+                run: yarn dev:test &
+                env:
+                    SERVER_RUNNING: "true"
+            -   name: Wait for server to start
+                run: sleep 30
             -   name: Run Playwright tests
                 run: yarn test
                 env:
                     CI_ENV: true
+                    SERVER_RUNNING: "true"
             -   name: Upload test results
                 if: always()
                 uses: actions/upload-artifact@v3
