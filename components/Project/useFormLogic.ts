@@ -3,18 +3,21 @@ import { useState } from 'react';
 import { getLogger } from '@/lib/logger';
 import toast from 'react-hot-toast';
 import { v4 as uuidv4 } from 'uuid';
+import { FormikHelpers } from 'formik';
 
 const log = getLogger('useFormLogic');
 
-const useFormLogic = (onCompleted) => {
+export interface ProjectFormValues {
+    name: string;
+    intent: string;
+    goals: string[];
+}
+
+const useFormLogic = (onCompleted: (values: ProjectFormValues) => void) => {
     const [generatedPrompt, setGeneratedPrompt] = useState('');
 
-    const generatePrompt = (values?: {
-        name: string;
-        intent: string;
-        goals: string[];
-    }) => {
-        const promptValues = values || formik.values;
+    const generatePrompt = (formikValues: ProjectFormValues) => {
+        const promptValues = formikValues;
         const prompt = `You are assisting me on a project with the following details:\n
 - Title: ${promptValues.name}\n
 - Intent: ${promptValues.intent}\n
@@ -26,7 +29,10 @@ ${promptValues.goals
         setGeneratedPrompt(prompt);
     };
 
-    const handleSubmit = async (values, actions) => {
+    const handleSubmit = async (
+        values: ProjectFormValues,
+        actions: FormikHelpers<ProjectFormValues>
+    ) => {
         try {
             toast.loading('Submitting...');
             log.debug(`Submitting project details: ${JSON.stringify(values)}`);
@@ -46,7 +52,12 @@ ${promptValues.goals
                     `Project details saved to Redis for project ID: ${projectId}`
                 );
             } else {
-                throw new Error(await response.text());
+                const errorMessage = await response.text();
+                log.error(`Error submitting project details: ${errorMessage}`);
+                toast.dismiss();
+                toast.error('Error');
+                actions.setSubmitting(false);
+                return;
             }
 
             await new Promise((resolve) => {

@@ -1,6 +1,19 @@
-export const showDirectoryPicker = async (opts) => {
-    return await (window as any).showDirectoryPicker(opts);
-};
+interface DirectoryPickerOptions {
+    types: {
+        description: string;
+        accept: {
+            'inode/directory': string[];
+        };
+    }[];
+    excludeAcceptAllOption: boolean;
+    multiple: boolean;
+}
+
+interface ExtendedWindow extends Window {
+    showDirectoryPicker: (
+        options: DirectoryPickerOptions
+    ) => Promise<FileSystemDirectoryHandle>;
+}
 
 export const getClientSideLoadDirectory =
     async (): Promise<FileSystemDirectoryHandle | null> => {
@@ -17,7 +30,9 @@ export const getClientSideLoadDirectory =
             multiple: false
         };
 
-        const handle = await showDirectoryPicker(opts);
+        const handle = await (window as ExtendedWindow).showDirectoryPicker(
+            opts
+        );
 
         if (handle) {
             return handle;

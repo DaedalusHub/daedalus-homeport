@@ -1,12 +1,16 @@
 import React from 'react';
+import Image from 'next/image';
 
 const Logo: React.FC = () => (
-    <a href="https://en.wikipedia.org/wiki/Daedalus">
-        <img
-            alt="Daedalus HomePort"
-            src="/daedalus.png"
-            className="min-h-8 h-16"
-        />
-    </a>
+    <div className="mask mask-circle">
+        <a href="https://en.wikipedia.org/wiki/Daedalus">
+            <Image
+                alt="Daedalus HomePort"
+                src="/daedalus.png"
+                width={64}
+                height={64}
+            />
+        </a>
+    </div>
 );
 export default Logo;

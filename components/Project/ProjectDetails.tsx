@@ -2,35 +2,30 @@ import React, { useEffect } from 'react';
 import { ErrorMessage, Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import GoalsInput from './GoalsInput';
-import useFormLogic from './useFormLogic';
+import useFormLogic, { ProjectFormValues } from './useFormLogic';
 import ProjectSelect from './ProjectSelect';
-import useGoals from '@/components/Project/useGoals';
+import useGoals, { ProjectInterface } from '@/components/Project/useGoals';
 
 interface ProjectDetailsProps {
-    projects: any[];
-    selectedProject: any;
-    setSelectedProject: (project: any) => void;
-    onCompleted: (values: {
-        name: string;
-        intent: string;
-        goals: string[];
-    }) => void;
-    onSelectedProjectChange: (project: any) => void;
+    projects: ProjectInterface[];
+    selectedProject: ProjectInterface | null;
+    setSelectedProject: (project: ProjectInterface | null) => void;
+    onCompleted: (values: ProjectFormValues) => void;
+    onSelectedProjectChange: (project: ProjectInterface | null) => void;
 }
 
 const ProjectDetails: React.FC<ProjectDetailsProps> = ({
     projects,
     selectedProject,
     setSelectedProject,
-    onCompleted,
-    onSelectedProjectChange
+    onCompleted
 }) => {
     const {
         goals: projectGoals,
         addGoal,
         removeGoal,
         handleGoalChange
-    } = useGoals(selectedProject, onSelectedProjectChange);
+    } = useGoals(selectedProject);
 
     const validationSchema = Yup.object({
         name: Yup.string().required('Please enter a name for your project.'),

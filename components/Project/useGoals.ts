@@ -3,7 +3,14 @@ import { getLogger } from '@/lib/logger';
 
 const log = getLogger('useGoals');
 
-const useGoals = (selectedProject) => {
+export interface ProjectInterface {
+    id: string;
+    name: string;
+    intent: string;
+    goals: string[];
+}
+
+const useGoals = (selectedProject: ProjectInterface | null) => {
     const [goals, setGoals] = useState<string[]>(
         selectedProject?.goals || ['']
     );

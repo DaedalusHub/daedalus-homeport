@@ -6,44 +6,43 @@ writing unit tests to ensure the code is working as expected.
 
 ## Response Guidelines
 
--   Temperature=0
--   Write code changes in the format
-    of [patches for IntelliJ] [patches for IntelliJ](https://www.jetbrains.com/help/idea/using-patches.html#apply-patch)
--   Show the entire file when changes affect most of the file or new files are created.
--   For new files, specify the recommended project folder location.
--   Provide minimal commentary unless asked specifically to describe changes.
--   Use strong typing and avoid 'any' types.
+- Temperature=0
+- Use interfaces and types to define objects and function signatures.
+- Avoid 'any' types.
+- Show the entire file when changes affect most of the file or new files are created.
+- For new files, specify the recommended project folder location.
+- Provide minimal commentary unless asked specifically to describe changes.
 
 ## Project References
 
--   [TypeScript](https://www.typescriptlang.org/docs/)
--   [React](https://reactjs.org/docs/getting-started.html)
--   [React Code](https://github.com/facebook/react)
--   [NextJS](https://nextjs.org/docs)
--   [NextJS Code](https://github.com/vercel/next.js/)
--   [Winston (server-side logging)](https://github.com/winstonjs/winston)
--   [Loglevel (client-side logging)](https://github.com/pimterry/loglevel)
--   [Redis NodeJS](https://redis.io/docs/clients/nodejs/)
--   [Redis NodeJS Code](https://github.com/redis/node-redis)
--   [Tailwind CSS](https://tailwindcss.com/docs/)
--   [Daisy UI](https://daisyui.com/docs/)
--   [Formik](https://formik.org/docs/)
--   [Playwright](https://playwright.dev/docs/intro)
--   [Playwright Code](https://github.com/microsoft/playwright)
--   [Mock Service Worker (MSW)](https://mswjs.io/docs/)
--   [Mock Service Worker (MSW) Code](https://github.com/mswjs/msw)
--   [Native File System adapter (ponyfill)](https://github.com/jimmywarting/native-file-system-adapter)
+- [TypeScript](https://www.typescriptlang.org/docs/)
+- [React](https://reactjs.org/docs/getting-started.html)
+- [React Code](https://github.com/facebook/react)
+- [NextJS](https://nextjs.org/docs)
+- [NextJS Code](https://github.com/vercel/next.js/)
+- [Winston (server-side logging)](https://github.com/winstonjs/winston)
+- [Loglevel (client-side logging)](https://github.com/pimterry/loglevel)
+- [Redis NodeJS](https://redis.io/docs/clients/nodejs/)
+- [Redis NodeJS Code](https://github.com/redis/node-redis)
+- [Tailwind CSS](https://tailwindcss.com/docs/)
+- [Daisy UI](https://daisyui.com/docs/)
+- [Formik](https://formik.org/docs/)
+- [Playwright](https://playwright.dev/docs/intro)
+- [Playwright Code](https://github.com/microsoft/playwright)
+- [Mock Service Worker (MSW)](https://mswjs.io/docs/)
+- [Mock Service Worker (MSW) Code](https://github.com/mswjs/msw)
+- [Native File System adapter (ponyfill)](https://github.com/jimmywarting/native-file-system-adapter)
 
 ## Code Style Guidelines
 
--   Use Yarn as the package manager and touch for file creation.
--   Avoid comments in code.
--   Always use absolute paths for imports.
--   Keep responsibilities local for components.
--   Prefer a loosely coupled architecture.
--   Opt for smaller classes and functions with a separation of concerns.
--   Aim for file sizes below 100 lines of code.
--   End-to-end tests should be written in Playwright using Mock Service Worker to mock 3rd party API calls.
+- Use Yarn as the package manager and touch for file creation.
+- Avoid comments in code.
+- Always use absolute paths for imports.
+- Keep responsibilities local for components.
+- Prefer a loosely coupled architecture.
+- Opt for smaller classes and functions with a separation of concerns.
+- Aim for file sizes below 100 lines of code.
+- End-to-end tests should be written in Playwright using Mock Service Worker to mock 3rd party API calls.
 
 ## React Best Practices
 
