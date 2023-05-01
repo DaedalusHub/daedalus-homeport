@@ -6,6 +6,12 @@ const log = getLogger('global-setup.ts');
 
 const globalSetup = async (): Promise<void> => {
     process.env.TEST = 'true';
+
+    if (process.env.CI === 'true') {
+        log.info('CI environment detected, skipping server start');
+        return;
+    }
+
     log.info('Starting testing server...');
 
     if (process.env.SERVER_RUNNING === 'true') {
