@@ -18,6 +18,7 @@
         "test": "playwright test",
         "dev:test": "TEST=true next dev",
         "coverage": "nyc report --reporter=html && open coverage/index.html",
+        "deepscan-coverage": "nyc report --reporter=cobertura && ./bin/deepsource report --analyzer test-coverage --key javascript --value-file coverage/cobertura-coverage.xml",
         "codecov": "nyc report --reporter=text-lcov > coverage.lcov && codecov",
         "commitlog": "conventional-changelog -p angular -i COMMITLOG.md -s -r 0",
         "bump": "node scripts/bump_version.mjs",
