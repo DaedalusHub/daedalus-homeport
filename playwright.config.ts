@@ -11,7 +11,7 @@ const config: PlaywrightTestConfig = {
         ignoreHTTPSErrors: true,
         screenshot: 'only-on-failure',
         video: 'on-first-retry',
-        baseURL: 'http://127.0.0.1:3000',
+        baseURL: 'http://localhost:3000',
         trace: 'on-first-retry',
         contextOptions: {
             permissions: ['clipboard-read', 'clipboard-write']
