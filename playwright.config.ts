@@ -17,8 +17,8 @@ const config: PlaywrightTestConfig = {
             permissions: ['clipboard-read', 'clipboard-write']
         }
     },
-    globalSetup: require.resolve('./tests/global-setup'),
-    globalTeardown: require.resolve('./tests/global-teardown'),
+    //globalSetup: require.resolve('./tests/global-setup'),
+    //globalTeardown: require.resolve('./tests/global-teardown'),
     reporter: isCI ? 'github' : 'dot',
     retries: isCI ? 2 : 0,
     timeout: isCI ? 60000 : 30000
