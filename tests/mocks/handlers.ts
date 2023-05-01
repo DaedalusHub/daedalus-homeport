@@ -9,7 +9,7 @@ export const handlers = [
             ctx.json({
                 message: {
                     role: 'assistant',
-                    content: "Mocked message reply."
+                    content: 'Mocked message reply.'
                 },
                 finish_reason: 'stop',
                 index: 0
@@ -22,25 +22,24 @@ export const handlers = [
         return res(
             ctx.status(200),
             ctx.json([
-                    {
-                        id: 'gpt-3.5-turbo',
-                        object: 'model',
-                        created: 1677610602,
-                        owned_by: 'openai',
-                        permission: [ [Object] ],
-                        root: 'gpt-3.5-turbo',
-                        parent: null
-                    },
-                    {
-                        id: 'gpt-4',
-                            object: 'model',
-                        created: 1678604602,
-                        owned_by: 'openai',
-                        permission: [ [Object] ],
-                        root: 'gpt-4',
-                        parent: null
-                    }
-
+                {
+                    id: 'gpt-3.5-turbo',
+                    object: 'model',
+                    created: 1677610602,
+                    owned_by: 'openai',
+                    permission: [[Object]],
+                    root: 'gpt-3.5-turbo',
+                    parent: null
+                },
+                {
+                    id: 'gpt-4',
+                    object: 'model',
+                    created: 1678604602,
+                    owned_by: 'openai',
+                    permission: [[Object]],
+                    root: 'gpt-4',
+                    parent: null
+                }
             ])
         );
     }),
@@ -49,7 +48,7 @@ export const handlers = [
         return res(
             ctx.status(200),
             ctx.json({
-                message: 'Project details saved successfully',
+                message: 'Project details saved successfully'
             })
         );
     }),
@@ -62,15 +61,15 @@ export const handlers = [
                     id: '1',
                     name: 'Project 1',
                     intent: 'Intent 1',
-                    goals: ['Goal 1', 'Goal 2'],
+                    goals: ['Goal 1', 'Goal 2']
                 },
                 {
                     id: '2',
                     name: 'Project 2',
                     intent: 'Intent 2',
-                    goals: ['Goal 3', 'Goal 4'],
-                },
+                    goals: ['Goal 3', 'Goal 4']
+                }
             ])
         );
-    }),
+    })
 ];

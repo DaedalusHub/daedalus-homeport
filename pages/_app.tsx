@@ -1,9 +1,9 @@
 // pages/_app.tsx
 import '../styles/global.css';
 import { useEffect } from 'react';
-import { AppProps } from "next/app";
-import log from "loglevel";
-import process from "process";
+import { AppProps } from 'next/app';
+import log from 'loglevel';
+import process from 'process';
 
 const logLevel = process.env.LOG_LEVEL || 'warn';
 log.setLevel(logLevel as log.LogLevelDesc);
