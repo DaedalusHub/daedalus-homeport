@@ -146,7 +146,10 @@ const FileTreeDisplay: React.FC = () => {
 
 const FileTreeContainer: React.FC<FileTreeContainerProps> = ({ children }) => {
     return (
-        <div className="border-2 rounded-lg border-primary bg-base-300 m-4 p-4">
+        <div
+            className="border-2 rounded-lg border-primary bg-base-300 m-4 p-4"
+            data-testid="fileTreeContainer"
+        >
             {children}
         </div>
     );

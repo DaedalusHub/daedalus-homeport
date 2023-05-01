@@ -13,29 +13,32 @@ const config: PlaywrightTestConfig = {
         video: 'on-first-retry',
         baseURL: 'http://127.0.0.1:3000',
         trace: 'on-first-retry',
+        contextOptions: {
+            permissions: ['clipboard-read', 'clipboard-write']
+        }
     },
     globalSetup: require.resolve('./tests/global-setup'),
     globalTeardown: require.resolve('./tests/global-teardown'),
-    reporter: isCI? 'github' : 'dot',
+    reporter: isCI ? 'github' : 'dot',
     retries: isCI ? 2 : 0,
     workers: isCI ? 1 : undefined,
-    timeout: 30000,
+    timeout: 30000
 };
 
 if (isCI) {
     config.projects = [
         {
             name: 'Chromium',
-            use: { browserName: 'chromium' },
+            use: { browserName: 'chromium' }
         },
         {
             name: 'Firefox',
-            use: { browserName: 'firefox' },
+            use: { browserName: 'firefox' }
         },
         {
             name: 'WebKit',
-            use: { browserName: 'webkit' },
-        },
+            use: { browserName: 'webkit' }
+        }
     ];
 }
 

@@ -28,13 +28,11 @@ writing unit tests to ensure the code is working as expected.
 - [Tailwind CSS](https://tailwindcss.com/docs/)
 - [Daisy UI](https://daisyui.com/docs/)
 - [Formik](https://formik.org/docs/)
-- [Mock Service Worker](https://mswjs.io/docs/)
 - [Playwright](https://playwright.dev/docs/intro)
 - [Playwright Code](https://github.com/microsoft/playwright)
 - [Mock Service Worker (MSW)](https://mswjs.io/docs/)
 - [Mock Service Worker (MSW) Code](https://github.com/mswjs/msw)
-- [
-  Native File System adapter (ponyfill)](https://github.com/jimmywarting/native-file-system-adapter)
+- [Native File System adapter (ponyfill)](https://github.com/jimmywarting/native-file-system-adapter)
 
 ## Code Style Guidelines
 
