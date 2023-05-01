@@ -1,11 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname "$0")/_/husky.sh"
 
-# Check staged files with Lint-Staged
-yarn lint-staged && yarn test
-
-# Update COMMITLOG
+yarn lint-staged
+yarn test
+yarn build
 yarn commitlog
-
-# Commit COMMITLOG
 git add COMMITLOG.md
