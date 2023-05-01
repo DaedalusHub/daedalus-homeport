@@ -9,11 +9,9 @@ on:
 jobs:
     build:
         runs-on: ubuntu-latest
-
         strategy:
             matrix:
                 node-version: [ 16.x, 18.x ]
-                # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
         steps:
             -   uses: actions/checkout@v3
@@ -21,9 +19,30 @@ jobs:
                 uses: actions/setup-node@v3
                 with:
                     node-version: ${{ matrix.node-version }}
-                    cache: 'yarn'
+                    cache: "yarn"
             -   run: yarn install --frozen-lockfile
             -   run: yarn build
+
+    lint:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v3
+            -   uses: actions/setup-node@v3
+                with:
+                    node-version: 16.x
+                    cache: "yarn"
+            -   run: yarn install --frozen-lockfile
+            -   run: yarn lint
+
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            -   uses: actions/checkout@v3
+            -   uses: actions/setup-node@v3
+                with:
+                    node-version: 16.x
+                    cache: "yarn"
+            -   run: yarn install --frozen-lockfile
             -   name: Install Playwright dependencies
                 run: npx playwright install-deps
             -   name: Run Playwright tests
@@ -50,7 +69,7 @@ jobs:
                 run: |
                     curl https://deepsource.io/cli | sh
                     yarn deepsource-coverage
-            -   name: 'Qodana Scan'
+            -   name: "Qodana Scan"
                 uses: JetBrains/qodana-action@main
                 env:
                     QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}

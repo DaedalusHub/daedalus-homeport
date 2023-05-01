@@ -4,7 +4,8 @@
 ### Bug Fixes
 
 * **message:** fix styling ([2c266af](https://github.com/DaedalusHub/daedalus-homeport/commit/2c266af25a48c9040b063ce106f256c99d6ca318))
-* resolve implicit any and other build errors ([9ef0c0a](https://github.com/DaedalusHub/daedalus-homeport/commit/9ef0c0a59586198ca860affa54d549451aad0a7d))
+* resolve implicit any and other build errors ([a34f101](https://github.com/DaedalusHub/daedalus-homeport/commit/a34f101bac652129a9228cc034048e0089c8d386))
+* resolve implicit any and other build errors ([13a1904](https://github.com/DaedalusHub/daedalus-homeport/commit/13a1904853e888e60a4ba03b1f0e6981fcea1516))
 
 
 ### Features
