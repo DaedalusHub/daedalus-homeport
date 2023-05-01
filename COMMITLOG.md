@@ -28,7 +28,7 @@
 * **chat:** refactor chat.tsx to multiple files, add loading animation ([2856884](https://github.com/DaedalusHub/daedalus-homeport/commit/2856884d6c9c3b7f50a737b059ed0de13c91d317))
 * **message:** add syntax highlighting ([6d52fb4](https://github.com/DaedalusHub/daedalus-homeport/commit/6d52fb4f407b8e12e8ef333376dd2e1c0ba15e56))
 * **message:** include history in messages ([0023059](https://github.com/DaedalusHub/daedalus-homeport/commit/002305980fce3f7468840a69fec72067de381762))
-* **project:** auto-generate prompt on project selection ([e9aba0d](https://github.com/DaedalusHub/daedalus-homeport/commit/e9aba0dd50ca58e99c35200ceb5d020db6d94cec))
+* **project:** auto-generate prompt on project selection ([e3e4b5a](https://github.com/DaedalusHub/daedalus-homeport/commit/e3e4b5a047598aa991dc96a83ba9a84465e1a22f))
 
 
 
