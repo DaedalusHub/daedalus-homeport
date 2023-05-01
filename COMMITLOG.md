@@ -5,6 +5,7 @@
 
 * **message:** fix styling ([2c266af](https://github.com/DaedalusHub/daedalus-homeport/commit/2c266af25a48c9040b063ce106f256c99d6ca318))
 * **playwright:** change 127.0.0.1 to localhost for baseurl ([658ce81](https://github.com/DaedalusHub/daedalus-homeport/commit/658ce81f477de3f834b67463be5f718330e854e9))
+* **playwright:** remove CI worker limit ([7ece0b7](https://github.com/DaedalusHub/daedalus-homeport/commit/7ece0b77209a70a91c3c8632dd14610c6753ee0b))
 * resolve implicit any and other build errors ([a34f101](https://github.com/DaedalusHub/daedalus-homeport/commit/a34f101bac652129a9228cc034048e0089c8d386))
 * resolve implicit any and other build errors ([13a1904](https://github.com/DaedalusHub/daedalus-homeport/commit/13a1904853e888e60a4ba03b1f0e6981fcea1516))
 
