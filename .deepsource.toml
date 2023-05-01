@@ -1,11 +1,24 @@
 version = 1
 
+test_patterns = ["tests/**"]
+
+exclude_patterns = ["prompts/**"]
+
 [[analyzers]]
-name = "shell"
+name = "test-coverage"
+
+[[analyzers]]
+name = "secrets"
 
 [[analyzers]]
 name = "javascript"
 
   [analyzers.meta]
   plugins = ["react"]
-  environment = ["nodejs"]
+  environment = [
+    "nodejs",
+    "browser"
+  ]
+
+[[transformers]]
+name = "prettier"
