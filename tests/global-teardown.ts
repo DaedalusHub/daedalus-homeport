@@ -1,11 +1,14 @@
-// tests/global-teardown.ts
-import { FullConfig } from '@playwright/test';
+import { getLogger } from '@/lib/logger';
+import testServer from './testServer';
 import process from 'process';
 
-export default async (config: FullConfig): Promise<void> => {
-    if ((global as any).__SERVER__) {
-        (global as any).__SERVER__.kill();
-    }
+const log = getLogger('global-teardown.ts');
 
-    process.env.USE_MOCKS = 'false';
+const globalTeardown = async (): Promise<void> => {
+    log.info('Stopping testing server...');
+    process.env.SERVER_RUNNING = 'false';
+    testServer.stop();
+    log.info('Testing server stopped');
 };
+
+export default globalTeardown;

@@ -4,6 +4,7 @@
     "private": true,
     "scripts": {
         "dev": "next dev",
+        "dev:test": "next dev -p 4000",
         "build": "next build",
         "start": "next start",
         "clean": "rm -rf .nyc_output coverage .next test-results logs",
@@ -16,7 +17,6 @@
         "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
         "putout": "putout .",
         "test": "playwright test",
-        "dev:test": "TEST=true next dev",
         "coverage": "nyc report --reporter=html && open coverage/index.html",
         "deepscan-coverage": "nyc report --reporter=cobertura && ./bin/deepsource report --analyzer test-coverage --key javascript --value-file coverage/cobertura-coverage.xml",
         "codecov": "nyc report --reporter=text-lcov > coverage.lcov && codecov",

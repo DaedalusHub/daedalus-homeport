@@ -19,7 +19,7 @@ const startWorker = async () => {
     (global as any).__WORKER_STARTED__ = true;
 };
 
-if (process.env.USE_MOCKS === 'true') {
+if (process.env.TEST === 'true') {
     startWorker();
 }
 

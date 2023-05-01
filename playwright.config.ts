@@ -11,7 +11,7 @@ const config: PlaywrightTestConfig = {
         ignoreHTTPSErrors: true,
         screenshot: 'only-on-failure',
         video: 'on-first-retry',
-        baseURL: 'http://localhost:3000',
+        baseURL: 'http://localhost:4000',
         trace: 'on-first-retry',
         contextOptions: {
             permissions: ['clipboard-read', 'clipboard-write']
@@ -21,8 +21,8 @@ const config: PlaywrightTestConfig = {
     globalTeardown: require.resolve('./tests/global-teardown'),
     reporter: isCI ? 'github' : 'dot',
     retries: isCI ? 2 : 0,
+    timeout: isCI ? 60000 : 30000
     //workers: isCI ? 1 : undefined,
-    timeout: 30000
 };
 
 export default config;
