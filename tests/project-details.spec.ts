@@ -46,7 +46,7 @@ test.describe('Project Page', () => {
     });
 
     test('should render the form', async ({ page }) => {
-        const formExists = await page.isVisible('#project-details-form');
+        const formExists = await page.getByTestId('project-details-form');
         expect(formExists).toBeTruthy();
     });
 
