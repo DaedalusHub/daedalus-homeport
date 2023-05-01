@@ -25,17 +25,4 @@ const config: PlaywrightTestConfig = {
     timeout: 30000
 };
 
-if (isCI) {
-    config.projects = [
-        {
-            name: 'Chromium',
-            use: { browserName: 'chromium' }
-        },
-        {
-            name: 'Firefox',
-            use: { browserName: 'firefox' }
-        }
-    ];
-}
-
 export default config;
