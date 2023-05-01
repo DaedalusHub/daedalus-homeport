@@ -1,13 +1,16 @@
-import React from "react";
-import Message from "@/components/Chat/components/Message/Message";
-import { ChatMessageType } from "@/components/Chat/utils/chatHelpers";
+import React from 'react';
+import Message from '@/components/Chat/components/Message/Message';
+import { ChatMessageType } from '@/components/Chat/utils/chatHelpers';
 
 export interface ChatHistoryProps {
     messages: ChatMessageType[];
     pendingResponse: boolean;
 }
 
-const ChatHistory: React.FC<ChatHistoryProps> = ({ messages, pendingResponse }) => (
+const ChatHistory: React.FC<ChatHistoryProps> = ({
+    messages,
+    pendingResponse
+}) => (
     <div className="overflow-y-auto max-h-screen-50 md:max-h-screen-75 flex-grow mb-6">
         {Array.isArray(messages) &&
             messages.map((message, index) => (

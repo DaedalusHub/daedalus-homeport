@@ -1,23 +1,29 @@
-import React, { useState } from "react";
-import ChatInput from "./components/ChatInput";
-import ChatHistory from "./components/ChatHistory";
-import ChatHeader from "./components/ChatHeader";
-import ChatModelSelector from "./components/ChatModelSelector";
+import React, { useState } from 'react';
+import ChatInput from './components/ChatInput';
+import ChatHistory from './components/ChatHistory';
+import ChatHeader from './components/ChatHeader';
+import ChatModelSelector from './components/ChatModelSelector';
 import {
     handleClear,
     handleExport,
     handleImport,
     handleSave,
     handleUserMessage
-} from "@/components/Chat/hooks/useChatActions";
-import { useModels } from "@/components/Chat/hooks/useModels";
-import { useChatState } from "@/components/Chat/hooks/useChatState";
+} from '@/components/Chat/hooks/useChatActions';
+import { useModels } from '@/components/Chat/hooks/useModels';
+import { useChatState } from '@/components/Chat/hooks/useChatState';
 
 const ChatUI: React.FC = () => {
-    const { messages, addMessage, setMessages, pendingResponse, setPendingResponse } = useChatState();
+    const {
+        messages,
+        addMessage,
+        setMessages,
+        pendingResponse,
+        setPendingResponse
+    } = useChatState();
     const models = useModels();
 
-    const [selectedModel, setSelectedModel] = useState<string>("gpt-3.5-turbo");
+    const [selectedModel, setSelectedModel] = useState<string>('gpt-3.5-turbo');
 
     return (
         <div className="bg-base-100 p-8 min-h-fit h-1/2 flex flex-col w-screen">
@@ -37,7 +43,10 @@ const ChatUI: React.FC = () => {
                 />
             </div>
             <div className="bg-base-200 p-6 rounded-lg shadow-lg flex flex-col flex-grow">
-                <ChatHistory messages={messages} pendingResponse={pendingResponse} />
+                <ChatHistory
+                    messages={messages}
+                    pendingResponse={pendingResponse}
+                />
 
                 <ChatInput
                     onSubmit={(message) =>

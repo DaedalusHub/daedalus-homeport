@@ -3,32 +3,21 @@
         "browser": true,
         "es2021": true
     },
-    "extends": [
-        "eslint:recommended",
-        "next",
-        "prettier"
-    ],
+    "extends": ["eslint:recommended", "next", "prettier"],
     "overrides": [
         {
-            "files": [
-                "*.ts",
-                "*.tsx"
-            ],
+            "files": ["*.ts", "*.tsx"],
             "extends": [
                 "eslint:recommended",
                 "plugin:@typescript-eslint/recommended",
                 "next"
             ],
-            "plugins": [
-                "@typescript-eslint"
-            ],
+            "plugins": ["@typescript-eslint"],
             "parser": "@typescript-eslint/parser",
             "parserOptions": {
                 "sourceType": "module",
                 "ecmaVersion": "latest",
-                "project": [
-                    "./tsconfig.json"
-                ],
+                "project": ["./tsconfig.json"],
                 "tsconfigRootDir": "./",
                 "ecmaFeatures": {
                     "jsx": true,
@@ -40,15 +29,11 @@
             }
         },
         {
-            "files": [
-                "./*.config.js"
-            ],
+            "files": ["./*.config.js"],
             "rules": {
                 "no-undef": "off"
             }
         }
     ],
-    "plugins": [
-        "regexp"
-    ]
+    "plugins": ["regexp"]
 }

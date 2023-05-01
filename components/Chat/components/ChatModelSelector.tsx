@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface ModelSelectorProps {
     models: string[];
@@ -7,17 +7,19 @@ interface ModelSelectorProps {
 }
 
 const ChatModelSelector: React.FC<ModelSelectorProps> = ({
-                                                             models,
-                                                             selectedModel,
-                                                             onModelSelect
-                                                         }) => {
+    models,
+    selectedModel,
+    onModelSelect
+}) => {
     const handleModelSelect = (model: string) => {
         onModelSelect(model);
     };
 
     return (
         <div className="dropdown dropdown-hover dropdown-top flex-none">
-            <button className="btn" aria-label="Model selector">{selectedModel}</button>
+            <button className="btn" aria-label="Model selector">
+                {selectedModel}
+            </button>
             <ul
                 tabIndex={0}
                 className="pr-2 shadow menu dropdown-content bg-base-300 w-auto"

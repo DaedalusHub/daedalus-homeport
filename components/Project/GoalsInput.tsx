@@ -9,11 +9,11 @@ interface GoalsInputProps {
 }
 
 const GoalsInput: React.FC<GoalsInputProps> = ({
-                                                   goals,
-                                                   addGoal,
-                                                   removeGoal,
-                                                   handleGoalChange,
-                                               }) => {
+    goals,
+    addGoal,
+    removeGoal,
+    handleGoalChange
+}) => {
     return (
         <>
             <div className="flex flex-col items-start">

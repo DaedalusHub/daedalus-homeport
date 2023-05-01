@@ -5,7 +5,7 @@
 import '../styles/global.css';
 import { AppProps } from 'next/app';
 import log from 'loglevel';
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 const logLevel = process.env.LOG_LEVEL || 'warn';
 log.setLevel(logLevel as log.LogLevelDesc);

@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 export interface ChatInputProps {
     onSubmit: (message: string) => void;
 }
 
 const ChatInput: React.FC<ChatInputProps> = ({ onSubmit }) => {
-    const [message, setMessage] = useState("");
+    const [message, setMessage] = useState('');
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (!message.trim()) return;
 
         onSubmit(message);
-        setMessage("");
+        setMessage('');
     };
 
     return (
@@ -24,7 +24,9 @@ const ChatInput: React.FC<ChatInputProps> = ({ onSubmit }) => {
             />
             <button
                 type="submit"
-                className={"bg-primary text-white px-6 py-2.5 rounded-r max-h-12"}
+                className={
+                    'bg-primary text-white px-6 py-2.5 rounded-r max-h-12'
+                }
             >
                 Send
             </button>

@@ -13,9 +13,7 @@
     "htmlWhitespaceSensitivity": "css",
     "overrides": [
         {
-            "files": [
-                "*.css"
-            ],
+            "files": ["*.css"],
             "options": {
                 "tabWidth": 4
             }
