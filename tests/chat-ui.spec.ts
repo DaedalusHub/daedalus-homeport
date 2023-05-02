@@ -60,8 +60,9 @@ test.describe('Chat Page', () => {
     test('should switch model when selecting a different model', async ({
         page
     }) => {
-        await page.getByTestId('model-dropdown').click({ force: true });
-
+        await page
+            .locator('[data-testid="model-selector-button"]')
+            .click({ force: true });
         await page.waitForSelector('.dropdown-content', { timeout: 10000 });
         const availableModels = await page.$$eval(
             '.dropdown-content > li > a',

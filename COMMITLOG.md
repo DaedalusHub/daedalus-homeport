@@ -9,6 +9,7 @@
 * **playwright:** disable layout shift check ([412ac1e](https://github.com/DaedalusHub/daedalus-homeport/commit/412ac1e09db9f52baa74c77170fb481558e8e85e))
 * **playwright:** fix CI env variable ([b5f5d43](https://github.com/DaedalusHub/daedalus-homeport/commit/b5f5d43ad4fa8c8e623be5c2842dcb80f43b146d))
 * **playwright:** fix test server execution ([b7499bc](https://github.com/DaedalusHub/daedalus-homeport/commit/b7499bc1d705b8c677572a73c6d911bdc76fc881))
+* **playwright:** improve model dropdown locator, increase test timeout ([d43c12e](https://github.com/DaedalusHub/daedalus-homeport/commit/d43c12ef6c31b7ecde45d52bcce8c3e575b6c338))
 * **playwright:** improve model dropdown locator, increase test timeout ([3a2fcd5](https://github.com/DaedalusHub/daedalus-homeport/commit/3a2fcd5b3284852d5331f801c9e4a78e70ad6115))
 * **playwright:** remove CI specific browser testing ([98c2c67](https://github.com/DaedalusHub/daedalus-homeport/commit/98c2c67adafa78b472e872c820402554625af1c9))
 * **playwright:** remove CI worker limit ([7ece0b7](https://github.com/DaedalusHub/daedalus-homeport/commit/7ece0b77209a70a91c3c8632dd14610c6753ee0b))
