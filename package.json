@@ -17,6 +17,7 @@
         "prepare-commit-msg": "exec < /dev/tty && git cz --hook || true",
         "putout": "putout .",
         "test": "playwright test",
+        "codegen": "playwright codegen localhost:4000",
         "coverage": "nyc report --reporter=html && open coverage/index.html",
         "deepscan-coverage": "nyc report --reporter=cobertura && ./bin/deepsource report --analyzer test-coverage --key javascript --value-file coverage/cobertura-coverage.xml",
         "codecov": "nyc report --reporter=text-lcov > coverage.lcov && codecov",

@@ -8,15 +8,26 @@ export const useModels = () => {
 
     useEffect(() => {
         async function fetchModels() {
-            const response = await fetch('/api/models?type=gpt');
-            const data = await response.json();
-            log.info(`Found ${data.models.length} models`);
-            log.debug(`Models: ${data.models.join(', ')}`);
-            if (!data.models) {
-                log.warn('No models found');
+            try {
+                const response = await fetch('/api/models?type=gpt');
+
+                if (!response.ok) {
+                    log.error(`Server error: ${response.status}`);
+                }
+
+                const data = await response.json();
+                log.info(`Found ${data.length} models`);
+                log.debug(`Models: ${data.join(', ')}`);
+
+                if (!data) {
+                    log.warn('No models found');
+                    setModels([]);
+                } else {
+                    setModels(data.sort());
+                }
+            } catch (error) {
+                log.error(`Error fetching models: ${error}`);
                 setModels([]);
-            } else {
-                setModels(data.models.sort());
             }
         }
 
