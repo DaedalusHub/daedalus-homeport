@@ -27,6 +27,7 @@ const ChatModelSelector: React.FC<ModelSelectorProps> = ({
             <ul
                 tabIndex={0}
                 className="pr-2 shadow menu dropdown-content bg-base-300 w-auto"
+                data-testid="model-selector-dropdown"
             >
                 {models.map((model) => (
                     <li key={model}>
