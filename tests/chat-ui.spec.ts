@@ -63,12 +63,11 @@ test.describe('Chat Page', () => {
         await page
             .locator('[data-testid="model-selector-button"]')
             .click({ force: true });
-        await page.waitForSelector(
-            '[data-testid="model-selector-dropdown"]:visible',
-            { timeout: 10000 }
-        );
+        await page.waitForSelector('[data-testid="model-selector-dropdown"]', {
+            timeout: 10000
+        });
         const availableModels = await page.$$eval(
-            '.dropdown-content > li > a',
+            '[data-testid^="model-"]',
             (models) => models.map((model) => model.textContent)
         );
         const modelToSelect = availableModels.find(
