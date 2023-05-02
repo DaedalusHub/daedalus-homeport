@@ -32,7 +32,7 @@ const ChatModelSelector: React.FC<ModelSelectorProps> = ({
                 {models.map((model) => (
                     <li key={model}>
                         <a
-                            data-testid={`model-${model}`}
+                            data-testid={`model-id-${model}`}
                             aria-label={`Select ${model} model`}
                             href="../..#"
                             className="block px-4 py-2 text-sm min-w-fit uppercase"

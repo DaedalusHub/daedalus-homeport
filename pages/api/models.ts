@@ -38,6 +38,9 @@ async function fetchModels(type: string) {
 
 export default async function (req: VercelRequest, res: VercelResponse) {
     if (!configuration.apiKey) {
+        log.error(
+            'OpenAI API key not configured, please follow instructions in README.md'
+        );
         res.status(500).json({
             error: {
                 message:
@@ -48,6 +51,7 @@ export default async function (req: VercelRequest, res: VercelResponse) {
     }
 
     try {
+        log.info('Request received for fetching models');
         const models = await fetchModels(req.query.type as string);
         res.status(200).json({ models });
     } catch (error) {

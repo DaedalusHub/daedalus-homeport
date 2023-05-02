@@ -10,6 +10,8 @@ export const useModels = () => {
         async function fetchModels() {
             const response = await fetch('/api/models?type=gpt');
             const data = await response.json();
+            log.info(`Found ${data.models.length} models`);
+            log.debug(`Models: ${data.models.join(', ')}`);
             if (!data.models) {
                 log.warn('No models found');
                 setModels([]);
