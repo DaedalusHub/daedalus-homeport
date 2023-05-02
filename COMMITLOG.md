@@ -13,6 +13,7 @@
 * **playwright:** remove CI worker limit ([7ece0b7](https://github.com/DaedalusHub/daedalus-homeport/commit/7ece0b77209a70a91c3c8632dd14610c6753ee0b))
 * **playwright:** remove webkit ([ae651fe](https://github.com/DaedalusHub/daedalus-homeport/commit/ae651fed908fa5da800bb311491b53fd0bdb197f))
 * **playwright:** skip launching test server for CI ([371a7ba](https://github.com/DaedalusHub/daedalus-homeport/commit/371a7ba8fa9091662787892f6a9b672b8aa56ff0))
+* **playwright:** turn on trace, increase speed in CI for testing ([e1aecfb](https://github.com/DaedalusHub/daedalus-homeport/commit/e1aecfb308e0fa70927f26937120ae77d5305d44))
 * resolve implicit any and other build errors ([a34f101](https://github.com/DaedalusHub/daedalus-homeport/commit/a34f101bac652129a9228cc034048e0089c8d386))
 * resolve implicit any and other build errors ([13a1904](https://github.com/DaedalusHub/daedalus-homeport/commit/13a1904853e888e60a4ba03b1f0e6981fcea1516))
 * **test:** remove yarn caching for playwright ([00449bc](https://github.com/DaedalusHub/daedalus-homeport/commit/00449bcd008b4927ec80deb4d7911fca61938b70))
