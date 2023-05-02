@@ -1,4 +1,7 @@
 import { useEffect, useState } from 'react';
+import { getLogger } from '@/lib/logger';
+
+const log = getLogger('useModels.ts');
 
 export const useModels = () => {
     const [models, setModels] = useState<string[]>([]);
@@ -7,7 +10,12 @@ export const useModels = () => {
         async function fetchModels() {
             const response = await fetch('/api/models?type=gpt');
             const data = await response.json();
-            setModels(data.models.sort() || []);
+            if (!data.models) {
+                log.warn('No models found');
+                setModels([]);
+            } else {
+                setModels(data.models.sort());
+            }
         }
 
         fetchModels();

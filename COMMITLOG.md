@@ -8,6 +8,7 @@
 * **playwright:** disable global setup and teardown ([20b3873](https://github.com/DaedalusHub/daedalus-homeport/commit/20b3873b3d695c158afdf2768f21d18ca182629c))
 * **playwright:** disable layout shift check ([412ac1e](https://github.com/DaedalusHub/daedalus-homeport/commit/412ac1e09db9f52baa74c77170fb481558e8e85e))
 * **playwright:** fix CI env variable ([b5f5d43](https://github.com/DaedalusHub/daedalus-homeport/commit/b5f5d43ad4fa8c8e623be5c2842dcb80f43b146d))
+* **playwright:** fix model dropdown locator ([656a056](https://github.com/DaedalusHub/daedalus-homeport/commit/656a05625e7b8027fa89ef487a9731a864bc098a))
 * **playwright:** fix model selector locator ([e3d3538](https://github.com/DaedalusHub/daedalus-homeport/commit/e3d3538b812d879293851a9a312a2be5f780b57b))
 * **playwright:** fix test server execution ([b7499bc](https://github.com/DaedalusHub/daedalus-homeport/commit/b7499bc1d705b8c677572a73c6d911bdc76fc881))
 * **playwright:** improve model dropdown locator, increase test timeout ([d43c12e](https://github.com/DaedalusHub/daedalus-homeport/commit/d43c12ef6c31b7ecde45d52bcce8c3e575b6c338))
