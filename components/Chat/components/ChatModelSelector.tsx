@@ -17,7 +17,11 @@ const ChatModelSelector: React.FC<ModelSelectorProps> = ({
 
     return (
         <div className="dropdown dropdown-hover dropdown-top flex-none">
-            <button className="btn" aria-label="Model selector">
+            <button
+                className="btn"
+                aria-label="Model selector"
+                data-testid="model-selector-button"
+            >
                 {selectedModel}
             </button>
             <ul

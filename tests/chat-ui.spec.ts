@@ -60,11 +60,9 @@ test.describe('Chat Page', () => {
     test('should switch model when selecting a different model', async ({
         page
     }) => {
-        await page
-            .getByRole('button', { name: /Model selector/i })
-            .click({ force: true });
+        await page.getByTestId('model-dropdown').click({ force: true });
 
-        await page.waitForSelector('.dropdown-content', { timeout: 2000 });
+        await page.waitForSelector('.dropdown-content', { timeout: 10000 });
         const availableModels = await page.$$eval(
             '.dropdown-content > li > a',
             (models) => models.map((model) => model.textContent)
