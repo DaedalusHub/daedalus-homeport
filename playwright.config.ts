@@ -1,6 +1,7 @@
 import { PlaywrightTestConfig } from '@playwright/test';
 
 const isCI = process.env.CI_ENV === 'true';
+process.env.PLAYWRIGHT_NO_LAYOUT_SHIFT_CHECK = '1';
 
 const config: PlaywrightTestConfig = {
     testDir: 'tests',
