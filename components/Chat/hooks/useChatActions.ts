@@ -1,5 +1,9 @@
-import { ChatMessageType, exportToJson, saveMessagesToFile } from "@/components/Chat/utils/chatHelpers";
-import { requestAPI } from "@/components/Chat/utils/requestAPI";
+import {
+    ChatMessageType,
+    exportToJson,
+    saveMessagesToFile
+} from '@/components/Chat/utils/chatHelpers';
+import { requestAPI } from '@/components/Chat/utils/requestAPI';
 
 export const handleUserMessage = async (
     selectedModel: string,
@@ -9,19 +13,21 @@ export const handleUserMessage = async (
     messageHistory: ChatMessageType[]
 ) => {
     const key = `${Date.now()}-${Math.random().toString(36).substring(2)}`;
-    addMessage("user", message, key);
+    addMessage('user', message, key);
     setPendingResponse(true);
 
     const response = await requestAPI(selectedModel, message, messageHistory);
     setPendingResponse(false);
-    addMessage("assistant", response.content, key);
+    addMessage('assistant', response.content, key);
 };
 
 export const handleSave = (messages: ChatMessageType[]) => {
     saveMessagesToFile(messages);
 };
 
-export const handleClear = (setMessages: (messages: ChatMessageType[]) => void) => {
+export const handleClear = (
+    setMessages: (messages: ChatMessageType[]) => void
+) => {
     setMessages([]);
 };
 
@@ -39,4 +45,3 @@ export const handleImport = (
     }));
     setMessages(messagesWithKey);
 };
-

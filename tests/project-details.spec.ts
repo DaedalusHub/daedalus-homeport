@@ -37,7 +37,7 @@ test.describe('Project Page', () => {
 
         await page.coverage.startJSCoverage();
         await page.goto('/');
-        await page.click('button:text("Project")');
+        await page.getByRole('button', { name: /Project/i }).click();
     });
 
     test.afterEach(async ({ page }) => {
@@ -53,9 +53,9 @@ test.describe('Project Page', () => {
     test('should submit the form with valid data', async ({ page }) => {
         await page.fill('[name="name"]', 'Test Project');
         await page.fill('[name="intent"]', 'Test the project submission');
-        await page.click('button:text("Add Goal")');
+        await page.getByRole('button', { name: /Add Goal/i }).click();
         await page.fill('[name="goals[0]"]', 'Goal 1');
-        await page.click('button:text("Save")');
+        await page.getByRole('button', { name: /Save/i }).click();
         const saveToast = await page.waitForSelector('div:text("Submitted")');
         expect(saveToast).toBeTruthy();
     });
@@ -63,9 +63,9 @@ test.describe('Project Page', () => {
     test('should generate a prompt with valid data', async ({ page }) => {
         await page.fill('[name="name"]', 'Test Project');
         await page.fill('[name="intent"]', 'Test the project submission');
-        await page.click('button:text("Add Goal")');
+        await page.getByRole('button', { name: /Add Goal/i }).click();
         await page.fill('[name="goals[0]"]', 'Goal 1');
-        await page.click('button:text("Generate Prompt")');
+        await page.getByRole('button', { name: /Generate Prompt/i }).click();
         await page.waitForFunction(
             'document.querySelector("body").innerText.includes("You are assisting me on a project with the following details:")'
         );

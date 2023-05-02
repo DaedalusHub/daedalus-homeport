@@ -1,17 +1,27 @@
-import {ChatMessageType} from '@/components/Chat/utils/chatHelpers';
-import {encode} from "gpt-3-encoder";
-import { ChatCompletionRequestMessage, CreateChatCompletionRequest } from "openai";
+import { ChatMessageType } from '@/components/Chat/utils/chatHelpers';
+import { encode } from 'gpt-3-encoder';
+import {
+    ChatCompletionRequestMessage,
+    CreateChatCompletionRequest
+} from 'openai';
 
-
-function getPromptTokens(model: string, messageHistory: ChatMessageType[], userMessage: string) {
-    const prompt = [...messageHistory, {
-        role: 'user',
-        content: userMessage
-    }].map((message) => message.content).join('\n');
-    const encoded = encode(prompt)
+function getPromptTokens(
+    model: string,
+    messageHistory: ChatMessageType[],
+    userMessage: string
+) {
+    const prompt = [
+        ...messageHistory,
+        {
+            role: 'user',
+            content: userMessage
+        }
+    ]
+        .map((message) => message.content)
+        .join('\n');
+    const encoded = encode(prompt);
     return encoded.length;
 }
-
 
 export function createChatCompletionRequest(
     model: string,
@@ -29,13 +39,13 @@ export function createChatCompletionRequest(
     const reducedTokens = Math.max(minimumTokens, availableTokens);
     console.log('reducedTokens', reducedTokens);
 
-
-    const formattedMessages: ChatCompletionRequestMessage[] = messageHistory.map((message) => {
-        return {
-            role: message.role as 'user' | 'assistant',
-            content: message.content,
-        };
-    });
+    const formattedMessages: ChatCompletionRequestMessage[] =
+        messageHistory.map((message) => {
+            return {
+                role: message.role as 'user' | 'assistant',
+                content: message.content
+            };
+        });
 
     return {
         model: model,
@@ -43,14 +53,14 @@ export function createChatCompletionRequest(
             ...formattedMessages,
             {
                 role: 'user',
-                content: userMessage,
-            },
+                content: userMessage
+            }
         ],
         max_tokens: reducedTokens,
         n: 1,
         temperature: 0.7,
         top_p: 1,
         frequency_penalty: 0,
-        presence_penalty: 0,
+        presence_penalty: 0
     };
 }

@@ -1,6 +1,7 @@
 # Changelog
 
-All notable changes to this project will be documented in this file. For a more granular list of changes see [COMMITLOG.md](COMMITLOG.md)
+All notable changes to this project will be documented in this file. For a more granular list of changes
+see [COMMITLOG.md](COMMITLOG.md)
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),\
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -18,7 +19,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - Added the ability to define projects with intent and goals for use in prompt generation.
-- Ability to use Redis as a datastore, currently only for storing project data, but can be extended to other datastores and data in the future.
+- Ability to use Redis as a datastore, currently only for storing project data, but can be extended to other datastores
+  and data in the future.
 
 ## [0.3.0] - 2023-04-20
 

@@ -11,6 +11,7 @@ Treat backing services as attached resources
 Do not use other packages, but suggest ones that might help improve the code
 
 References in order of priority:
+
 1. https://github.com/codemirror
 2. https://codemirror.net/
 3. https://github.com/vercel/next.js/
@@ -21,6 +22,4 @@ References in order of priority:
 
 Feature 1: Write the components for a chat interface that takes user input and displays the chat history.
 
-
 Goal: Code in the chat interface is displayed in a codemirror component.
-

@@ -6,7 +6,7 @@ const log = getLogger('API');
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     if (req.method === 'GET') {
-        log.info("Fetching all projects");
+        log.info('Fetching all projects');
 
         try {
             const projects = await getAllProjects();

@@ -4,25 +4,32 @@ export interface ChatMessageType {
     key: string;
 }
 
-export function importFromJson(fileContent: string): ChatMessageType[] | undefined {
+export function importFromJson(
+    fileContent: string
+): ChatMessageType[] | undefined {
     try {
         return JSON.parse(fileContent) as ChatMessageType[];
     } catch (err) {
-        console.error("Invalid JSON format");
+        console.error('Invalid JSON format');
         return undefined;
     }
 }
 
-export const importMessages = (file: File, onImport: (data: ChatMessageType[]) => void) => {
+export const importMessages = (
+    file: File,
+    onImport: (data: ChatMessageType[]) => void
+) => {
     const reader = new FileReader();
     reader.onload = () => {
         const result = reader.result;
-        if (typeof result === "string") {
+        if (typeof result === 'string') {
             const messages = importFromJson(result);
             if (messages) {
                 onImport(messages);
             } else {
-                console.error("Failed to import messages. Invalid data format.");
+                console.error(
+                    'Failed to import messages. Invalid data format.'
+                );
             }
         }
     };
@@ -32,13 +39,13 @@ export const importMessages = (file: File, onImport: (data: ChatMessageType[]) =
 export function saveMessagesToFile(messages: ChatMessageType[]) {
     const chatText = messages
         .map((message) => `--${message.role}--\n\n${message.content}`)
-        .join("\n\n\n");
+        .join('\n\n\n');
 
-    const blob = new Blob([chatText], { type: "text/plain;charset=utf-8" });
+    const blob = new Blob([chatText], { type: 'text/plain;charset=utf-8' });
     const href = URL.createObjectURL(blob);
-    const link = document.createElement("a");
+    const link = document.createElement('a');
     link.href = href;
-    link.download = "chat_history.txt";
+    link.download = 'chat_history.txt';
     link.click();
     URL.revokeObjectURL(href);
 }
@@ -50,12 +57,12 @@ export function exportToJson(messages: ChatMessageType[]) {
         }))
     );
     const blob = new Blob([data], {
-        type: "application/json;charset=utf-8"
+        type: 'application/json;charset=utf-8'
     });
     const href = URL.createObjectURL(blob);
-    const link = document.createElement("a");
+    const link = document.createElement('a');
     link.href = href;
-    link.download = "chat_history.json";
+    link.download = 'chat_history.json';
     link.click();
     URL.revokeObjectURL(href);
 }

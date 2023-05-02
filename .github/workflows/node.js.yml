@@ -2,9 +2,9 @@ name: Node.js CI
 
 on:
     push:
-        branches: [ "main" ]
+        branches: [ 'main' ]
     pull_request:
-        branches: [ "main" ]
+        branches: [ 'main' ]
 
 jobs:
     build:
@@ -19,7 +19,7 @@ jobs:
                 uses: actions/setup-node@v3
                 with:
                     node-version: ${{ matrix.node-version }}
-                    cache: "yarn"
+                    cache: 'yarn'
             -   run: yarn install --frozen-lockfile
             -   run: yarn build
 
@@ -30,7 +30,7 @@ jobs:
             -   uses: actions/setup-node@v3
                 with:
                     node-version: 16.x
-                    cache: "yarn"
+                    cache: 'yarn'
             -   run: yarn install --frozen-lockfile
             -   run: yarn lint
 
@@ -47,14 +47,14 @@ jobs:
             -   name: Start development server
                 run: yarn dev:test &
                 env:
-                    SERVER_RUNNING: "true"
+                    SERVER_RUNNING: 'true'
             -   name: Wait for server to start
                 run: sleep 30
             -   name: Run Playwright tests
                 run: yarn test
                 env:
                     CI_ENV: true
-                    SERVER_RUNNING: "true"
+                    SERVER_RUNNING: 'true'
             -   name: Upload test results
                 if: always()
                 uses: actions/upload-artifact@v3
@@ -76,7 +76,7 @@ jobs:
                 run: |
                     curl https://deepsource.io/cli | sh
                     yarn deepsource-coverage
-            -   name: "Qodana Scan"
+            -   name: 'Qodana Scan'
                 uses: JetBrains/qodana-action@main
                 env:
                     QODANA_TOKEN: ${{ secrets.QODANA_TOKEN }}
