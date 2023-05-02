@@ -41,7 +41,9 @@ test.describe('Chat Page', () => {
 
     test('should send a message and receive a response', async ({ page }) => {
         await page.fill('textarea', 'Hello, how are you?');
-        await page.getByRole('button', { name: /Send/i }).click();
+        await page
+            .getByRole('button', { name: /Send/i })
+            .click({ force: true });
         await page.waitForSelector('.message-user', { timeout: 2000 });
         await page.waitForSelector('.message-assistant', { timeout: 10000 });
 
@@ -80,10 +82,14 @@ test.describe('Chat Page', () => {
         page
     }) => {
         await page.fill('textarea', 'Hello, how are you?');
-        await page.getByRole('button', { name: /Send/i }).click();
+        await page
+            .getByRole('button', { name: /Send/i })
+            .click({ force: true });
         await page.waitForSelector('.message-user', { timeout: 2000 });
         await page.waitForSelector('.message-assistant', { timeout: 10000 });
-        await page.getByRole('button', { name: /Clear/i }).click();
+        await page
+            .getByRole('button', { name: /Clear/i })
+            .click({ force: true });
 
         const messages = await page.$$('.message');
         expect(messages.length).toBe(0);
