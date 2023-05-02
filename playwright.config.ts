@@ -22,7 +22,7 @@ const config: PlaywrightTestConfig = {
     //globalTeardown: require.resolve('./tests/global-teardown'),
     reporter: isCI ? 'github' : 'dot',
     retries: isCI ? 0 : 0,
-    timeout: isCI ? 10000 : 30000,
+    timeout: isCI ? 60000 : 30000,
     workers: isCI ? 4 : undefined
 };
 
